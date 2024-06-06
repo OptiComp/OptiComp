@@ -6,11 +6,6 @@ class WrapperInterface:
 
     def norm_parameters(self, params):
         raise NotImplementedError("This method should be overridden to normalize the parameters for the objective")
-    
-    # def reverse_objective(self):
-    #     def reversed(params):
-    #         return -self.norm_objective(params)
-    #     self.norm_objective = reversed
 
     def optimize(self):
         raise NotImplementedError("This method should be overridden by subclasses")

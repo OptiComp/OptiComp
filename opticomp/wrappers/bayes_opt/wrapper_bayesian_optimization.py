@@ -1,5 +1,7 @@
 # Imports
 from bayes_opt import BayesianOptimization
+from bayes_opt import UtilityFunction
+import numpy as np
 import logging
 from ...wrapper_interface import WrapperInterface
 
@@ -15,19 +17,39 @@ class BayesianOptWrapper(WrapperInterface):
         return params
     
     def optimize(self, objective):
+        # Initialize BayesianOptimization object
         optimizer = BayesianOptimization(
-            f=lambda **params: objective(params),
-            pbounds=self.search_space,
-            random_state=42,
-            verbose=False
+            f=None,                   # Placeholder for objective function
+            pbounds=self.search_space,  # Parameter bounds
+            random_state=42,          # Random seed
+            verbose=False             # Disable verbosity
         )
+        
+        # Initialize utility function (Upper Confidence Bound)
+        utility = UtilityFunction(kind="ucb", kappa=2.5, xi=0.0)
 
-        optimizer.maximize(init_points=4, n_iter=25)
+        # Get the next point to probe using the utility function
+        next_point_to_probe = optimizer.suggest(utility)
+
+        # Call the objective function with the suggested point
+        target = objective(next_point_to_probe)
+
+        # Register the result of the probe
+        optimizer.register(
+            params=next_point_to_probe,
+            target=target
+        )   
+
+        # Perform additional probes
+        for _ in range(5):
+            next_point = optimizer.suggest(utility)  # Get the next point to probe
+            target = objective(next_point)          # Call the objective function with the suggested point
+            optimizer.register(params=next_point, target=target)  # Register the result of the probe
+            
 
         # Extract best parameters and best score
         best_params = optimizer.max['params']
         best_score = optimizer.max['target']
 
         return best_params, best_score
-
     

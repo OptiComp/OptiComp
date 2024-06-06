@@ -25,7 +25,7 @@ for wrapper in selected_wrappers:
     OptComparer.add_wrapper(wrapper)
 
 # Compare and optimize using the added wrappers
-best_result, all_results = OptComparer.compare(direction="minimize", verbose=True)
+best_result, all_results = OptComparer.compare(direction="maximize", verbose=True)
 
 # print(f"Best optimizer: {best_result}")
 # print("All results:", all_results)
