@@ -1,4 +1,6 @@
+# Imports
 from bayes_opt import BayesianOptimization
+import logging
 from ...wrapper_interface import WrapperInterface
 
 
@@ -14,12 +16,13 @@ class BayesianOptWrapper(WrapperInterface):
     
     def optimize(self, objective):
         optimizer = BayesianOptimization(
-            f=lambda **params: objective(params),  # Modified to accept **params
+            f=lambda **params: objective(params),
             pbounds=self.search_space,
-            random_state=42  # You can set a random state for reproducibility
+            random_state=42,
+            verbose=False
         )
 
-        optimizer.maximize(init_points=5, n_iter=100)
+        optimizer.maximize(init_points=4, n_iter=25)
 
         # Extract best parameters and best score
         best_params = optimizer.max['params']
