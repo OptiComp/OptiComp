@@ -1,5 +1,5 @@
 # Imports
-from parato.wrappers.wrappers_all import get_wrappers
+from .wrappers.wrappers_all import get_wrappers
 
 def select_wrapper(name):
     # Get a list of all available wrappers
