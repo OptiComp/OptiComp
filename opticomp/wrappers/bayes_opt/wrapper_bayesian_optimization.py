@@ -16,7 +16,7 @@ class BayesianOptWrapper(WrapperInterface):
         # No need to normalize parameters for BayesianOptimization
         return params
     
-    def optimize(self, objective):
+    def optimize(self, objective, n_steps):
         # Initialize BayesianOptimization object
         optimizer = BayesianOptimization(
             f=None,                   # Placeholder for objective function
@@ -41,7 +41,7 @@ class BayesianOptWrapper(WrapperInterface):
         )   
 
         # Perform additional probes
-        for _ in range(5):
+        for _ in range(int(n_steps/20)):
             next_point = optimizer.suggest(utility)  # Get the next point to probe
             target = objective(next_point)          # Call the objective function with the suggested point
             optimizer.register(params=next_point, target=target)  # Register the result of the probe

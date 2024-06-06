@@ -6,12 +6,14 @@ from opticomp.wrappers_buildin import select_wrapper
 def objective(params):
     param1 = params['param1'] 
     param2 = params['param2'] 
-    return (param1 - 2) ** 2 + (param2 + 3) ** 2
+    # param3 = params['param3'] 
+    return (param1 - 2) ** 2 + (param2 + 3) ** 2 # - (param3 + 3) ** 2
 
 # Search space
 # {'param_name': (min, max)}
 search_space = {'param1': (-10, 10), 
                 'param2': (-10, 10)}
+                # 'param3': (-100, 300),}
 
 # Select wrappers by name
 wrapper_names = ["OptunaRandom", "OptunaTPE", "BayesianOpt"]
