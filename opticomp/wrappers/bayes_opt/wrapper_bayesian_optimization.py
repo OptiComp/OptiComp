@@ -14,7 +14,7 @@ class BayesianOptWrapper(WrapperInterface):
     
     def optimize(self, objective):
         optimizer = BayesianOptimization(
-            f=objective,
+            f=lambda **params: objective(params),  # Modified to accept **params
             pbounds=self.search_space,
             random_state=42  # You can set a random state for reproducibility
         )

@@ -4,7 +4,7 @@ from .optuna.wrapper_optuna_tpe import OptunaTPEWrapper
 
 from .hyperopt.wrapper_hyperopt_tpe import HyperoptTPEWrapper
 
-from .bayes_opt.wrapper_bayesian_optimization import BayesianOptimization
+from .bayes_opt.wrapper_bayesian_optimization import BayesianOptWrapper
 
 def get_wrappers():
     # Create wrappers list
@@ -15,7 +15,7 @@ def get_wrappers():
     # ============================================== Hyperopt
     wrappers.append(HyperoptTPEWrapper)
     # ============================================== BayesianOptimization
-    wrappers.append(BayesianOptimization)
+    wrappers.append(BayesianOptWrapper)
 
     # Return all buildin wrappers
     return wrappers
