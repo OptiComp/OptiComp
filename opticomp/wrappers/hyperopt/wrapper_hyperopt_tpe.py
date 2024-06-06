@@ -2,7 +2,6 @@ from hyperopt import hp
 from ...wrapper_interface import WrapperInterface
 
 
-
 # Wrapper for Hyperopt with TPE
 class HyperoptTPEWrapper(WrapperInterface):
     name = "HyperoptTPE"           # Name for the wrapper

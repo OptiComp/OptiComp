@@ -1,15 +1,21 @@
 # Imports
-from .wrappers.wrappers_all import get_wrappers
+from .wrappers.wrappers_all import wrapper_info
+import importlib
+
 
 def select_wrapper(name):
-    # Get a list of all available wrappers
-    wrappers = get_wrappers()
+    # Dynamically import and select the specified wrapper
+    for module_path, class_name, opt_name in wrapper_info:
+        if opt_name == name:
+            try:
+                # Dynamically import the module and get the class
+                module = importlib.import_module(module_path)
+                wrapper_class = getattr(module, class_name)
+                return wrapper_class
+            except ImportError:
+                raise ImportError(f"Required library for {opt_name} is not installed.")
+            except AttributeError:
+                raise ImportError(f"{class_name} not found in {module_path}.")
 
-    # Filter wrappers by name
-    selected_wrappers = [wrapper for wrapper in wrappers if wrapper.name == name]
-
-    # Error if wrapper does not exist
-    if not selected_wrappers:
-        raise ValueError(f"No wrapper with name '{name}' found.")
-
-    return selected_wrappers[0]
+    # Raise an error if no matching wrapper is found
+    raise ValueError(f"No wrapper with name '{name}' found.")
