@@ -14,7 +14,7 @@ search_space = {'param1': (-10, 10),
                 'param2': (-10, 10)}
 
 # Select wrappers by name
-wrapper_names = ["OptunaRandom", "OptunaTPE", "HyperoptTPE"]
+wrapper_names = ["OptunaRandom", "OptunaTPE", "BayesianOpt"]
 selected_wrappers = [select_wrapper(name) for name in wrapper_names]
 
 # Create an instance of the optimizer comparer
