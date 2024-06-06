@@ -16,7 +16,7 @@ class OptimizerCompare:
         results = {}
         for wrapper in self.wrappers:
             start_time = time.time()
-            params, loss = wrapper.optimize()
+            params, loss = wrapper.optimize(False)
             elapsed_time = time.time() - start_time
             results[wrapper.__class__.__name__] = {
                 'params': params,
