@@ -12,7 +12,7 @@ class OptimizerCompare:
         wrapper = wrapper_class(self.objective, self.search_space)
         self.wrappers.append(wrapper)
 
-    def compare(self, direction="minimize", verbose=True):
+    def compare(self, direction="minimize", n_steps=100, verbose=True):
         results = {}
         for wrapper in self.wrappers:
             # Check optimizer direction
@@ -21,7 +21,7 @@ class OptimizerCompare:
                 invert = True
             # Set start time
             start_time = time.time()
-            params, score = wrapper._run(invert)
+            params, score = wrapper._run(invert, n_steps)
             elapsed_time = time.time() - start_time
             results[wrapper.name] = {
                 'params': params,

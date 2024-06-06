@@ -21,12 +21,12 @@ class OptunaTPEWrapper(WrapperInterface):
         return normalized_params
     
     # Apply optimizer
-    def optimize(self, objective):
+    def optimize(self, objective, n_steps):
         # Disable feedback from Optuna
         optuna.logging.disable_default_handler()
         optuna.logging.get_logger("optuna").addHandler(logging.NullHandler())
         
         study = optuna.create_study(direction="minimize", sampler=optuna.samplers.RandomSampler())
-        study.optimize(objective, n_trials=100)
+        study.optimize(objective, n_trials=n_steps)
         return study.best_params, study.best_value
     
