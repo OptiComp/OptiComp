@@ -1,8 +1,6 @@
 # Imports
 from bayes_opt import BayesianOptimization
 from bayes_opt import UtilityFunction
-import numpy as np
-import logging
 from ...wrapper_interface import WrapperInterface
 
 
