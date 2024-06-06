@@ -1,6 +1,6 @@
 # Imports
-from ..opticomp.optimizer_compare import OptimizerCompare
-from ..opticomp.wrappers_buildin import select_wrapper
+from opticomp.optimizer_compare import OptimizerCompare
+from opticomp.wrappers_buildin import select_wrapper
 
 # Objective function
 def objective(params):
@@ -12,7 +12,7 @@ search_space = {'x': (-10, 10),
                 'y': (-10, 10)}
 
 # Select wrappers by name
-wrapper_names = ["OptunaRandomWrapper", "SciPyWrapper"]
+wrapper_names = ["OptunaRandom", "OptunaTPE"]
 selected_wrappers = [select_wrapper(name) for name in wrapper_names]
 
 # Create an instance of the optimizer comparer
@@ -23,8 +23,8 @@ for wrapper in selected_wrappers:
     OptComparer.add_wrapper(wrapper)
 
 # Compare and optimize using the added wrappers
-best_result, all_results = OptComparer.compare()
+best_result, all_results = OptComparer.compare(verbose=True)
 
-print(f"Best optimizer: {best_result}")
-print("All results:", all_results)
+# print(f"Best optimizer: {best_result}")
+# print("All results:", all_results)
 
