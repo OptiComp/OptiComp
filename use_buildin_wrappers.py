@@ -4,12 +4,13 @@ from opticomp.wrappers_buildin import select_wrapper
 
 # Objective function
 def objective(params):
-    x, y = params
-    return (x - 2) ** 2 + (y + 3) ** 2
+    param1, param2 = params
+    return (param1 - 2) ** 2 + (param2 + 3) ** 2
 
 # Search space
-search_space = {'x': (-10, 10), 
-                'y': (-10, 10)}
+# {'param_name': (min, max)}
+search_space = {'param1': (-10, 10), 
+                'param2': (-10, 10)}
 
 # Select wrappers by name
 wrapper_names = ["OptunaRandom", "OptunaTPE"]
