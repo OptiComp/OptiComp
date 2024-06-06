@@ -4,7 +4,8 @@ from opticomp.wrappers_buildin import select_wrapper
 
 # Objective function
 def objective(params):
-    param1, param2 = params
+    param1 = params['param1'] 
+    param2 = params['param2'] 
     return (param1 - 2) ** 2 + (param2 + 3) ** 2
 
 # Search space
@@ -24,7 +25,7 @@ for wrapper in selected_wrappers:
     OptComparer.add_wrapper(wrapper)
 
 # Compare and optimize using the added wrappers
-best_result, all_results = OptComparer.compare(verbose=True)
+best_result, all_results = OptComparer.compare(direction="minimize", verbose=True)
 
 # print(f"Best optimizer: {best_result}")
 # print("All results:", all_results)
