@@ -3,6 +3,9 @@ class WrapperInterface:
     def __init__(self, objective, search_space):
         self.objective = objective
         self.search_space = search_space
+        
+    class Config:
+        Empty = "This wrapper has no parameters to configure"
 
     def _wrap_norm_parameters(self, params):
         raise NotImplementedError("This method should be overridden to normalize the parameters for the objective")
