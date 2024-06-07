@@ -1,6 +1,6 @@
 # OptiComp
 ## Overview
-OptiComp is a versatile optimization library that provides a unified interface for various optimization libraries, including Optuna, bayes_opt, and Hyperopt. Whether you are using built-in wrappers or creating custom ones, OptiComp offers an easy-to-use API for optimizing your objectives efficiently. Additionally, OptiComp provides functions to compare different optimizers and choose the best one for your specific needs.
+OptiComp is a versatile optimization library that provides a unified interface for various optimization libraries, including Optuna, bayes_opt, and Hyperopt. With OptiComp, you can efficiently optimize your objectives using built-in wrappers or create custom ones tailored to your needs. One of the standout features of OptiComp is its ability to compare different optimizers and select the best one for your specific requirements, making it an invaluable tool for anyone looking to streamline and enhance their optimization workflows.
 
 ## Features
 - **Unified API:** Standardize different optimization libraries or custom optimizers with common wrappers.
