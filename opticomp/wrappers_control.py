@@ -25,7 +25,7 @@ class Wrapper():
         return wrapper_class(objective, search_space)
 
 
-    def info(wrapper_class):
+    def print_info(wrapper_class):
         print("\n==== Wrapper info ====")
         print(f"Name: {wrapper_class.name}")
         print(f"Lib version: {wrapper_class.library_version}")

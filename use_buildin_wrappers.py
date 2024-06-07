@@ -20,7 +20,7 @@ wrapper_names = ["OptunaRandom", "OptunaTPE", "BayesianOpt"]
 selected_wrappers = [Wrapper.fetch(name) for name in wrapper_names]
 
 for wrapper in selected_wrappers:
-    Wrapper.info(wrapper)
+    Wrapper.print_info(wrapper)
 
 # Create an instance of the optimizer comparer
 OptComparer = OptimizerCompare(objective, search_space)
