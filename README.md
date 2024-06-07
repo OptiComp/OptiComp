@@ -53,22 +53,16 @@ for wrapper in selected_wrappers:
 best_result, all_results = Optbenchmark.benchmark(verbose=True)
 ```
 
-**Comparing Wrappers:**
-
-```python
-print("Haven't made this shit yet")
-```
-
 **Custom Wrappers:**
 Create a custom wrapper by extending the WrapperInterface:
 
 ```python
-print("Haven't made this shit yet")
+print("Haven't made this example yet")
 ```
 
 **Selecting the Best Wrapper:**
 ```python
-print("Haven't made this shit yet")
+print("Haven't made this example yet")
 ```
 
 ## Built-in Wrappers
