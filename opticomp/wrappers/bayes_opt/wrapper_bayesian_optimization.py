@@ -10,6 +10,11 @@ class BayesianOptWrapper(WrapperInterface):
     library_version = "1.4.3"      # The library version that wrapper is based on
     default_direction = "maximize" # Give default direction
 
+    # Config class
+    class Config:
+        kappa = 2.5           
+        xi = 0.0              
+
     def norm_parameters(self, params):
         # No need to normalize parameters for BayesianOptimization
         return params
@@ -24,7 +29,7 @@ class BayesianOptWrapper(WrapperInterface):
         )
         
         # Initialize utility function (Upper Confidence Bound)
-        utility = UtilityFunction(kind="ucb", kappa=2.5, xi=0.0)
+        utility = UtilityFunction(kind="ucb", kappa=self.Config.kappa, xi=self.Config.xi)
 
         # Get the next point to probe using the utility function
         next_point_to_probe = optimizer.suggest(utility)
