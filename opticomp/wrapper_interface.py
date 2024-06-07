@@ -1,7 +1,7 @@
 # Wrapper interface
 class WrapperInterface:   
-    name = "Unknown"                # Name for the wrapper
-    library_version = "Unknown"     # The library version that wrapper is based on
+    name = "Unknown"                # Default name for the wrapper
+    library_version = "Unknown"     # Default library version that wrapper is based on
     default_direction = "Unknown"   # Default direction
 
     def __init__(self, objective, search_space):
