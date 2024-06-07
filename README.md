@@ -31,7 +31,7 @@ def objective(params):
     param1 = params['param1'] 
     param2 = params['param2'] 
     # param3 = params['param3'] 
-    return (param1 - 2) ** 2 + (param2 + 3) ** 2 # - (param3 + 3) ** 2
+    return (param1 - 2) ** 2 + (param2 + 3) ** 2
 
 # Example search space
 # {'param_name': (min, max)}
