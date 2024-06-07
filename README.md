@@ -19,7 +19,7 @@ pip install opticomp
 
 ## Usage
 **Using Built-in Wrappers:**
-```
+```python
 from opticomp import select_wrapper
 
 # Example objective function
