@@ -9,11 +9,11 @@ class HyperoptTPEWrapper(WrapperInterface):
     default_direction = "minimize" # Default optimization direction
 
     # Normalize parameters
-    def norm_parameters(self, params):
+    def _wrap_norm_parameters(self, params):
         return params  # No normalization needed for Hyperopt
 
     # Apply optimizer
-    def optimize(self, objective):
+    def _wrap_execute_optimization(self, objective):
         space = {name: hp.uniform(name, low, high) for name, (low, high) in self.search_space.items()}
 
         def objective_wrapper(params):

@@ -10,7 +10,7 @@ class OptunaTPEWrapper(WrapperInterface):
     default_direction = "minimize"  # Give default direction
 
     # Normalize parameters
-    def norm_parameters(self, trial):
+    def _wrap_norm_parameters(self, trial):
         # Get params
         params = [trial.suggest_float(name, low, high) for name, (low, high) in self.search_space.items()]
         # Normilize params
@@ -21,7 +21,7 @@ class OptunaTPEWrapper(WrapperInterface):
         return normalized_params
     
     # Apply optimizer
-    def optimize(self, objective, n_steps):
+    def _wrap_execute_optimization(self, objective, n_steps):
         # Disable feedback from Optuna
         optuna.logging.disable_default_handler()
         optuna.logging.get_logger("optuna").addHandler(logging.NullHandler())

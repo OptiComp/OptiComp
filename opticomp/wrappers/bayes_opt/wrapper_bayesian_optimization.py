@@ -15,11 +15,11 @@ class BayesianOptWrapper(WrapperInterface):
         kappa = 2.5           
         xi = 0.0              
 
-    def norm_parameters(self, params):
+    def _wrap_norm_parameters(self, params):
         # No need to normalize parameters for BayesianOptimization
         return params
     
-    def optimize(self, objective, n_steps):
+    def _wrap_execute_optimization(self, objective, n_steps):
         # Initialize BayesianOptimization object
         optimizer = BayesianOptimization(
             f=None,                   # Placeholder for objective function

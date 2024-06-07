@@ -24,7 +24,7 @@ class OptimizerCompare:
                 invert = True
             # Set start time
             start_time = time.time()
-            params, score = wrapper._run(invert, n_steps)
+            params, score = wrapper.optimize(invert, n_steps)
             elapsed_time = time.time() - start_time
             results[wrapper.name] = {
                 'params': params,
