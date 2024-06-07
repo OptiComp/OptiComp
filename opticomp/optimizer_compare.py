@@ -12,6 +12,9 @@ class OptimizerCompare:
         wrapper = wrapper_class(self.objective, self.search_space)
         self.wrappers.append(wrapper)
 
+    def clear_wrappers(self):
+        self.wrappers.clear()
+
     def compare(self, direction="minimize", n_steps=100, verbose=True):
         results = {}
         for wrapper in self.wrappers:
