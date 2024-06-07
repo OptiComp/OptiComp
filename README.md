@@ -42,7 +42,7 @@ print(f"Best Parameters: {best_params}, Best Score: {best_score}")
 
 **Comparing Wrappers:**
 
-```
+```python
 from opticomp import compare_wrappers
 
 # List of wrapper names to compare
@@ -58,7 +58,7 @@ for result in results:
 **Custom Wrappers:**
 Create a custom wrapper by extending the WrapperInterface:
 
-```
+```python
 from opticomp.wrapper_interface import WrapperInterface
 
 class CustomOptimizerWrapper(WrapperInterface):
@@ -72,7 +72,7 @@ class CustomOptimizerWrapper(WrapperInterface):
 ```
 
 **Selecting the Best Wrapper:**
-```
+```python
 from opticomp import select_best_wrapper
 
 # Select the best wrapper for the objective
