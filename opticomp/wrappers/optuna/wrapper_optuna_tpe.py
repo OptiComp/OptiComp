@@ -14,9 +14,7 @@ class OptunaTPEWrapper(WrapperInterface):
         # Get params
         params = [trial.suggest_float(name, low, high) for name, (low, high) in self.search_space.items()]
         # Normilize params
-        normalized_params = {}
-        for name, param_value in zip(self.search_space.keys(), params):
-            normalized_params[name] = param_value
+        normalized_params = {name: param_value for name, param_value in zip(self.search_space.keys(), params)}
         # Return normilized params
         return normalized_params
     
