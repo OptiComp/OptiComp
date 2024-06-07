@@ -3,7 +3,7 @@ from .wrappers.wrappers_all import wrapper_info
 import importlib
 
 
-def select_wrapper(name):
+def fetch_wrapper(name):
     # Dynamically import and select the specified wrapper
     for module_path, class_name, opt_name in wrapper_info:
         if opt_name.lower() == name.lower():

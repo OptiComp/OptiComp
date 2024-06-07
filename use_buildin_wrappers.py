@@ -1,6 +1,6 @@
 # Imports
 from opticomp.optimizer_compare import OptimizerCompare
-from opticomp.wrappers_buildin import select_wrapper
+from opticomp.wrappers_buildin import fetch_wrapper
 
 # Objective function
 def objective(params):
@@ -17,7 +17,7 @@ search_space = {'param1': (-10, 10),
 
 # Select wrappers by name
 wrapper_names = ["OptunaRandom", "OptunaTPE", "BayesianOpt"]
-selected_wrappers = [select_wrapper(name) for name in wrapper_names]
+selected_wrappers = [fetch_wrapper(name) for name in wrapper_names]
 
 # Create an instance of the optimizer comparer
 OptComparer = OptimizerCompare(objective, search_space)
