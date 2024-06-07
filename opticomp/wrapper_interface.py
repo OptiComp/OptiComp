@@ -25,7 +25,4 @@ class WrapperInterface:
         # Invert final score
         if invert:
             score = -score
-        # Normilize final parameters
-        # norm_params = self.norm_parameters(params)
-        # Return final parameters and result
         return params, score
