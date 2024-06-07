@@ -2,7 +2,7 @@
 import time
 
 # Optimizer compare class
-class OptimizerCompare:
+class OptimizerBenchmark:
     def __init__(self, objective, search_space):
         self.objective = objective
         self.search_space = search_space
@@ -15,7 +15,7 @@ class OptimizerCompare:
     def clear_wrappers(self):
         self.wrappers.clear()
 
-    def compare(self, direction="minimize", n_steps=100, verbose=True):
+    def benchmark(self, direction="minimize", n_steps=100, verbose=True):
         results = {}
         for wrapper in self.wrappers:
             # Check optimizer direction
