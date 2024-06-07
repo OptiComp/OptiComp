@@ -1,6 +1,6 @@
 # Imports
 from opticomp.optimizer_compare import OptimizerCompare
-from opticomp.wrappers_buildin import fetch_wrapper
+from opticomp.wrappers_control import fetch_wrapper
 
 # Objective function
 def objective(params):
