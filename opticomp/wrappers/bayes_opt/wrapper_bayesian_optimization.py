@@ -8,7 +8,7 @@ from ...wrapper_interface import WrapperInterface
 class BayesianOptWrapper(WrapperInterface):
     name = "BayesianOpt"           # Name for the wrapper
     library_version = "1.4.3"      # The library version that wrapper is based on
-    default_direction = "maximize" # Give default direction
+    default_direction = "maximize" # Default direction
 
     # Config class
     class Config:

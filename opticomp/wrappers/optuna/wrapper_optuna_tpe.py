@@ -7,7 +7,7 @@ from ...wrapper_interface import WrapperInterface
 class OptunaTPEWrapper(WrapperInterface):
     name = "OptunaTPE"              # Name for the wrapper
     library_version = "3.6.1"       # The library version that wrapper is based on
-    default_direction = "minimize"  # Give default direction
+    default_direction = "minimize"  # Default direction
 
     # Normalize parameters
     def _wrap_norm_parameters(self, trial):
