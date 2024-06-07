@@ -6,7 +6,7 @@ import importlib
 def select_wrapper(name):
     # Dynamically import and select the specified wrapper
     for module_path, class_name, opt_name in wrapper_info:
-        if opt_name == name:
+        if opt_name.lower() == name.lower():
             try:
                 # Dynamically import the module and get the class
                 module = importlib.import_module(module_path)
