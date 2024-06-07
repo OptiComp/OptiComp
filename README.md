@@ -9,6 +9,8 @@ OptiComp is a versatile optimization library that provides a unified interface f
 - **Direct Optimization:** Run optimizations directly using the provided wrappers.
 - **Optimizer Comparison:** Compare different wrappers on your objective to find the most effective optimizer.
 - **Best Wrapper Selection:** Select the best wrapper for your objective with less computational overhead.
+- **Custom Objectives:** Create custom objectives to evaluate the optimizer on, allowing for tailored evaluation metrics based on specific tasks or requirements.
+- **Standard Objectives:** Pick a standard objective to evaluate the optimizer on, providing predefined metrics for easier evaluation and comparison across different optimization algorithms.
 
 ## Installation
 **Install OptiComp via pip:**
