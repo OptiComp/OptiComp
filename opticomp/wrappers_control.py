@@ -3,7 +3,7 @@ from .wrappers.wrappers_all import wrapper_info
 import importlib
 
 
-def fetch_wrapper(self, name):
+def fetch_wrapper(name):
     # Dynamically import and select the specified wrapper
     for module_path, class_name, opt_name in wrapper_info:
         if opt_name.lower() == name.lower():
@@ -19,3 +19,7 @@ def fetch_wrapper(self, name):
 
     # Raise an error if no matching wrapper is found
     raise ValueError(f"No wrapper with name '{name}' found.")
+
+
+def initialize_wrapper(wrapper_class, objective, search_space):
+    return wrapper_class(objective, search_space)
