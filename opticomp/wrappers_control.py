@@ -30,5 +30,10 @@ class Wrapper():
         print(f"Name: {wrapper_class.name}")
         print(f"Lib version: {wrapper_class.library_version}")
         print(f"Direction: {wrapper_class.default_direction}")
+
+        print("\nConfig parameters:")
+        for var_name, var_value in wrapper_class.Config.__dict__.items():
+            if not var_name.startswith('__'):  # Exclude dunder (magic) methods
+                print(f"- {var_name}: {var_value}")
         # wrapper_class
         print("======================\n")
