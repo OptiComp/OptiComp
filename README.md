@@ -22,64 +22,25 @@ pip install opticomp
 ## Usage
 **Using Built-in Wrappers:**
 ```python
-from opticomp import select_wrapper
-
-# Example objective function
-def objective(params):
-    x = params['x']
-    y = params['y']
-    return -(x ** 2 + y ** 2)
-
-# Select a wrapper
-OptunaWrapper = select_wrapper('OptunaRandom')
-
-# Initialize the wrapper
-optimizer = OptunaWrapper(search_space={'x': (-10, 10), 'y': (-10, 10)})
-
-# Run optimization
-best_params, best_score = optimizer.optimize(objective)
-
-print(f"Best Parameters: {best_params}, Best Score: {best_score}")
+print("Haven't made this shit yet")
 ```
 
 **Comparing Wrappers:**
 
 ```python
-from opticomp import compare_wrappers
-
-# List of wrapper names to compare
-wrapper_names = ['OptunaRandom', 'OptunaTPE', 'HyperoptTPE', 'BayesianOpt']
-
-# Compare the wrappers on the objective
-results = compare_wrappers(objective, wrapper_names, search_space={'x': (-10, 10), 'y': (-10, 10)})
-
-for result in results:
-    print(f"Wrapper: {result['wrapper']}, Best Params: {result['params']}, Best Score: {result['score']}")
+print("Haven't made this shit yet")
 ```
 
 **Custom Wrappers:**
 Create a custom wrapper by extending the WrapperInterface:
 
 ```python
-from opticomp.wrapper_interface import WrapperInterface
-
-class CustomOptimizerWrapper(WrapperInterface):
-    name = "CustomOptimizer"
-    library_version = "1.0.0"
-    default_direction = "maximize"
-
-    def optimize(self, objective):
-        # Implement your custom optimization logic here
-        pass
+print("Haven't made this shit yet")
 ```
 
 **Selecting the Best Wrapper:**
 ```python
-from opticomp import select_best_wrapper
-
-# Select the best wrapper for the objective
-best_wrapper_name = select_best_wrapper(objective, ['OptunaRandom', 'OptunaTPE', 'HyperoptTPE', 'BayesianOpt'])
-print(f"The best wrapper is: {best_wrapper_name}")
+print("Haven't made this shit yet")
 ```
 
 ## Built-in Wrappers
