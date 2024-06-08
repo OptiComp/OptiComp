@@ -12,10 +12,10 @@ from opticomp.wrappers_control import Wrapper
 #     return (param1 - 2) ** 2 + (param2 + 3) ** 2 # - (param3 + 3) ** 2
 
 '''
-Performance on the Sphere function signifies an optimizer's effectiveness in finding the global minimum, 
-situated at the origin with a function value of 0. 
-It reflects the optimizer's ability to efficiently explore the search space, 
-navigate towards the optimal solution, 
+Performance on the Sphere function signifies an optimizer's effectiveness in finding the global minimum,
+situated at the origin with a function value of 0.
+It reflects the optimizer's ability to efficiently explore the search space,
+navigate towards the optimal solution,
 and converge to the global minimum with minimal iterations or evaluations.
 '''
 # sphere function
