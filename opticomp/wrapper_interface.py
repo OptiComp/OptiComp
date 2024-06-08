@@ -1,5 +1,5 @@
 # Wrapper interface
-class WrapperInterface:   
+class WrapperInterface:
     name = "Unknown"                # Default name for the wrapper
     library_version = "Unknown"     # Default library version that wrapper is based on
     default_direction = "Unknown"   # Default direction
@@ -18,7 +18,7 @@ class WrapperInterface:
         raise NotImplementedError("This method should be overridden by subclasses")
     
     def optimize(self, invert, n_steps):
-        # Create the final objective function. Normilize parameters and set the direction. 
+        # Create the final objective function. Normilize parameters and set the direction.
         def final_objective(params):
             # Normalize parameters
             params = self._wrap_norm_parameters(params)

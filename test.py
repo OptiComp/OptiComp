@@ -1,13 +1,14 @@
 # Imports
+import numpy as np
+
 from opticomp.benchmarking import OptimizerBenchmark
 from opticomp.wrappers_control import Wrapper
-import numpy as np
 
 # Objective function
 # def objective(params):
-#     param1 = params['param1'] 
-#     param2 = params['param2'] 
-#     # param3 = params['param3'] 
+#     param1 = params['param1']
+#     param2 = params['param2']
+#     # param3 = params['param3']
 #     return (param1 - 2) ** 2 + (param2 + 3) ** 2 # - (param3 + 3) ** 2
 
 '''
@@ -24,7 +25,7 @@ def objective(params):
 
 # Search space
 # {'param_name': (min, max)}
-search_space = {'param1': (-100, 100), 
+search_space = {'param1': (-100, 100),
                 'param2': (-100, 100),
                 'param3': (-100, 100),
                 'param4': (-100, 100),

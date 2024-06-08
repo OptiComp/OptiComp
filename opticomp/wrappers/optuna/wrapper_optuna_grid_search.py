@@ -1,6 +1,8 @@
 # Imports
-import optuna
 import logging
+
+import optuna
+
 from ...wrapper_interface import WrapperInterface
 
 

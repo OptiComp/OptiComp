@@ -1,6 +1,7 @@
 # Imports
 import time
 
+
 # Optimizer compare class
 class OptimizerBenchmark:
     def __init__(self, objective, search_space):

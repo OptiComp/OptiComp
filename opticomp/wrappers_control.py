@@ -1,8 +1,11 @@
 # Imports
-from .wrappers.wrappers_all import wrapper_info
 import importlib
 
+from .wrappers.wrappers_all import wrapper_info
+
+
 class Wrapper():
+    @staticmethod
     def fetch(name):
         # Dynamically import and select the specified wrapper
         for module_path, class_name, opt_name in wrapper_info:
@@ -21,10 +24,12 @@ class Wrapper():
         raise ValueError(f"No wrapper with name '{name}' found.")
 
 
+    @staticmethod
     def initialize(wrapper_class, objective, search_space):
         return wrapper_class(objective, search_space)
 
 
+    @staticmethod
     def print_info(wrapper_class):
         print("\n==== Wrapper info ====")
         print(f"Name: {wrapper_class.name}")

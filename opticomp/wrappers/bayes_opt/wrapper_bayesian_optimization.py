@@ -1,6 +1,6 @@
 # Imports
-from bayes_opt import BayesianOptimization
-from bayes_opt import UtilityFunction
+from bayes_opt import BayesianOptimization, UtilityFunction
+
 from ...wrapper_interface import WrapperInterface
 
 
@@ -12,8 +12,8 @@ class BayesianOptWrapper(WrapperInterface):
 
     # Config class
     class Config:
-        kappa = 2.5           
-        xi = 0.0              
+        kappa = 2.5
+        xi = 0.0
 
     def _wrap_norm_parameters(self, params):
         # No need to normalize parameters for BayesianOptimization
@@ -41,10 +41,10 @@ class BayesianOptWrapper(WrapperInterface):
         optimizer.register(
             params=next_point_to_probe,
             target=target
-        )   
+        )
 
         # Perform additional probes
-        for _ in range(int(n_steps/20)):
+        for _ in range(int(n_steps / 20)):
             next_point = optimizer.suggest(utility)  # Get the next point to probe
             target = objective(next_point)          # Call the objective function with the suggested point
             optimizer.register(params=next_point, target=target)  # Register the result of the probe

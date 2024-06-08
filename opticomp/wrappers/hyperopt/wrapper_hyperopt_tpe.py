@@ -1,4 +1,5 @@
 from hyperopt import hp
+
 from ...wrapper_interface import WrapperInterface
 
 
