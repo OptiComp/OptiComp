@@ -49,7 +49,7 @@ for wrapper in wrapper_names:
     OptSuite.add_wrapper(wrapper)
 
 # Compare and optimize using the added wrappers
-best_result, all_results = OptSuite.benchmark(direction="minimize", verbose=True)
+best_result, all_results = OptSuite.benchmark(direction="minimize", max_steps=30, verbose=True)
 
 # print(f"Best optimizer: {best_result}")
 # print("All results:", all_results)
