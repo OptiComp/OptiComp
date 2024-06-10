@@ -6,7 +6,7 @@ import optuna
 from ...wrapper_interface import WrapperInterface
 
 
-class OptunaGridSearchWrapper(WrapperInterface):
+class OptunaGridSearch(WrapperInterface):
     name = "OptunaGridSearch"       # Name for the wrapper
     library_version = "3.6.1"       # The library version that wrapper is based on
     default_direction = "minimize"  # Default direction
