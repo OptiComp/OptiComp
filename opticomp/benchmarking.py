@@ -27,14 +27,14 @@ class OptimizerBenchmark:
             start_time = time.time()
             params, score = wrapper.optimize(invert, n_steps)
             elapsed_time = time.time() - start_time
-            results[wrapper.name] = {
+            results[wrapper.__class__.__name__] = {
                 'params': params,
                 'score': score,
                 'time': elapsed_time
             }
 
             if verbose:
-                print(f"Optimiser: {wrapper.name}")
+                print(f"Optimiser: {wrapper.__class__.__name__}")
                 print(f"Score: {score}")
                 print(f"Time: {elapsed_time}\n")
         

@@ -5,7 +5,6 @@ from ...wrapper_interface import WrapperInterface
 
 # Wrapper for Hyperopt with TPE
 class HyperoptTPE(WrapperInterface):
-    name = "HyperoptTPE"           # Name for the wrapper
     library_version = "0.2.5"      # The library version that wrapper is based on
     default_direction = "minimize" # Default optimization direction
 

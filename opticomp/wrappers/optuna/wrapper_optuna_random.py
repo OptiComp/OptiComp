@@ -7,7 +7,6 @@ from ...wrapper_interface import WrapperInterface
 
 
 class OptunaRandom(WrapperInterface):
-    name = "OptunaRandom"           # Name for the wrapper
     library_version = "3.6.1"       # The library version that wrapper is based on
     default_direction = "minimize"  # Default direction
 
