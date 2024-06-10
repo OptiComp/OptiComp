@@ -15,11 +15,10 @@ class Wrapper():
                     module = importlib.import_module(module_path)
                     wrapper_class = getattr(module, class_name)
                     return wrapper_class
-                except ImportError:
-                    raise ImportError(f"Required library for {class_name} is not installed.")
+                except ImportError as e:
+                    raise ImportError(f"Required library '{e.name}' for {class_name} is not installed.")
                 except AttributeError:
                     raise ImportError(f"{class_name} not found in {module_path}.")
-
         # Raise an error if no matching wrapper is found
         raise ValueError(f"No wrapper with name '{name}' found.")
 

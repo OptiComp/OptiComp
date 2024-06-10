@@ -33,7 +33,7 @@ search_space = {'param1': (-100, 100),
                 'param6': (-100, 100)}
 
 # Select wrappers by name
-wrapper_names = ["OptunaRandom", "OptunaTPE", "OptunaGridSearch", "BayesianOpt"]
+wrapper_names = ["OptunaRandom", "OptunaTPE", "OptunaGridSearch", "BayesianOpt", "HyperoptTPE"]
 selected_wrappers = [Wrapper.fetch(name) for name in wrapper_names]
 
 for wrapper in selected_wrappers:
