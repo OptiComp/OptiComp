@@ -11,20 +11,23 @@ class OptunaRandom(WrapperInterface):
     default_direction = "minimize"  # Default direction
 
     # Normalize parameters
-    def _wrap_norm_parameters(self, trial):
+    def _wrap_normalize_parameters(self, trial, search_space):
         # Get params
-        params = [trial.suggest_float(name, low, high) for name, (low, high) in self.search_space.items()]
+        params = [trial.suggest_float(name, low, high) for name, (low, high) in search_space.items()]
         # Normilize params
-        normalized_params = {name: param_value for name, param_value in zip(self.search_space.keys(), params)}
+        normalized_params = {name: param_value for name, param_value in zip(search_space.keys(), params)}
         # Return normilized params
         return normalized_params
 
-    # Apply optimizer
-    def _wrap_execute_optimization(self, objective, n_steps):
+    # Setup optimizer
+    def _wrap_setup(self, objective, search_space):
         # Disable feedback from Optuna
         optuna.logging.disable_default_handler()
         optuna.logging.get_logger("optuna").addHandler(logging.NullHandler())
 
-        study = optuna.create_study(direction="minimize", sampler=optuna.samplers.TPESampler())
-        study.optimize(objective, n_trials=n_steps)
-        return study.best_params, study.best_value
+        self._study = optuna.create_study(direction="minimize", sampler=optuna.samplers.RandomSampler())
+    
+    # Take one optimizer step
+    def _wrap_step(self, objective, search_space):
+        self._study.optimize(objective, n_trials=1)
+        return self._study.best_params, self._study.best_value

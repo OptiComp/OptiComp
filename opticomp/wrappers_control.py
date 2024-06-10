@@ -21,11 +21,9 @@ class Wrapper():
                     raise ImportError(f"{class_name} not found in {module_path}.")
         raise ValueError(f"No wrapper with name '{name}' found.")
 
-
     @staticmethod
     def initialize(wrapper, objective, search_space):
         return wrapper(objective, search_space)
-
 
     @staticmethod
     def print_info(wrapper):

@@ -18,6 +18,8 @@ It reflects the optimizer's ability to efficiently explore the search space,
 navigate towards the optimal solution,
 and converge to the global minimum with minimal iterations or evaluations.
 '''
+
+
 # sphere function
 def objective(params):
     x = np.array([params[key] for key in params.keys()])
@@ -32,7 +34,7 @@ search_space = {'param1': (-100, 100),
                 'param5': (-100, 100),
                 'param6': (-100, 100)}
 
-# Create an instance of the optimizer comparer
+# Create an instance of the optimizer suite
 OptSuite = OptimizerSuite(objective, search_space)
 
 # Select wrappers by name
@@ -47,7 +49,7 @@ for wrapper in wrapper_names:
     OptSuite.add_wrapper(wrapper)
 
 # Compare and optimize using the added wrappers
-best_result, all_results = OptSuite.benchmark(direction="maximize", verbose=True)
+best_result, all_results = OptSuite.benchmark(direction="minimize", verbose=True)
 
 # print(f"Best optimizer: {best_result}")
 # print("All results:", all_results)
