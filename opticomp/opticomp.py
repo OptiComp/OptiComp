@@ -4,7 +4,7 @@ from .wrappers_control import Wrapper
 
 
 # Optimizer compare class
-class OptimizerBenchmark:
+class OptiComp:
     def __init__(self, objective, search_space):
         self.objective = objective
         self.search_space = search_space
@@ -44,3 +44,6 @@ class OptimizerBenchmark:
         
         best_result = min(results.items(), key=lambda x: x[1]['score'])
         return best_result, results
+    
+    def get_best():
+        print("Not made yet")

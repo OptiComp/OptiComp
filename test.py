@@ -1,7 +1,7 @@
 # Imports
 import numpy as np
 
-from opticomp.benchmarking import OptimizerBenchmark
+from opticomp.opticomp import OptiComp
 from opticomp.wrappers_control import Wrapper
 
 # Objective function
@@ -32,6 +32,9 @@ search_space = {'param1': (-100, 100),
                 'param5': (-100, 100),
                 'param6': (-100, 100)}
 
+# Create an instance of the optimizer comparer
+OptiComp = OptiComp(objective, search_space)
+
 # Select wrappers by name
 wrapper_names = ["OptunaRandom", "OptunaTPE", "OptunaGridSearch", "BayesianOpt"]
 selected_wrappers = [Wrapper.fetch(name) for name in wrapper_names]
@@ -39,15 +42,12 @@ selected_wrappers = [Wrapper.fetch(name) for name in wrapper_names]
 for wrapper in selected_wrappers:
     Wrapper.print_info(wrapper)
 
-# Create an instance of the optimizer comparer
-Optbenchmark = OptimizerBenchmark(objective, search_space)
-
 # Add selected wrappers to the optimizer comparer
 for wrapper in wrapper_names:
-    Optbenchmark.add_wrapper(wrapper)
+    OptiComp.add_wrapper(wrapper)
 
 # Compare and optimize using the added wrappers
-best_result, all_results = Optbenchmark.benchmark(direction="maximize", verbose=True)
+best_result, all_results = OptiComp.benchmark(direction="maximize", verbose=True)
 
 # print(f"Best optimizer: {best_result}")
 # print("All results:", all_results)
