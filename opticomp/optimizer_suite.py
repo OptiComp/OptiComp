@@ -4,7 +4,7 @@ from .wrappers_control import Wrapper
 
 
 # Optimizer compare class
-class OptiComp:
+class OptimizerSuite:
     def __init__(self, objective, search_space):
         self.objective = objective
         self.search_space = search_space

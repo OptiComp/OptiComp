@@ -1,7 +1,7 @@
 # Imports
 import numpy as np
 
-from opticomp.opticomp import OptiComp
+from opticomp.optimizer_suite import OptimizerSuite
 from opticomp.wrappers_control import Wrapper
 
 # Objective function
@@ -33,7 +33,7 @@ search_space = {'param1': (-100, 100),
                 'param6': (-100, 100)}
 
 # Create an instance of the optimizer comparer
-OptiComp = OptiComp(objective, search_space)
+OptSuite = OptimizerSuite(objective, search_space)
 
 # Select wrappers by name
 wrapper_names = ["OptunaRandom", "OptunaTPE", "OptunaGridSearch", "BayesianOpt"]
@@ -44,10 +44,10 @@ for wrapper in selected_wrappers:
 
 # Add selected wrappers to the optimizer comparer
 for wrapper in wrapper_names:
-    OptiComp.add_wrapper(wrapper)
+    OptSuite.add_wrapper(wrapper)
 
 # Compare and optimize using the added wrappers
-best_result, all_results = OptiComp.benchmark(direction="maximize", verbose=True)
+best_result, all_results = OptSuite.benchmark(direction="maximize", verbose=True)
 
 # print(f"Best optimizer: {best_result}")
 # print("All results:", all_results)
