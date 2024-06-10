@@ -40,13 +40,12 @@ search_space = {'param1': (-100, 100),
 
 # Select wrappers by name
 wrapper_names = ["OptunaRandom", "OptunaTPE", "OptunaGridSearch", "BayesianOpt"]
-selected_wrappers = [Wrapper.fetch(name) for name in wrapper_names]
 
 # Create an instance of the optimizer benchmark
 Optbenchmark = OptimizerBenchmark(objective, search_space)
 
 # Add selected wrappers to the optimizer benchmark
-for wrapper in selected_wrappers:
+for wrapper in wrapper_names:
     Optbenchmark.add_wrapper(wrapper)
 
 # Compare and optimize using the added wrappers
