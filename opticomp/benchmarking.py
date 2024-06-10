@@ -1,5 +1,6 @@
 # Imports
 import time
+from .wrappers_control import Wrapper
 
 
 # Optimizer compare class
@@ -9,9 +10,12 @@ class OptimizerBenchmark:
         self.search_space = search_space
         self.wrappers = []
 
-    def add_wrapper(self, wrapper_class):
-        wrapper = wrapper_class(self.objective, self.search_space)
-        self.wrappers.append(wrapper)
+    def add_wrapper(self, wrapper):
+        # Fetch wrapper if given variable is string
+        if isinstance(wrapper, str):
+            wrapper = Wrapper.fetch(wrapper)
+        # initialize wrapper and appand to wrapper list
+        self.wrappers.append(Wrapper.initialize(wrapper, self.objective, self.search_space))
 
     def clear_wrappers(self):
         self.wrappers.clear()

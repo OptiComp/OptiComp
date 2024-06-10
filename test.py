@@ -43,7 +43,7 @@ for wrapper in selected_wrappers:
 Optbenchmark = OptimizerBenchmark(objective, search_space)
 
 # Add selected wrappers to the optimizer comparer
-for wrapper in selected_wrappers:
+for wrapper in wrapper_names:
     Optbenchmark.add_wrapper(wrapper)
 
 # Compare and optimize using the added wrappers
