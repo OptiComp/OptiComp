@@ -23,7 +23,7 @@ def sphere_function():
 
 def griewank_function():
     """
-    Rosenbrock function.
+    Griewank function.
 
     Explanation
     -----------
