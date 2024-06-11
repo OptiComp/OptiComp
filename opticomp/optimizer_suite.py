@@ -1,7 +1,37 @@
 import time
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from typing import Callable
 
+import psutil
+
 from .wrapper_interface import WrapperInterface
+
+'''
+Multiprocessing does work, HOWEVER.
+Some optimizers dont play well together.
+Specifically the bayesian optimizer can not run twice at the same time.
+If you run 1, CPU 40%.
+If you run 2 CPU 100%.
+This is with an Intel I5, but still.
+
+Currently the code checks if the CPU is below a set threshold before starting a new process.
+However, it will start another process when the CPU is under 40% and it will not stop untill finished.
+
+This ofcourse causes the elapsed time for these optimizers to be way higher.
+'''
+
+
+def benchmark_wrapper(wrapper, direction, max_steps, target_score):
+    start_time = time.time()
+    params, score, step = wrapper.optimize(direction, max_steps, target_score)
+    print("DONE")
+    elapsed_time = time.time() - start_time
+    return wrapper.__class__.__name__, {
+        'params': params,
+        'score': score,
+        'time': elapsed_time,
+        'steps': step
+        }
 
 
 # Optimizer compare class
@@ -81,23 +111,28 @@ class OptimizerSuite:
         """
         if not max_steps and not target_score:
             raise ValueError("Either max_steps or target_score must be provided")
+        
         results = {}
-        for wrapper in self._wrappers:
-            start_time = time.time()
-            params, score, step = wrapper.optimize(direction, max_steps, target_score)
-            elapsed_time = time.time() - start_time
-            results[wrapper.__class__.__name__] = {
-                'params': params,
-                'score': score,
-                'time': elapsed_time,
-                'steps': step
-            }
-
-            if verbose:
-                print(f"Optimiser: {wrapper.__class__.__name__}")
-                print(f"Score: {score}")
-                print(f"Time: {elapsed_time}")
-                print(f"steps: {step}\n")
+        with ProcessPoolExecutor(max_workers=10) as executor:
+            futures = {}
+            for wrapper in self._wrappers:
+                # Wait if CPU usage is too high before submitting a new task
+                while psutil.cpu_percent(interval=0.1) > 70:
+                    time.sleep(0.5)
+                print("Start process")
+                future = executor.submit(benchmark_wrapper, wrapper, direction, max_steps, target_score)
+                futures[future] = wrapper
+                # Wait a few seconds for previous optimizer to start before checking cpu
+                time.sleep(2)
+            
+            for future in as_completed(futures):
+                name, result = future.result()
+                results[name] = result
+                if verbose:
+                    print(f"Optimiser: {name}")
+                    print(f"Score: {result['score']}")
+                    print(f"Time: {result['time']}")
+                    print(f"Steps: {result['steps']}\n")
         
         best_result = min(results.items(), key=lambda x: x[1]['score'])
         return best_result, results
