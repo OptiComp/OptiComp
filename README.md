@@ -20,7 +20,7 @@ pip install opticomp
 ```
 
 ## Usage
-**Benchmark Built-in Wrappers And Objectives:**
+**Benchmark Common Wrappers And Objectives:**
 ```python
 from opticomp import OptimizerSuite, objective_zoo, wrapper_zoo
 
