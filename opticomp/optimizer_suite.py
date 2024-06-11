@@ -1,16 +1,17 @@
 import time
+from typing import Callable
 
-# from . import wrappers_control
+from .wrapper_interface import WrapperInterface
 
 
 # Optimizer compare class
 class OptimizerSuite:
-    def __init__(self, objective, search_space):
+    def __init__(self, objective: Callable[[list[int]], int], search_space: dict[str, tuple[int, int]]):
         self._objective = objective
         self._search_space = search_space
         self._wrappers = []
 
-    def add_wrapper(self, wrapper):
+    def add_wrapper(self, wrapper: WrapperInterface):
         # Make sure all wrappers have the same objective and search_space
         wrapper.reinitialize(self._objective, self._search_space)
         self._wrappers.append(wrapper)
@@ -18,16 +19,13 @@ class OptimizerSuite:
     def clear_wrappers(self):
         self._wrappers.clear()
 
-    def benchmark(self, direction="minimize", max_steps=None, target_score=None, verbose=True):
+    def benchmark(self, direction: str = "minimize", max_steps: int = None, target_score: int = None, verbose: bool = True):
         if not max_steps and not target_score:
             raise ValueError("Either max_steps or target_score must be provided")
         results = {}
         for wrapper in self._wrappers:
-            invert = False
-            if wrapper.default_direction != direction:
-                invert = True
             start_time = time.time()
-            params, score, step = wrapper.optimize(invert, max_steps, target_score)
+            params, score, step = wrapper.optimize(direction, max_steps, target_score)
             elapsed_time = time.time() - start_time
             results[wrapper.__class__.__name__] = {
                 'params': params,
@@ -46,4 +44,4 @@ class OptimizerSuite:
         return best_result, results
     
     def get_best():
-        print("Not made yet")
+        raise NotImplementedError()

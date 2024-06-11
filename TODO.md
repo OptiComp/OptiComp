@@ -23,8 +23,8 @@ Comments that explain why code does something > comments that explain what code 
 
 Keep comments short
 
-def init(self, objective, search_space: dict[str, tuple[int, int]]):
-Zet in string als je hier error bij krijgt 
+<!-- def init(self, objective, search_space: dict[str, tuple[int, int]]):
+Zet in string als je hier error bij krijgt  -->
 
 def test() -> int: # Tells the user what it returns
 
@@ -101,9 +101,9 @@ Een bestand met een basic richting voor optimiser soort en use-case
 
 
 
-    # TODO implement this
-    def get_best():
-        raise NotImplementedError()
+<!-- # TODO implement this
+def get_best():
+    raise NotImplementedError() -->
 
 
 
