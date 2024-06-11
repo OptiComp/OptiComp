@@ -22,7 +22,6 @@ class HyperoptTPE(WrapperInterface):
         trials = hp.Trials()
         best = hp.fmin(fn=objective, space=space, algo=hp.tpe.suggest, max_evals=100, trials=trials)
 
-        # Extract the best parameters and score from the trials object
         best_trial = trials.best_trial
         best_params = best_trial['misc']['vals']
         best_params = {key[0]: value[0] for key, value in best_params.items()}
