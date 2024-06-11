@@ -1,6 +1,11 @@
 import numpy as np
 
 
+def sphere_objective(params):
+    x = np.array(list(params.values()))
+    return np.sum(x**2)
+
+
 def sphere_function():
     """
     Sphere function.
@@ -14,11 +19,13 @@ def sphere_function():
                     'param2': (-100, 100),
                     'param3': (-100, 100)}
     
-    def objective(params):
-        x = np.array(list(params.values()))
-        return np.sum(x**2)
-    
-    return objective, search_space
+    return sphere_objective, search_space
+
+
+def griewank_objective(params):
+    x = np.array(list(params.values()))
+    n = len(x)
+    return 1 + (1 / 4000) * np.sum(x**2) - np.prod(np.cos(x / np.sqrt(np.arange(1, n + 1))))
 
 
 def griewank_function():
@@ -33,13 +40,13 @@ def griewank_function():
     search_space = {'param1': (-600, 600),
                     'param2': (-600, 600),
                     'param3': (-600, 600)}
-    
-    def objective(params):
-        x = np.array(list(params.values()))
-        n = len(x)
-        return 1 + (1 / 4000) * np.sum(x**2) - np.prod(np.cos(x / np.sqrt(np.arange(1, n + 1))))
-    
-    return objective, search_space
+
+    return griewank_objective, search_space
+
+
+def rosenbrock_objective(params):
+    x = np.array(list(params.values()))
+    return np.sum(100 * (x[1:] - x[:-1]**2)**2 + (1 - x[:-1])**2)
 
 
 def rosenbrock_function():
@@ -55,12 +62,14 @@ def rosenbrock_function():
                     'param2': (-10, 10),
                     'param3': (-10, 10)}
     
-    def objective(params):
-        x = np.array(list(params.values()))
-        return np.sum(100 * (x[1:] - x[:-1]**2)**2 + (1 - x[:-1])**2)
-    
-    return objective, search_space
+    return rosenbrock_objective, search_space
 
+
+def ackley_objective(params):
+    x = np.array(list(params.values()))
+    n = len(x)
+    return -20 * np.exp(-0.2 * np.sqrt(np.sum(x**2) / n)) - np.exp(np.sum(np.cos(2 * np.pi * x)) / n)
+    
 
 def ackley_function():
     """
@@ -76,9 +85,4 @@ def ackley_function():
                     'param2': (-32.768, 32.768),
                     'param3': (-32.768, 32.768)}
     
-    def objective(params):
-        x = np.array(list(params.values()))
-        n = len(x)
-        return -20 * np.exp(-0.2 * np.sqrt(np.sum(x**2) / n)) - np.exp(np.sum(np.cos(2 * np.pi * x)) / n)
-    
-    return objective, search_space
+    return ackley_objective, search_space
