@@ -28,7 +28,7 @@ from opticomp import OptimizerSuite, objective_zoo, wrapper_zoo
 # Get common objective from objective_zoo
 objective, search_space = objective_zoo.sphere_function()
 
-# Create an instance of the optimizer suite
+# Create an instance of the benchmark suite
 benchmark_suite = OptimizerSuite(objective, search_space)
 
 # Add wrappers directly from wrapper_zoo to the benchmark_suite
@@ -62,7 +62,7 @@ def objective(params):
 search_space = {'param1': (-100, 100),
                 'param2': (-100, 100)}
 
-# Create an instance of the optimizer suite
+# Create an instance of the benchmark suite
 benchmark_suite = BenchmarkSuite(objective, search_space)
 
 # Add wrappers directly from wrapper_zoo to the benchmark_suite
