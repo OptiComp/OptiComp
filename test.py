@@ -1,7 +1,7 @@
 import numpy as np
 
-from opticomp.optimizer_suite import OptimizerSuite
-from opticomp.wrappers_control import Wrapper
+from opticomp import optimizer_suite
+from opticomp import wrappers_control
 
 # Objective function
 # def objective(params):

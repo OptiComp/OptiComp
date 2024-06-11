@@ -17,7 +17,7 @@ verwijder wrappers class to only be functions
 
 Plaats import in init file in opticomp, dan kan je daar direct uit importeren
 
-Remove import comments
+<!-- Remove import comments -->
 
 Comments that explain why code does something > comments that explain what code does
 
