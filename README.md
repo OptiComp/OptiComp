@@ -119,14 +119,6 @@ custom_wrapper = CustomWrapper(objective, search_space)
 ```
 <br>
 
-## Built-in Wrappers
-OptiComp currently includes wrappers for the following libraries:
-
-- **Optuna:** An optimization library for hyperparameter tuning.
-- **bayes_opt:** A Bayesian Optimization library.
-- **Hyperopt:** A library for distributed asynchronous hyperparameter optimization.
-<br>
-
 ## Contributing
 Contributions are welcome! Please feel free to submit a pull request or open an issue to improve OptiComp.
 <br>
