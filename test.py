@@ -1,7 +1,6 @@
 import numpy as np
 
-from opticomp import optimizer_suite
-from opticomp import wrappers_control
+from opticomp import OptimizerSuite, wrappers_control
 
 # Objective function
 # def objective(params):
@@ -38,10 +37,10 @@ optimizer_suite = OptimizerSuite(objective, search_space)
 
 # Select wrappers by name
 wrapper_names = ["OptunaRandom", "OptunaTPE", "OptunaGridSearch", "BayesianOpt"]
-selected_wrappers = [Wrapper.fetch(name) for name in wrapper_names]
+selected_wrappers = [wrappers_control.fetch(name) for name in wrapper_names]
 
 for wrapper in selected_wrappers:
-    Wrapper.print_info(wrapper)
+    wrappers_control.print_info(wrapper)
 
 # Add selected wrappers to the optimizer comparer
 for wrapper in wrapper_names:
