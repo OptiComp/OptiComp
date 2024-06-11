@@ -46,7 +46,6 @@ best_result, all_results = optimizer_suite.benchmark(direction="minimize", max_s
 ```python
 from opticomp import BenchmarkSuite, wrapper_zoo
 
-
 # Custom objective
 def objective(params):
     # Split params
