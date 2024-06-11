@@ -36,10 +36,11 @@ search_space = {'param1': (-100, 100),
 optimizer_suite = OptimizerSuite(objective, search_space)
 
 # Select wrappers by name
-wrapper_names = ["OptunaRandom", "OptunaTPE", "OptunaGridSearch", "BayesianOpt"]
+wrapper_names = ["OptunaRandom", "OptunaTPE", "OptunaGridSearch"]  # , "BayesianOpt"
 selected_wrappers = [wrappers_control.fetch(name) for name in wrapper_names]
 
 for wrapper in selected_wrappers:
+    wrapper = wrappers_control.initialize(wrapper, objective, search_space)
     wrappers_control.print_info(wrapper)
 
 # Add selected wrappers to the optimizer comparer

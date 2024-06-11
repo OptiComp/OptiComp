@@ -1,9 +1,17 @@
+from abc import ABC
+from typing import Callable, Dict
 
-class WrapperInterface:
-    library_version = "Unknown"     # Default library version that wrapper is based on
-    default_direction = "Unknown"   # Default direction
 
-    def __init__(self, objective, search_space):
+class WrapperInterface(ABC):
+    library_version: str
+    default_direction: str
+
+    objective: Callable[[list[int]], int]
+    search_space: Dict[str, int]
+
+    def __init__(self, library_version: str, default_direction: str, objective: Callable[[list[int]], int], search_space: Dict[str, int]):
+        self.library_version = library_version
+        self.default_direction = default_direction
         self.__objective = objective
         self.__search_space = search_space
       

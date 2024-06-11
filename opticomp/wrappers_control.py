@@ -24,7 +24,7 @@ def initialize(wrapper, objective, search_space):
 
 def print_info(wrapper):
     print("\n==== Wrapper info ====")
-    print(f"Name: {wrapper.__name__}")
+    print(f"Name: {wrapper.__class__.__name__}")
     print(f"Lib version: {wrapper.library_version}")
     print(f"Direction: {wrapper.default_direction}")
 

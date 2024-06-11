@@ -1,6 +1,6 @@
 import time
 
-from .wrappers_control import Wrapper
+from . import wrappers_control
 
 
 # Optimizer compare class
@@ -12,8 +12,8 @@ class OptimizerSuite:
 
     def add_wrapper(self, wrapper):
         if isinstance(wrapper, str):
-            wrapper = Wrapper.fetch(wrapper)
-        self.wrappers.append(Wrapper.initialize(wrapper, self.objective, self.search_space))
+            wrapper = wrappers_control.fetch(wrapper)
+        self.wrappers.append(wrappers_control.initialize(wrapper, self.objective, self.search_space))
 
     def clear_wrappers(self):
         self.wrappers.clear()

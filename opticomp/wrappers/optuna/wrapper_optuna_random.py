@@ -6,8 +6,8 @@ from ...wrapper_interface import WrapperInterface
 
 
 class OptunaRandom(WrapperInterface):
-    library_version = "3.6.1"       # The library version that wrapper is based on
-    default_direction = "minimize"  # Default direction
+    def __init__(self, objective, search_space):
+        super().__init__("3.6.1", "minimize", objective, search_space)
 
     # Normalize parameters
     def _wrap_normalize_parameters(self, trial, search_space):

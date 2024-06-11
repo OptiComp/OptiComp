@@ -39,9 +39,9 @@ def test() -> int: # Tells the user what it returns
 
 
 
-# kan niet worden geroepen als normale class
+<!-- # kan niet worden geroepen als normale class
 from abc import ABC
-class WrapperInterface(ABC):
+class WrapperInterface(ABC): -->
 
 
 
