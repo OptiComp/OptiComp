@@ -23,7 +23,7 @@ pip install opticomp
 <br>
 
 ## Usage
-**Benchmark Common Wrappers And Objectives:**
+#### **Benchmark Common Wrappers And Objectives:**
 <br>Use the OptiComp common wrappers and objectives:
 ```python
 from opticomp import BenchmarkSuite, objective_zoo, wrapper_zoo
@@ -44,7 +44,7 @@ best_result, all_results = benchmark_suite.benchmark(direction="minimize", max_s
 ```
 <br>
 
-**Custom Objective:**
+#### **Custom Objective:**
 <br>Create a custom objective and search_space:
 
 ```python
@@ -79,7 +79,7 @@ best_result, all_results = benchmark_suite.benchmark(direction="maximize", max_s
 ```
 <br>
 
-**Custom Wrapper:**
+#### **Custom Wrapper:**
 <br>Create a custom wrapper for any optimizer:
 ```python
 import logging
