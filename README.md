@@ -43,7 +43,35 @@ best_result, all_results = optimizer_suite.benchmark(direction="minimize", max_s
 Create a custom wrapper by extending the WrapperInterface:
 
 ```python
-print("Haven't made this example yet")
+from opticomp import BenchmarkSuite, wrapper_zoo
+
+
+# Custom objective
+def objective(params):
+    # Split params
+    param1 = params['param1']
+    param2 = params['param1']
+    
+    # Evaluate and calculate score
+    score = param1 + param2
+
+    # Return score
+    return score
+
+# Custom search_space
+search_space = {'param1': (-100, 100),
+                'param2': (-100, 100)}
+
+# Create an instance of the optimizer suite
+optimizer_suite = BenchmarkSuite(objective, search_space)
+
+# Add wrappers directly from wrapper_zoo to the optimizer_suite
+optimizer_suite.add_wrapper(wrapper_zoo.optuna_random(objective, search_space))
+optimizer_suite.add_wrapper(wrapper_zoo.optuna_tpe(objective, search_space))
+optimizer_suite.add_wrapper(wrapper_zoo.bayesian(objective, search_space))
+
+# Compare and optimize using the added wrappers
+best_result, all_results = optimizer_suite.benchmark(direction="maximize", max_steps=100, target_score=190, verbose=True)
 ```
 
 **Selecting the Best Wrapper:**
