@@ -1,7 +1,7 @@
 # Imports
 import importlib
 
-from .wrappers.wrappers_all import wrapper_info
+from .wrappers.wrapper_zoo import wrapper_info
 
 
 class Wrapper():
