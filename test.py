@@ -34,7 +34,7 @@ search_space = {'param1': (-100, 100),
                 'param6': (-100, 100)}
 
 # Create an instance of the optimizer suite
-OptSuite = OptimizerSuite(objective, search_space)
+optimizer_suite = OptimizerSuite(objective, search_space)
 
 # Select wrappers by name
 wrapper_names = ["OptunaRandom", "OptunaTPE", "OptunaGridSearch", "BayesianOpt"]
@@ -45,10 +45,10 @@ for wrapper in selected_wrappers:
 
 # Add selected wrappers to the optimizer comparer
 for wrapper in wrapper_names:
-    OptSuite.add_wrapper(wrapper)
+    optimizer_suite.add_wrapper(wrapper)
 
 # Compare and optimize using the added wrappers
-best_result, all_results = OptSuite.benchmark(direction="minimize", max_steps=30, verbose=True)
+best_result, all_results = optimizer_suite.benchmark(direction="minimize", max_steps=30, verbose=True)
 
 # print(f"Best optimizer: {best_result}")
 # print("All results:", all_results)
