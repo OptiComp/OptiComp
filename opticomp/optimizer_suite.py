@@ -6,20 +6,77 @@ from .wrapper_interface import WrapperInterface
 
 # Optimizer compare class
 class OptimizerSuite:
+    """
+    A class for comparing and benchmarking optimization wrappers.
+
+    Parameters
+    ----------
+    objective : Callable[[list[int]], int]
+        The objective function to be optimized.
+    search_space : dict[str, tuple[int, int]]
+        The search space defining the range of each parameter.
+
+    Methods
+    -------
+    add_wrapper(wrapper)
+        Add a wrapper to the OptimizerSuite.
+
+    clear_wrappers()
+        Clear all wrappers from the OptimizerSuite.
+
+    benchmark(direction = "minimize", max_steps = None, target_score = None, verbose = True)
+        Benchmark wrappers on provided objective and search_space.
+
+    get_best()
+        [Not Implemented] Get the best result from the benchmark.
+    """
+
     def __init__(self, objective: Callable[[list[int]], int], search_space: dict[str, tuple[int, int]]):
         self._objective = objective
         self._search_space = search_space
         self._wrappers = []
 
     def add_wrapper(self, wrapper: WrapperInterface):
+        """
+        Add a wrapper to the OptimizerSuite.
+
+        Parameters
+        ----------
+        wrapper : WrapperInterface
+            The wrapper to be added. Can be from wrapper_zoo or custom.
+        """
         # Make sure all wrappers have the same objective and search_space
         wrapper.reinitialize(self._objective, self._search_space)
         self._wrappers.append(wrapper)
 
     def clear_wrappers(self):
+        """
+        Clear all wrappers from the OptimizerSuite.
+        """
         self._wrappers.clear()
 
     def benchmark(self, direction: str = "minimize", max_steps: int = None, target_score: int = None, verbose: bool = True):
+        """
+        Benchmark wrappers on provided objective and search_space.
+
+        Parameters
+        ----------
+        direction : str, optional
+            The direction of optimization. Default is 'minimize'.
+        max_steps : int, optional
+            The maximum number of optimization steps. If not provided, target_score must be provided.
+        target_score : int, optional
+            The target score to achieve. If not provided, max_steps must be provided.
+        verbose : bool, optional
+            If True, print detailed information during benchmarking. Default is True.
+
+        Returns
+        -------
+        tuple
+            A tuple containing the best result
+        tuple
+            A tuple containing the all results
+        """
         if not max_steps and not target_score:
             raise ValueError("Either max_steps or target_score must be provided")
         results = {}
