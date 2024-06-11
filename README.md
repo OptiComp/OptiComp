@@ -20,36 +20,23 @@ pip install opticomp
 ```
 
 ## Usage
-**Benchmark Built-in Wrappers:**
+**Benchmark Built-in Wrappers And Objectives:**
 ```python
-# Imports
-from opticomp.benchmarking import OptimizerBenchmark
-from opticomp.wrappers_control import Wrapper
+from opticomp import OptimizerSuite, objective_zoo, wrapper_zoo
 
-# Example objective function
-def objective(params):
-    param1 = params['param1'] 
-    param2 = params['param2'] 
-    # param3 = params['param3'] 
-    return (param1 - 2) ** 2 + (param2 + 3) ** 2
+# Get common objective from objective_zoo
+objective, search_space = objective_zoo.sphere_function()
 
-# Example search space
-# {'param_name': (min, max)}
-search_space = {'param1': (-100, 100), 
-                'param2': (-100, 100)}
+# Create an instance of the optimizer suite
+optimizer_suite = OptimizerSuite(objective, search_space)
 
-# Select wrappers by name
-wrapper_names = ["OptunaRandom", "OptunaTPE", "OptunaGridSearch", "BayesianOpt"]
-
-# Create an instance of the optimizer benchmark
-Optbenchmark = OptimizerBenchmark(objective, search_space)
-
-# Add selected wrappers to the optimizer benchmark
-for wrapper in wrapper_names:
-    Optbenchmark.add_wrapper(wrapper)
+# Add wrappers directly from wrapper_zoo to the optimizer_suite
+optimizer_suite.add_wrapper(wrapper_zoo.optuna_random(objective, search_space))
+optimizer_suite.add_wrapper(wrapper_zoo.optuna_tpe(objective, search_space))
+optimizer_suite.add_wrapper(wrapper_zoo.bayesian(objective, search_space))
 
 # Compare and optimize using the added wrappers
-best_result, all_results = Optbenchmark.benchmark(verbose=True)
+best_result, all_results = optimizer_suite.benchmark(direction="minimize", max_steps=100, target_score=200, verbose=True)
 ```
 
 **Custom Wrappers:**
