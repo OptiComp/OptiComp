@@ -20,10 +20,11 @@ class BayesianOpt(WrapperInterface):
     def _wrap_setup(self, objective, search_space):
         # Initialize BayesianOptimization object
         self._optimizer = BayesianOptimization(
-            f=None,                   # Placeholder for objective function
-            pbounds=search_space,     # Parameter bounds
-            random_state=42,          # Random seed
-            verbose=False             # Disable verbosity
+            f=None,
+            pbounds=search_space,
+            random_state=42,
+            verbose=False,
+            allow_duplicate_points=True
         )
         
         # Initialize utility function (Upper Confidence Bound)
