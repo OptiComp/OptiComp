@@ -5,11 +5,9 @@ from .wrappers.wrapper_zoo import wrapper_info
 
 
 def fetch(name):
-    # Dynamically import and select the specified wrapper
     for module_path, class_name in wrapper_info:
         if class_name.lower() == name.lower():
             try:
-                # Dynamically import the module and get the class
                 module = importlib.import_module(module_path)
                 wrapper = getattr(module, class_name)
                 return wrapper
@@ -34,5 +32,4 @@ def print_info(wrapper):
     for var_name, var_value in wrapper.Config.__dict__.items():
         if not var_name.startswith('__'):  # Exclude dunder (magic) methods
             print(f"- {var_name}: {var_value}")
-    # wrapper_class
     print("======================\n")

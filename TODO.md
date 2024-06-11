@@ -11,11 +11,11 @@ def import():
 	import wrapper
 	return wrapper
 
-verwijder wrappers class to only be functions
+<!-- verwijder wrappers class to only be functions -->
 
 <!-- verwijder __init__s -->
 
-Plaats import in init file in opticomp, dan kan je daar direct uit importeren
+<!-- Plaats import in init file in opticomp, dan kan je daar direct uit importeren -->
 
 <!-- Remove import comments -->
 

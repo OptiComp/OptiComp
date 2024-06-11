@@ -1,4 +1,4 @@
-# Wrapper interface
+
 class WrapperInterface:
     library_version = "Unknown"     # Default library version that wrapper is based on
     default_direction = "Unknown"   # Default direction
@@ -27,13 +27,10 @@ class WrapperInterface:
         step = 0
         while True:
             step += 1
-            # Perform optimizer
             best_params, best_value = self._wrap_step(final_objective, search_space)
-            # Stop when target_value is reached
             if target_score:
                 if best_value >= target_score:
                     break
-            # Stop when max_steps is reached
             if max_steps:
                 if step >= max_steps:
                     break
@@ -46,19 +43,14 @@ class WrapperInterface:
         
         # Create the final objective function. Normilize parameters and set the direction.
         def final_objective(params):
-            # Normalize parameters
             params = self._wrap_normalize_parameters(params, self.__search_space)
             result = self.__objective(params)
-            # Invert result if needed
             return -result if invert else result
         
-        # Setup optimizer
         self._wrap_setup(final_objective, self.__search_space)
 
-        # Run optimizer
         params, score, step = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score)
         
-        # Invert final score if needed
         score = -score if invert else score
         return params, score, step
     

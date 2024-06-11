@@ -11,10 +11,8 @@ class OptimizerSuite:
         self.wrappers = []
 
     def add_wrapper(self, wrapper):
-        # Fetch wrapper if given variable is string
         if isinstance(wrapper, str):
             wrapper = Wrapper.fetch(wrapper)
-        # initialize wrapper and appand to wrapper list
         self.wrappers.append(Wrapper.initialize(wrapper, self.objective, self.search_space))
 
     def clear_wrappers(self):
@@ -25,11 +23,9 @@ class OptimizerSuite:
             raise ValueError("Either max_steps or target_score must be provided")
         results = {}
         for wrapper in self.wrappers:
-            # Check optimizer direction
             invert = False
             if wrapper.default_direction != direction:
                 invert = True
-            # Set start time
             start_time = time.time()
             params, score, step = wrapper.optimize(invert, max_steps, target_score)
             elapsed_time = time.time() - start_time
