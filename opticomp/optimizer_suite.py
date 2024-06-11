@@ -19,6 +19,8 @@ class OptimizerSuite:
     Methods
     -------
     add_wrapper(wrapper)
+        tuple
+            A tuple containing the following elements:)
         Add a wrapper to the OptimizerSuite.
 
     clear_wrappers()
@@ -73,9 +75,9 @@ class OptimizerSuite:
         Returns
         -------
         tuple
-            A tuple containing the best result
-        tuple
-            A tuple containing the all results
+            A tuple containing the following elements:
+            - a tuple containing the best result
+            - a tuple containing the all results
         """
         if not max_steps and not target_score:
             raise ValueError("Either max_steps or target_score must be provided")

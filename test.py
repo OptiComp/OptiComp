@@ -32,4 +32,5 @@ optimizer_suite.add_wrapper(wrapper_zoo.bayesian(objective, search_space))
 # Compare and optimize using the added wrappers
 best_result, all_results = optimizer_suite.benchmark(direction="maximize", max_steps=500, target_score=29000, verbose=True)
 
-
+opt = wrapper_zoo.optuna_random(objective, search_space)
+opt.optimize

@@ -47,6 +47,26 @@ class WrapperInterface(ABC):
     
     # Run optimizer
     def optimize(self, direction: str, max_steps: int = None, target_score: int = None):
+        """
+        Run the optimizer on the provided objective and search space.
+
+        Parameters
+        ----------
+        direction : str
+            The direction of optimization, either "minimize" or "maximize".
+        max_steps : int, optional
+            The maximum number of optimization steps. If not provided, target_score must be provided.
+        target_score : int, optional
+            The target score to achieve. If not provided, max_steps must be provided.
+
+        Returns
+        -------
+        tuple
+            A tuple containing the following elements:
+            - list[int]: The optimized parameters.
+            - int: The resulting score.
+            - int: The number of steps taken.
+        """
         if not max_steps and not target_score:
             raise ValueError("Either max_steps or target_score must be provided")
         
@@ -68,6 +88,16 @@ class WrapperInterface(ABC):
         return params, score, steps
     
     def reinitialize(self, objective: Callable[[list[int]], int], search_space: dict[str, int]):
+        """
+        Reinitialize the wrapper with a new objective function and search space.
+
+        Parameters
+        ----------
+        objective : Callable[[list[int]], int]
+            The new objective function to be optimized.
+        search_space : dict[str, int]
+            The new search space defining the range of each parameter.
+        """
         self.__objective = objective
         self.__search_space = search_space
     
