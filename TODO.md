@@ -1,7 +1,7 @@
-Change config class to be same as search_space
+<!-- Change config class to be same as search_space
 change comment to be visible outside '''comment'''
 ^^^ Dit kan ook onder config
-je kan alle wrappers in de init zetten 
+je kan alle wrappers in de init zetten  -->
 
 
 enum is class with only variables
@@ -71,7 +71,7 @@ objective: Callable[[list[int]], int] -->
 
 Multiprocessing voor verschillende processes op meerdere cores
 
-str | WrapperInstance
+<!-- str | WrapperInstance -->
 
 Use logging library instead of prints
 loggers kunnen 'children' loggers hebben, dan kan je ook children andere levels zetten ofzo
