@@ -1,4 +1,3 @@
-# Imports
 from bayes_opt import BayesianOptimization, UtilityFunction
 
 from ...wrapper_interface import WrapperInterface

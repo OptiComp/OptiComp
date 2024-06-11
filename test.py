@@ -1,4 +1,3 @@
-# Imports
 import numpy as np
 
 from opticomp.optimizer_suite import OptimizerSuite
