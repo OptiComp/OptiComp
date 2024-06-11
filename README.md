@@ -40,7 +40,7 @@ best_result, all_results = optimizer_suite.benchmark(direction="minimize", max_s
 ```
 
 **Custom Objective:**
-Create a objective and search_space:
+<br>Create a objective and search_space:
 
 ```python
 from opticomp import BenchmarkSuite, wrapper_zoo
