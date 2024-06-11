@@ -39,8 +39,8 @@ optimizer_suite.add_wrapper(wrapper_zoo.bayesian(objective, search_space))
 best_result, all_results = optimizer_suite.benchmark(direction="minimize", max_steps=100, target_score=200, verbose=True)
 ```
 
-**Custom Wrappers:**
-Create a custom wrapper by extending the WrapperInterface:
+**Custom Objective:**
+Create a objective and search_space:
 
 ```python
 from opticomp import BenchmarkSuite, wrapper_zoo
