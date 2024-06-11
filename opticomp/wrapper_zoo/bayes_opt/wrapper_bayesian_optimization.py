@@ -8,10 +8,8 @@ class BayesianOpt(WrapperInterface):
     def __init__(self, objective, search_space):
         super().__init__("1.4.3", "maximize", objective, search_space)
 
-    # Config class
-    class Config:
-        kappa = 2.5
-        xi = 0.0
+    config = {'kappa': 2.5,
+              'xi': 30.0}
 
     # Normalize parameters
     def _wrap_normalize_parameters(self, params, search_space):
@@ -29,7 +27,7 @@ class BayesianOpt(WrapperInterface):
         )
         
         # Initialize utility function (Upper Confidence Bound)
-        self._utility = UtilityFunction(kind="ucb", kappa=self.Config.kappa, xi=self.Config.xi)
+        self._utility = UtilityFunction(kind="ucb", kappa=self.config["kappa"], xi=self.config["xi"])
 
         # Get the next point to probe using the utility function
         next_point_to_probe = self._optimizer.suggest(self._utility)

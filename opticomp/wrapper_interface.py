@@ -8,16 +8,15 @@ class WrapperInterface(ABC):
 
     objective: Callable[[list[int]], int]
     search_space: dict[str, tuple[int, int]]
+    
+    config = {}
 
     def __init__(self, library_version: str, default_direction: str, objective: Callable[[list[int]], int], search_space: dict[str, tuple[int, int]]):
         self.library_version = library_version
         self.default_direction = default_direction
         self.__objective = objective
         self.__search_space = search_space
-      
-    class Config:
-        Empty = "None"
-
+    
     # Normalize parameters
     def _wrap_normalize_parameters(self, params, search_space):
         raise NotImplementedError("The wrapper method '_wrap_normalize_parameters' should be overridden")
@@ -32,19 +31,19 @@ class WrapperInterface(ABC):
     
     # Apply optimizer
     def __optimization_loop(self, final_objective, search_space, max_steps, target_score, direction):
-        step = 0
+        steps = 0
         while True:
-            step += 1
+            steps += 1
             best_params, best_value = self._wrap_step(final_objective, search_space)
             if max_steps:
-                if step >= max_steps:
+                if steps >= max_steps:
                     break
             if target_score:
                 if abs(best_value) >= target_score and direction == "maximize":
                     break
                 elif abs(best_value) <= target_score and direction == "minimize":
                     break
-        return best_params, best_value, step
+        return best_params, best_value, steps
     
     # Run optimizer
     def optimize(self, direction: str, max_steps: int = None, target_score: int = None):
@@ -63,10 +62,10 @@ class WrapperInterface(ABC):
         
         self._wrap_setup(final_objective, self.__search_space)
 
-        params, score, step = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction)
+        params, score, steps = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction)
         
         score = -score if invert else score
-        return params, score, step
+        return params, score, steps
     
     def reinitialize(self, objective: Callable[[list[int]], int], search_space: dict[str, int]):
         self.__objective = objective

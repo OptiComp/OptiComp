@@ -1,14 +1,6 @@
 import numpy as np
 
-from opticomp import OptimizerSuite
-from opticomp.wrappers import wrapper_zoo
-
-# Objective function
-# def objective(params):
-#     param1 = params['param1']
-#     param2 = params['param2']
-#     # param3 = params['param3']
-#     return (param1 - 2) ** 2 + (param2 + 3) ** 2 # - (param3 + 3) ** 2
+from opticomp import OptimizerSuite, wrapper_zoo
 
 '''
 Performance on the Sphere function signifies an optimizer's effectiveness in finding the global minimum,
@@ -40,6 +32,4 @@ optimizer_suite.add_wrapper(wrapper_zoo.bayesian(objective, search_space))
 # Compare and optimize using the added wrappers
 best_result, all_results = optimizer_suite.benchmark(direction="maximize", max_steps=500, target_score=29000, verbose=True)
 
-# print(f"Best optimizer: {best_result}")
-# print("All results:", all_results)
 
