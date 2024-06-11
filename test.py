@@ -1,6 +1,7 @@
 import numpy as np
 
 from opticomp import OptimizerSuite, wrappers_control
+from opticomp.wrappers import wrapper_zoo
 
 # Objective function
 # def objective(params):
@@ -32,20 +33,25 @@ search_space = {'param1': (-100, 100),
                 'param5': (-100, 100),
                 'param6': (-100, 100)}
 
+optuna_random = wrapper_zoo.optuna_random(objective, search_space)
+optuna_tpe = wrapper_zoo.optuna_tpe(objective, search_space)
+
 # Create an instance of the optimizer suite
 optimizer_suite = OptimizerSuite(objective, search_space)
 
 # Select wrappers by name
 wrapper_names = ["OptunaRandom", "OptunaTPE", "OptunaGridSearch"]  # , "BayesianOpt"
-selected_wrappers = [wrappers_control.fetch(name) for name in wrapper_names]
+# selected_wrappers = [wrappers_control.fetch(name) for name in wrapper_names]
 
-for wrapper in selected_wrappers:
-    wrapper = wrappers_control.initialize(wrapper, objective, search_space)
-    wrappers_control.print_info(wrapper)
+# for wrapper in selected_wrappers:
+#     wrapper = wrappers_control.initialize(wrapper, objective, search_space)
+#     wrappers_control.print_info(wrapper)
 
 # Add selected wrappers to the optimizer comparer
-for wrapper in wrapper_names:
-    optimizer_suite.add_wrapper(wrapper)
+# for wrapper in wrapper_names:
+#     optimizer_suite.add_wrapper(wrapper)
+optimizer_suite.add_wrapper(optuna_random)
+optimizer_suite.add_wrapper(optuna_tpe)
 
 # Compare and optimize using the added wrappers
 best_result, all_results = optimizer_suite.benchmark(direction="minimize", max_steps=30, verbose=True)

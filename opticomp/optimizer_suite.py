@@ -1,28 +1,27 @@
 import time
 
-from . import wrappers_control
+# from . import wrappers_control
 
 
 # Optimizer compare class
 class OptimizerSuite:
     def __init__(self, objective, search_space):
-        self.objective = objective
-        self.search_space = search_space
-        self.wrappers = []
+        self._objective = objective
+        self._search_space = search_space
+        self._wrappers = []
 
     def add_wrapper(self, wrapper):
-        if isinstance(wrapper, str):
-            wrapper = wrappers_control.fetch(wrapper)
-        self.wrappers.append(wrappers_control.initialize(wrapper, self.objective, self.search_space))
+        wrapper.reinitialize(self._objective, self._search_space)
+        self._wrappers.append(wrapper)
 
     def clear_wrappers(self):
-        self.wrappers.clear()
+        self.wrap_wrapperspers.clear()
 
     def benchmark(self, direction="minimize", max_steps=None, target_score=None, verbose=True):
         if not max_steps and not target_score:
             raise ValueError("Either max_steps or target_score must be provided")
         results = {}
-        for wrapper in self.wrappers:
+        for wrapper in self._wrappers:
             invert = False
             if wrapper.default_direction != direction:
                 invert = True

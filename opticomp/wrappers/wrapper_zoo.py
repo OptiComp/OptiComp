@@ -9,3 +9,31 @@ wrapper_info = [
     # Bayesian
     ("opticomp.wrappers.bayes_opt.wrapper_bayesian_optimization", "BayesianOpt"),
 ]
+
+
+# ============================================================== Optuna
+def optuna_tpe(objective, search_space):
+    from .optuna.wrapper_optuna_tpe import OptunaTPE
+    return OptunaTPE(objective, search_space)
+
+
+def optuna_random(objective, search_space):
+    from .optuna.wrapper_optuna_random import OptunaRandom
+    return OptunaRandom(objective, search_space)
+
+
+def optuna_grid_search(objective, search_space):
+    from .optuna.wrapper_optuna_grid_search import OptunaGridSearch
+    return OptunaGridSearch(objective, search_space)
+
+
+# ============================================================== Hyperopt
+def hyperopt_tpe(objective, search_space):
+    from .hyperopt.wrapper_hyperopt_tpe import HyperoptTPE
+    return HyperoptTPE(objective, search_space)
+
+
+# ============================================================== BayesianOpt
+def bayesian(objective, search_space):
+    from .bayes_opt.wrapper_bayesian_optimization import BayesianOpt
+    return BayesianOpt(objective, search_space)

@@ -30,6 +30,10 @@ class WrapperInterface(ABC):
     def _wrap_step(self, objective, search_space):
         raise NotImplementedError("The wrapper method '_wrap_step' should be overridden")
     
+    def reinitialize(self, objective: Callable[[list[int]], int], search_space: Dict[str, int]):
+        self.__objective = objective
+        self.__search_space = search_space
+    
     # Apply optimizer
     def __optimization_loop(self, final_objective, search_space, max_steps, target_score):
         step = 0
