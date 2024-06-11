@@ -1,5 +1,5 @@
 # Imports
-from opticomp.optimizer_suite import OptimizerBenchmark
+from opticomp.benchmark_suite import OptimizerBenchmark
 from opticomp.wrappers_control import Wrapper
 
 

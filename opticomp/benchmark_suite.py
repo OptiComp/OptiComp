@@ -5,7 +5,7 @@ from .wrapper_interface import WrapperInterface
 
 
 # Optimizer compare class
-class OptimizerSuite:
+class BenchmarkSuite:
     """
     A class for comparing and benchmarking optimization wrappers.
 
@@ -21,10 +21,10 @@ class OptimizerSuite:
     add_wrapper(wrapper)
         tuple
             A tuple containing the following elements:)
-        Add a wrapper to the OptimizerSuite.
+        Add a wrapper to the BenchmarkSuite.
 
     clear_wrappers()
-        Clear all wrappers from the OptimizerSuite.
+        Clear all wrappers from the BenchmarkSuite.
 
     benchmark(direction = "minimize", max_steps = None, target_score = None, verbose = True)
         Benchmark wrappers on provided objective and search_space.
@@ -40,7 +40,7 @@ class OptimizerSuite:
 
     def add_wrapper(self, wrapper: WrapperInterface):
         """
-        Add a wrapper to the OptimizerSuite.
+        Add a wrapper to the BenchmarkSuite.
 
         Parameters
         ----------
@@ -53,7 +53,7 @@ class OptimizerSuite:
 
     def clear_wrappers(self):
         """
-        Clear all wrappers from the OptimizerSuite.
+        Clear all wrappers from the BenchmarkSuite.
         """
         self._wrappers.clear()
 
