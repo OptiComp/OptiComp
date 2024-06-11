@@ -11,11 +11,12 @@ class OptimizerSuite:
         self._wrappers = []
 
     def add_wrapper(self, wrapper):
+        # Make sure all wrappers have the same objective and search_space
         wrapper.reinitialize(self._objective, self._search_space)
         self._wrappers.append(wrapper)
 
     def clear_wrappers(self):
-        self.wrap_wrapperspers.clear()
+        self._wrappers.clear()
 
     def benchmark(self, direction="minimize", max_steps=None, target_score=None, verbose=True):
         if not max_steps and not target_score:

@@ -6,10 +6,10 @@ je kan alle wrappers in de init zetten
 
 enum is class with only variables
 
-gooi alles in classes implaats van dynamic import
+<!-- gooi alles in classes implaats van dynamic import
 def import():
 	import wrapper
-	return wrapper
+	return wrapper -->
 
 <!-- verwijder wrappers class to only be functions -->
 
@@ -32,10 +32,10 @@ def test() -> int: # Tells the user what it returns
 
 
 
-    library_version = "Unknown"     # Default library version that wrapper is based on
+    <!-- library_version = "Unknown"     # Default library version that wrapper is based on
     default_direction :str
 
-    __objective: str
+    __objective: str -->
 
 
 
@@ -45,7 +45,7 @@ class WrapperInterface(ABC): -->
 
 
 
-# ========================
+<!-- # ========================
     library_version: str    # Default library version that wrapper is based on
     default_direction: str   # Default direction
 
@@ -60,13 +60,13 @@ class WrapperInterface(ABC): -->
  # in wrapper
     def __init__(self, objective, search_space):
         super().__init__("1.4.3", "maximize", objective, search_space)
-# ========================
+# ======================== -->
 
 
-wrapper_interface() hoeft geen ()
+<!-- wrapper_interface() hoeft geen () -->
 
-from typing import Callable
-objective: Callable[[list[int]], int]
+<!-- from typing import Callable
+objective: Callable[[list[int]], int] -->
 
 
 Multiprocessing voor verschillende processes op meerdere cores
@@ -80,7 +80,7 @@ loggers kunnen 'children' loggers hebben, dan kan je ook children andere levels 
 Zet eventueel alle outputs in een class. Dan kan je makkelijker alle. 
 dan krijg je ook hints wat er in staat en eventueel helpen methods in the method. 
 
-hou local variable naming lower case (zoals OptSuite)
+<!-- hou local variable naming lower case (zoals OptSuite) -->
 
 <!-- kijk of er ruff codes zijn voor naming conventions (lower case in local classes)(uper case in classes) -->
 

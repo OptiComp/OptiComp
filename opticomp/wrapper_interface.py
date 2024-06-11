@@ -1,5 +1,5 @@
 from abc import ABC
-from typing import Callable, Dict
+from typing import Callable
 
 
 class WrapperInterface(ABC):
@@ -7,9 +7,9 @@ class WrapperInterface(ABC):
     default_direction: str
 
     objective: Callable[[list[int]], int]
-    search_space: Dict[str, int]
+    search_space: dict[str, tuple[int, int]]
 
-    def __init__(self, library_version: str, default_direction: str, objective: Callable[[list[int]], int], search_space: Dict[str, int]):
+    def __init__(self, library_version: str, default_direction: str, objective: Callable[[list[int]], int], search_space: dict[str, tuple[int, int]]):
         self.library_version = library_version
         self.default_direction = default_direction
         self.__objective = objective
@@ -30,7 +30,7 @@ class WrapperInterface(ABC):
     def _wrap_step(self, objective, search_space):
         raise NotImplementedError("The wrapper method '_wrap_step' should be overridden")
     
-    def reinitialize(self, objective: Callable[[list[int]], int], search_space: Dict[str, int]):
+    def reinitialize(self, objective: Callable[[list[int]], int], search_space: dict[str, int]):
         self.__objective = objective
         self.__search_space = search_space
     

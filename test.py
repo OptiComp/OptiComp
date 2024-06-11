@@ -1,6 +1,6 @@
 import numpy as np
 
-from opticomp import OptimizerSuite, wrappers_control
+from opticomp import OptimizerSuite
 from opticomp.wrappers import wrapper_zoo
 
 # Objective function
@@ -35,6 +35,7 @@ search_space = {'param1': (-100, 100),
 
 optuna_random = wrapper_zoo.optuna_random(objective, search_space)
 optuna_tpe = wrapper_zoo.optuna_tpe(objective, search_space)
+bayes_opt = wrapper_zoo.bayesian(objective, search_space)
 
 # Create an instance of the optimizer suite
 optimizer_suite = OptimizerSuite(objective, search_space)
