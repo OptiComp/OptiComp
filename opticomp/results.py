@@ -30,8 +30,9 @@ class BenchmarkResults():
             result.summarize()
 
     def fetch_wrapper_result(self, wrapper_name: str):
+        norm_wrapper_name = wrapper_name.lower().replace(" ", "").replace("_", "").replace("-", "")
         for result in self._results:
-            if result.name.lower() == wrapper_name.lower():
+            if result.name.lower() == norm_wrapper_name:
                 return result
         print(f"No results found for wrapper: {wrapper_name}")
         # Create and return a default WrapperResult

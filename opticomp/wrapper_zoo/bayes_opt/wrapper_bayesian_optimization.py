@@ -4,7 +4,7 @@ from ...wrapper_interface import WrapperInterface
 
 
 # Wrapper interface
-class BayesianOpt(WrapperInterface):
+class Bayesian(WrapperInterface):
     def __init__(self, objective, search_space):
         super().__init__("1.4.3", "maximize", objective, search_space)
 

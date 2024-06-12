@@ -75,26 +75,19 @@ class BenchmarkSuite:
 
         Returns
         -------
-        tuple
-            A tuple containing the following elements:
-            - a tuple containing the best result
-            - a tuple containing the all results
+        class BenchmarkResults
+            A class containing all benchmark results
         """
         if not max_steps and not target_score:
             raise ValueError("Either max_steps or target_score must be provided")
+        
         results = BenchmarkResults()
-        # results = {}
+
         for wrapper in self._wrappers:
             start_time = time.time()
             params, score, steps = wrapper.optimize(direction, max_steps, target_score)
             elapsed_time = time.time() - start_time
-            # results[wrapper.__class__.__name__] = {
-            #     'params': params,
-            #     'score': score,
-            #     'time': elapsed_time,
-            #     'steps': steps
-            # }
-            print(params)
+
             results._add_result(wrapper, params, score, elapsed_time, steps)
 
             if verbose:
@@ -103,7 +96,6 @@ class BenchmarkSuite:
                 print(f"Time: {elapsed_time}")
                 print(f"steps: {steps}\n")
         
-        # best_result = min(results.items(), key=lambda x: x[1]['score'])
         return results
     
     def get_best():

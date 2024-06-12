@@ -25,8 +25,8 @@ def hyperopt_tpe(objective: Callable[[list[int]], int], search_space: dict[str, 
 
 # ============================================================== BayesianOpt
 def bayesian(objective: Callable[[list[int]], int], search_space: dict[str, tuple[int, int]]):
-    from .bayes_opt.wrapper_bayesian_optimization import BayesianOpt
-    return BayesianOpt(objective, search_space)
+    from .bayes_opt.wrapper_bayesian_optimization import Bayesian
+    return Bayesian(objective, search_space)
 
 
 
