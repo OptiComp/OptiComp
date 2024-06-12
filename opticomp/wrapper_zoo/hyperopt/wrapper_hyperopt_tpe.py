@@ -1,6 +1,6 @@
 from hyperopt import hp
 
-from ...wrapper_interface import WrapperInterface
+from ..wrapper_interface import WrapperInterface
 
 
 # Wrapper for Hyperopt with TPE

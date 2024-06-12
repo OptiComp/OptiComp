@@ -1,4 +1,4 @@
-from .wrapper_interface import WrapperInterface
+from ..wrapper_zoo.wrapper_interface import WrapperInterface
 
 
 class WrapperResult():
