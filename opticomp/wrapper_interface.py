@@ -1,3 +1,4 @@
+import warnings
 from abc import ABC
 from typing import Callable
 
@@ -32,8 +33,13 @@ class WrapperInterface(ABC):
     # Apply optimizer
     def __optimization_loop(self, final_objective, search_space, max_steps, target_score, direction, progress_bar):
         if progress_bar:
-            from tqdm import tqdm
-            pbar = tqdm(total=max_steps, desc="Benchmarking", unit="step", ascii=True, colour='green')
+            try:
+                from tqdm import tqdm
+                pbar = tqdm(total=max_steps, desc="Benchmarking", unit="step", ascii=True, colour='green')
+            except ImportError:
+                pbar = None
+                warnings.warn("The 'tqdm' library is required to utilize the progress bar. Please install it using 'pip install tqdm'.\n"
+                                "Continuing without progress bar")
         else:
             pbar = None
         steps = 0
