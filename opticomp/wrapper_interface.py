@@ -30,11 +30,18 @@ class WrapperInterface(ABC):
         raise NotImplementedError("The wrapper method '_wrap_step' should be overridden")
     
     # Apply optimizer
-    def __optimization_loop(self, final_objective, search_space, max_steps, target_score, direction):
+    def __optimization_loop(self, final_objective, search_space, max_steps, target_score, direction, progress_bar):
+        if progress_bar:
+            from tqdm import tqdm
+            pbar = tqdm(total=max_steps, desc="Benchmarking", unit="step", ascii=True, colour='green')
+        else:
+            pbar = None
         steps = 0
         while True:
             steps += 1
             best_params, best_value = self._wrap_step(final_objective, search_space)
+            if pbar:
+                pbar.update(1)
             if max_steps:
                 if steps >= max_steps:
                     break
@@ -46,7 +53,7 @@ class WrapperInterface(ABC):
         return best_params, best_value, steps
     
     # Run optimizer
-    def optimize(self, direction: str, max_steps: int = None, target_score: int = None):
+    def optimize(self, direction: str, max_steps: int = None, target_score: int = None, progress_bar: bool = False):
         """
         Run the optimizer on the provided objective and search space.
 
@@ -58,6 +65,9 @@ class WrapperInterface(ABC):
             The maximum number of optimization steps. If not provided, target_score must be provided.
         target_score : int, optional
             The target score to achieve. If not provided, max_steps must be provided.
+        progress_bar : bool, optional
+            Show progress bar.
+            This requires the tqdm library.
 
         Returns
         -------
@@ -82,7 +92,7 @@ class WrapperInterface(ABC):
         
         self._wrap_setup(final_objective, self.__search_space)
 
-        params, score, steps = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction)
+        params, score, steps = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction, progress_bar)
         
         score = -score if invert else score
         return params, score, steps

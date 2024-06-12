@@ -58,7 +58,7 @@ class BenchmarkSuite:
         """
         self._wrappers.clear()
 
-    def benchmark(self, direction: str = "minimize", max_steps: int = None, target_score: int = None, verbose: bool = True):
+    def benchmark(self, direction: str = "minimize", max_steps: int = None, target_score: int = None, verbose: bool = True, progress_bar: bool = False):
         """
         Benchmark wrappers on provided objective and search_space.
 
@@ -71,7 +71,9 @@ class BenchmarkSuite:
         target_score : int, optional
             The target score to achieve. If not provided, max_steps must be provided.
         verbose : bool, optional
-            If True, print detailed information during benchmarking. Default is True.
+            If True, print information during benchmarking. Default is False.
+        progress_bar: bool, optional
+            If True, a progress bar will be shown during benchmarking. Default is False.
 
         Returns
         -------
@@ -84,17 +86,22 @@ class BenchmarkSuite:
         results = BenchmarkResults()
 
         for wrapper in self._wrappers:
+            if verbose or progress_bar:
+                print(f"\n=== Wrapper: {wrapper.__class__.__name__} ===")
+
             start_time = time.time()
-            params, score, steps = wrapper.optimize(direction, max_steps, target_score)
+            params, score, steps = wrapper.optimize(direction, max_steps=max_steps, target_score=target_score, progress_bar=progress_bar)
             elapsed_time = time.time() - start_time
 
             results._add_result(wrapper, params, score, elapsed_time, steps)
 
             if verbose:
-                print(f"Optimiser: {wrapper.__class__.__name__}")
-                print(f"Score: {score}")
+                print(f"\nScore: {score}")
                 print(f"Time: {elapsed_time}")
-                print(f"steps: {steps}\n")
+                print(f"steps: {steps}")
+        
+        if verbose:
+            print()
         
         return results
     
