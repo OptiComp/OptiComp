@@ -2,6 +2,7 @@ import time
 from typing import Callable
 
 from .wrapper_interface import WrapperInterface
+from . results import BenchmarkResults
 
 
 # Optimizer compare class
@@ -81,26 +82,29 @@ class BenchmarkSuite:
         """
         if not max_steps and not target_score:
             raise ValueError("Either max_steps or target_score must be provided")
-        results = {}
+        results = BenchmarkResults()
+        # results = {}
         for wrapper in self._wrappers:
             start_time = time.time()
-            params, score, step = wrapper.optimize(direction, max_steps, target_score)
+            params, score, steps = wrapper.optimize(direction, max_steps, target_score)
             elapsed_time = time.time() - start_time
-            results[wrapper.__class__.__name__] = {
-                'params': params,
-                'score': score,
-                'time': elapsed_time,
-                'steps': step
-            }
+            # results[wrapper.__class__.__name__] = {
+            #     'params': params,
+            #     'score': score,
+            #     'time': elapsed_time,
+            #     'steps': steps
+            # }
+            print(params)
+            results._add_result(wrapper, params, score, elapsed_time, steps)
 
             if verbose:
                 print(f"Optimiser: {wrapper.__class__.__name__}")
                 print(f"Score: {score}")
                 print(f"Time: {elapsed_time}")
-                print(f"steps: {step}\n")
+                print(f"steps: {steps}\n")
         
-        best_result = min(results.items(), key=lambda x: x[1]['score'])
-        return best_result, results
+        # best_result = min(results.items(), key=lambda x: x[1]['score'])
+        return results
     
     def get_best():
         raise NotImplementedError()

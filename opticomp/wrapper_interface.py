@@ -6,8 +6,8 @@ class WrapperInterface(ABC):
     library_version: str
     default_direction: str
 
-    objective: Callable[[list[int]], int]
-    search_space: dict[str, tuple[int, int]]
+    __objective: Callable[[list[int]], int]
+    __search_space: dict[str, tuple[int, int]]
     
     config = {}
 
