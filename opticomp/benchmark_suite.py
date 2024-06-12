@@ -1,8 +1,8 @@
 import time
 from typing import Callable
 
+from .results import BenchmarkResults
 from .wrapper_interface import WrapperInterface
-from . results import BenchmarkResults
 
 
 # Optimizer compare class

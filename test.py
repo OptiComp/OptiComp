@@ -14,5 +14,7 @@ benchmark_suite.add_wrapper(wrapper_zoo.bayesian(objective, search_space))
 # Compare and optimize using the added wrappers
 results = benchmark_suite.benchmark(direction="minimize", max_steps=100, target_score=200, verbose=True)
 
+results.summarize_all()
+result = results.fetch_wrapper_result("optuna_random")
 
 

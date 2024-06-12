@@ -1,44 +1,6 @@
 from .wrapper_interface import WrapperInterface
 
 
-class BenchmarkResults():
-    def __init__(self):
-        self._results = []
-
-    def _add_result(self, wrapper,
-                    best_params,
-                    best_score,
-                    elapsed_time,
-                    steps):
-        result = WrapperResult(wrapper.__class__.__name__,
-                                wrapper,
-                                best_params,
-                                best_score,
-                                elapsed_time,
-                                steps)
-        self._results.append(result)
-
-    def summarize(self, wrapper_name: str):
-        for result in self._results:
-            if result.name.lower() == wrapper_name.lower():
-                result.summarize()
-                return
-        print(f"No results found for optimizer: {wrapper_name}")
-
-    def summarize_all(self):
-        for result in self._results:
-            result.summarize()
-
-    def fetch_wrapper_result(self, wrapper_name: str):
-        norm_wrapper_name = wrapper_name.lower().replace(" ", "").replace("_", "").replace("-", "")
-        for result in self._results:
-            if result.name.lower() == norm_wrapper_name:
-                return result
-        print(f"No results found for wrapper: {wrapper_name}")
-        # Create and return a default WrapperResult
-        return WrapperResult("EmptyResult", None, None, None, None, None)
-
-
 class WrapperResult():
     name: str
     wrapper: WrapperInterface
@@ -61,10 +23,72 @@ class WrapperResult():
         self.steps = steps
     
     def summarize(self):
+        """
+        Summarize the results for this wrappers.
+        """
         print(f"Optimiser: {self.name}")
         print(f"Score: {self.best_score}")
         print(f"Time: {self.elapsed_time}")
         print(f"steps: {self.steps}\n")
 
 
+class BenchmarkResults():
+    def __init__(self):
+        self._results = []
 
+    def _add_result(self, wrapper,
+                    best_params,
+                    best_score,
+                    elapsed_time,
+                    steps):
+        result = WrapperResult(wrapper.__class__.__name__,
+                                wrapper,
+                                best_params,
+                                best_score,
+                                elapsed_time,
+                                steps)
+        self._results.append(result)
+
+    def summarize(self, wrapper_name: str):
+        """
+        Summarize the results for a specific wrapper.
+        
+        Parameters
+        ----------
+        wrapper_name : str
+            Provide the wrapper name you want to summarize.
+        """
+        for result in self._results:
+            if result.name.lower() == wrapper_name.lower():
+                result.summarize()
+                return
+        print(f"No results found for optimizer: {wrapper_name}")
+
+    def summarize_all(self):
+        """
+        Summarize the results for all wrappers.
+        """
+        for result in self._results:
+            result.summarize()
+
+    def fetch_wrapper_result(self, wrapper_name: str) -> WrapperResult:
+        """
+        Fetch and return the result class of a specific wrapper
+        
+        Parameters
+        ----------
+        wrapper_name : str
+            Provide the wrapper name you want to summarize.
+
+        Returns
+        -------
+        class WrapperResult
+            A class containing the results for a specific wrapper
+        """
+        norm_wrapper_name = wrapper_name.lower().replace(" ", "").replace("_", "").replace("-", "")
+        for result in self._results:
+            if result.name.lower() == norm_wrapper_name:
+                return result
+        print(f"No results found for wrapper: {wrapper_name}")
+        # Create and return a default WrapperResult
+        return WrapperResult("EmptyResult", None, None, None, None, None)
