@@ -49,6 +49,10 @@ class BenchmarkResults():
                                 steps)
         self._results.append(result)
 
+    def _normalize_name(self, name):
+        norm_name = name.lower().replace(" ", "").replace("_", "").replace("-", "")
+        return norm_name
+
     def summarize(self, wrapper_name: str):
         """
         Summarize the results for a specific wrapper.
@@ -59,7 +63,7 @@ class BenchmarkResults():
             Provide the wrapper name you want to summarize.
         """
         for result in self._results:
-            if result.name.lower() == wrapper_name.lower():
+            if result.name.lower() == self._normalize_name(wrapper_name):
                 result.summarize()
                 return
         print(f"No results found for optimizer: {wrapper_name}")
@@ -85,9 +89,8 @@ class BenchmarkResults():
         class WrapperResult
             A class containing the results for a specific wrapper
         """
-        norm_wrapper_name = wrapper_name.lower().replace(" ", "").replace("_", "").replace("-", "")
         for result in self._results:
-            if result.name.lower() == norm_wrapper_name:
+            if result.name.lower() == self._normalize_name(wrapper_name):
                 return result
         print(f"No results found for wrapper: {wrapper_name}")
         # Create and return a default WrapperResult
