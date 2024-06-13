@@ -90,7 +90,8 @@ class WrapperInterface(ABC):
         """
         if not max_steps and not target_score:
             raise ValueError("Either max_steps or target_score must be provided")
-        
+        if self.__objective is None or self.__search_space is None:
+            raise ValueError("Wrapper not initialized. Please use 'wrapper.initialize(objective, search_space)'.")
         invert = False
         if self.default_direction != direction:
             invert = True
@@ -110,9 +111,9 @@ class WrapperInterface(ABC):
         score = -score if invert else score
         return params, score, steps
     
-    def reinitialize(self, objective: Callable[[dict[str, float]], float], search_space: dict[str, tuple[float, float]]):
+    def initialize(self, objective: Callable[[dict[str, float]], float], search_space: dict[str, tuple[float, float]]):
         """
-        Reinitialize the wrapper with a new objective function and search space.
+        Initialize the wrapper with a new objective function and search space.
 
         Parameters
         ----------

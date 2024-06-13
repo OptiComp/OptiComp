@@ -49,7 +49,7 @@ class BenchmarkSuite:
             The wrapper to be added. Can be from wrapper_zoo or custom.
         """
         # Make sure all wrappers have the same objective and search_space
-        wrapper.reinitialize(self._objective, self._search_space)
+        wrapper.initialize(self._objective, self._search_space)
         self._wrappers.append(wrapper)
 
     def clear_wrappers(self):
