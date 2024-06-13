@@ -15,6 +15,7 @@ setup(
     ],
     install_requires=[
         "numpy",
+        "tqdm",
     ],
     extras_require={
         "dev": [
