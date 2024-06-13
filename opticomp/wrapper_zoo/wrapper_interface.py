@@ -8,14 +8,14 @@ class WrapperInterface(ABC):
     library_version: str
     default_direction: str
 
-    __objective: Callable[[list[int]], int]
-    __search_space: dict[str, tuple[int, int]]
+    __objective: Callable[[dict[str, float]], float]
+    __search_space: dict[str, tuple[float, float]]
     
     @dataclass
     class Config:
         empty: None
 
-    def __init__(self, library_version: str, default_direction: str, objective: Callable[[list[int]], int], search_space: dict[str, tuple[int, int]]):
+    def __init__(self, library_version: str, default_direction: str, objective: Callable[[dict[str, float]], float], search_space: dict[str, tuple[float, float]]):
         self.library_version = library_version
         self.default_direction = default_direction
         self.__objective = objective
@@ -34,7 +34,7 @@ class WrapperInterface(ABC):
         raise NotImplementedError("The wrapper method '_wrap_step' should be overridden")
     
     # Apply optimizer
-    def __optimization_loop(self, final_objective, search_space, max_steps, target_score, direction, progress_bar):
+    def __optimization_loop(self, final_objective, search_space, max_steps, target_score, direction, invert, progress_bar):
         if progress_bar:
             try:
                 from tqdm import tqdm
@@ -42,27 +42,29 @@ class WrapperInterface(ABC):
             except ImportError:
                 pbar = None
                 warnings.warn("The 'tqdm' library is required to utilize the progress bar. Please install it using 'pip install tqdm'.\n"
-                                "Continuing without progress bar")
+                              "Continuing without progress bar")
         else:
             pbar = None
         steps = 0
         while True:
             steps += 1
-            best_params, best_value = self._wrap_step(final_objective, search_space)
+            best_params, best_score = self._wrap_step(final_objective, search_space)
             if pbar:
                 pbar.update(1)
             if max_steps:
                 if steps >= max_steps:
                     break
             if target_score:
-                if abs(best_value) >= target_score and direction == "maximize":
+                # Invert best_score back to normal, if invert == True (see 'final_objective' in 'optimize' below)
+                norm_score = -best_score if invert else best_score
+                if norm_score >= target_score and direction == "maximize":
                     break
-                elif abs(best_value) <= target_score and direction == "minimize":
+                elif norm_score <= target_score and direction == "minimize":
                     break
-        return best_params, best_value, steps
+        return best_params, best_score, steps
     
     # Run optimizer
-    def optimize(self, direction: str, max_steps: int = None, target_score: int = None, progress_bar: bool = False):
+    def optimize(self, direction: str, max_steps: int = None, target_score: int = None, progress_bar: bool = False) -> tuple[dict[str, float], float, int]:
         """
         Run the optimizer on the provided objective and search space.
 
@@ -82,8 +84,8 @@ class WrapperInterface(ABC):
         -------
         tuple
             A tuple containing the following elements:
-            - list[int]: The optimized parameters.
-            - int: The resulting score.
+            - dict[str, float]: The optimized parameters.
+            - float: The resulting score.
             - int: The number of steps taken.
         """
         if not max_steps and not target_score:
@@ -96,25 +98,27 @@ class WrapperInterface(ABC):
         # Create the final objective function. Normilize parameters and set the direction.
         def final_objective(params):
             params = self._wrap_normalize_parameters(params, self.__search_space)
-            result = self.__objective(params)
-            return -result if invert else result
+            score = self.__objective(params)
+            # Invert score to set optimizer direction, if invert == True
+            return -score if invert else score
         
         self._wrap_setup(final_objective, self.__search_space)
 
-        params, score, steps = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction, progress_bar)
+        params, score, steps = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction, invert, progress_bar)
         
+        # Invert score back to normal, if invert == True (see 'final_objective' above)
         score = -score if invert else score
         return params, score, steps
     
-    def reinitialize(self, objective: Callable[[list[int]], int], search_space: dict[str, int]):
+    def reinitialize(self, objective: Callable[[dict[str, float]], float], search_space: dict[str, tuple[float, float]]):
         """
         Reinitialize the wrapper with a new objective function and search space.
 
         Parameters
         ----------
-        objective : Callable[[list[int]], int]
+        objective : Callable[[dict[str, float]], float]
             The new objective function to be optimized.
-        search_space : dict[str, int]
+        search_space : dict[str, tuple[float, float]
             The new search space defining the range of each parameter.
         """
         self.__objective = objective
