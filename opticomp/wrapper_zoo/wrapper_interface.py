@@ -113,14 +113,14 @@ class WrapperInterface(ABC):
     
     def initialize(self, objective: Callable[[dict[str, float]], float], search_space: dict[str, tuple[float, float]]):
         """
-        Initialize the wrapper with a new objective function and search space.
+        Initialize the wrapper with an objective function and search space.
 
         Parameters
         ----------
         objective : Callable[[dict[str, float]], float]
-            The new objective function to be optimized.
+            The objective function to be optimized.
         search_space : dict[str, tuple[float, float]
-            The new search space defining the range of each parameter.
+            The search space defining the range of each parameter.
         """
         self.__objective = objective
         self.__search_space = search_space
