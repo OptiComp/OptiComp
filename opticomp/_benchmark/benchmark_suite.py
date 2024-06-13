@@ -35,8 +35,8 @@ class BenchmarkSuite:
     """
 
     def __init__(self, objective: Callable[[dict[str, float]], float], search_space: dict[str, tuple[float, float]]):
-        self._objective = objective
-        self._search_space = search_space
+        self.objective = objective
+        self.search_space = search_space
         self._wrappers = []
 
     def add_wrapper(self, wrapper: WrapperInterface):
@@ -49,7 +49,7 @@ class BenchmarkSuite:
             The wrapper to be added. Can be from wrapper_zoo or custom.
         """
         # Make sure all wrappers have the same objective and search_space
-        wrapper.initialize(self._objective, self._search_space)
+        wrapper.initialize(self.objective, self.search_space)
         self._wrappers.append(wrapper)
 
     def clear_wrappers(self):
