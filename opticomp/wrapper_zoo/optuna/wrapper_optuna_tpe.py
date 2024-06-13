@@ -23,4 +23,3 @@ class OptunaTPE(WrapperInterface):
     def _wrap_step(self, objective, search_space):
         self._study.optimize(objective, n_trials=1)
         return self._study.best_params, self._study.best_value
-    
