@@ -34,13 +34,10 @@ objective, search_space = objective_zoo.fetch_sphere_function()
 # Create an instance of the benchmark suite
 benchmark_suite = BenchmarkSuite(objective, search_space)
 
-# Initialize custom wrapper
-custom_wrapper = CustomWrapper(objective, search_space)
-
 # Add wrappers directly from wrapper_zoo to the benchmark_suite
-benchmark_suite.add_wrapper(wrapper_zoo.optuna_tpe(objective, search_space))
-benchmark_suite.add_wrapper(wrapper_zoo.bayesian(objective, search_space))
-benchmark_suite.add_wrapper(custom_wrapper)
+benchmark_suite.add_wrapper(wrapper_zoo.fetch_optuna_tpe())
+benchmark_suite.add_wrapper(wrapper_zoo.fetch_bayesian())
+benchmark_suite.add_wrapper(CustomWrapper)
 
 # Compare and optimize using the added wrappers
 results = benchmark_suite.benchmark(direction="minimize", max_steps=100, target_score=200, verbose=True, progress_bar=True)
