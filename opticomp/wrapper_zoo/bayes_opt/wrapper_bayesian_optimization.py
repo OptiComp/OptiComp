@@ -28,7 +28,7 @@ class Bayesian(WrapperInterface):
             allow_duplicate_points=True
         )
         
-        self._utility = UtilityFunction(kind="ucb", kappa=self.config["kappa"], xi=self.config["xi"])
+        self._utility = UtilityFunction(kind="ucb", kappa=self.Config.kappa, xi=self.Config.xi)
 
         next_point_to_probe = self._optimizer.suggest(self._utility)
 

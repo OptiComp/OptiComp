@@ -12,9 +12,9 @@ class BenchmarkSuite:
 
     Parameters
     ----------
-    objective : Callable[[list[int]], int]
+    objective : Callable[[dict[str, float]], float]
         The objective function to be optimized.
-    search_space : dict[str, tuple[int, int]]
+    search_space : dict[str, tuple[float, float]
         The search space defining the range of each parameter.
 
     Methods
@@ -34,7 +34,7 @@ class BenchmarkSuite:
         [Not Implemented] Get the best result from the benchmark.
     """
 
-    def __init__(self, objective: Callable[[list[int]], int], search_space: dict[str, tuple[int, int]]):
+    def __init__(self, objective: Callable[[dict[str, float]], float], search_space: dict[str, tuple[float, float]]):
         self._objective = objective
         self._search_space = search_space
         self._wrappers = []
