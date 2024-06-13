@@ -29,7 +29,7 @@ class CustomWrapper(WrapperInterface):
         return self._study.best_params, self._study.best_value
 
 # Get common objective from objective_zoo
-objective, search_space = objective_zoo.sphere_function()
+objective, search_space = objective_zoo.fetch_sphere_function()
 
 # Create an instance of the benchmark suite
 benchmark_suite = BenchmarkSuite(objective, search_space)

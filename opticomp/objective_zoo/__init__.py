@@ -14,7 +14,7 @@ def fetch_sphere_function():
         - Callable[[dict[str, float]], float]: The objective function.
         - dict[str, tuple[float, float]]: An example search space that fits the objective.
     """
-    from sphere_function import objective, search_space
+    from .sphere_function import objective, search_space
     return objective, search_space
 
 
@@ -32,7 +32,7 @@ def fetch_griewank_function():
         - Callable[[dict[str, float]], float]: The objective function.
         - dict[str, tuple[float, float]]: An example search space that fits the objective.
     """
-    from griewank_function import objective, search_space
+    from .griewank_function import objective, search_space
     return objective, search_space
 
 
@@ -50,7 +50,7 @@ def fetch_rosenbrock_function():
         - Callable[[dict[str, float]], float]: The objective function.
         - dict[str, tuple[float, float]]: An example search space that fits the objective.
     """
-    from rosenbrock_function import objective, search_space
+    from .rosenbrock_function import objective, search_space
     return objective, search_space
 
 
@@ -68,5 +68,5 @@ def fetch_ackley_function():
         - Callable[[dict[str, float]], float]: The objective function.
         - dict[str, tuple[float, float]]: An example search space that fits the objective.
     """
-    from ackley_function import objective, search_space
+    from .ackley_function import objective, search_space
     return objective, search_space

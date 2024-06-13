@@ -2,7 +2,7 @@ from typing import Callable
 
 
 # ================================================================================ Optuna
-def optuna_tpe(objective: Callable[[dict[str, float]], float] = None,
+def fetch_optuna_tpe(objective: Callable[[dict[str, float]], float] = None,
             search_space: dict[str, tuple[float, float]] = None):
     """ Fetch optimizer wrapper from wrapper zoo.\n
         Optionally pass parameters to initialize the wrapper."""
@@ -10,7 +10,7 @@ def optuna_tpe(objective: Callable[[dict[str, float]], float] = None,
     return OptunaTPE(objective, search_space)
 
 
-def optuna_random(objective: Callable[[dict[str, float]], float] = None,
+def fetch_optuna_random(objective: Callable[[dict[str, float]], float] = None,
             search_space: dict[str, tuple[float, float]] = None):
     """ Fetch optimizer wrapper from wrapper zoo.\n
         Optionally pass parameters to initialize the wrapper."""
@@ -18,7 +18,7 @@ def optuna_random(objective: Callable[[dict[str, float]], float] = None,
     return OptunaRandom(objective, search_space)
 
 
-def optuna_grid_search(objective: Callable[[dict[str, float]], float] = None,
+def fetch_optuna_grid_search(objective: Callable[[dict[str, float]], float] = None,
             search_space: dict[str, tuple[float, float]] = None):
     """ Fetch optimizer wrapper from wrapper zoo.\n
         Optionally pass parameters to initialize the wrapper."""
@@ -27,7 +27,7 @@ def optuna_grid_search(objective: Callable[[dict[str, float]], float] = None,
 
 
 # ================================================================================ Hyperopt
-def hyperopt_tpe(objective: Callable[[dict[str, float]], float] = None,
+def fetch_hyperopt_tpe(objective: Callable[[dict[str, float]], float] = None,
             search_space: dict[str, tuple[float, float]] = None):
     """ Fetch optimizer wrapper from wrapper zoo.\n
         Optionally pass parameters to initialize the wrapper."""
@@ -36,7 +36,7 @@ def hyperopt_tpe(objective: Callable[[dict[str, float]], float] = None,
 
 
 # ================================================================================ BayesianOpt
-def bayesian(objective: Callable[[dict[str, float]], float] = None,
+def fetch_bayesian(objective: Callable[[dict[str, float]], float] = None,
             search_space: dict[str, tuple[float, float]] = None):
     """ Fetch optimizer wrapper from wrapper zoo.\n
         Optionally pass parameters to initialize the wrapper."""
