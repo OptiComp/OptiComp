@@ -82,7 +82,7 @@ class BenchmarkResults():
         Parameters
         ----------
         wrapper_name : str
-            Provide the wrapper name you want to summarize.
+            Provide the wrapper name you want to fetch.
 
         Returns
         -------
@@ -93,5 +93,5 @@ class BenchmarkResults():
             if result.name.lower() == self._normalize_name(wrapper_name):
                 return result
         print(f"No results found for wrapper: {wrapper_name}")
-        # Create and return a default WrapperResult
+        # Create and return an empty WrapperResult
         return WrapperResult("EmptyResult", None, None, None, None, None)
