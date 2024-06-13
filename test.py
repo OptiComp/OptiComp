@@ -1,7 +1,7 @@
 from opticomp import BenchmarkSuite, objective_zoo, wrapper_zoo
 
 # Get common objective from objective_zoo
-objective, search_space = objective_zoo.sphere_function()
+objective, search_space = objective_zoo.fetch_sphere_function()
 
 # Create an instance of the benchmark_suite
 benchmark_suite = BenchmarkSuite(objective, search_space)
@@ -17,4 +17,3 @@ results = benchmark_suite.benchmark(direction="minimize", max_steps=50, target_s
 results.summarize_all()
 result = results.fetch_wrapper_result("optuna_random")
 # result.wrapper.optimize
-

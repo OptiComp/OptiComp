@@ -29,7 +29,9 @@ target-version = "py312"
 # E301 - Requires 1 blank line between methods within a class.
 # E302 - Requires 2 blank lines before top-level function and class definitions
 # E303 - Flags if there are too many blank lines (more than 2).
-select = ["E1", "E22", "E252", "E4", "E7", "E9", "F", "W291", "C901", "N", "COM818", "COM819", "I", "E301", "E302", "E303"]
+# W292 - Ensure every file ends with a blank line.
+# W391 - Ensure every file ends with not more than one blank line
+select = ["E1", "E22", "E252", "E4", "E7", "E9", "F", "W291", "C901", "N", "COM818", "COM819", "I", "E301", "E302", "E303", "W292", "W391"]
 
 # Here we set the rules we want to ignore.
 # N804 - invalid-first-argument-name-for-class-method (https://docs.astral.sh/ruff/rules/#pep8-naming-n)

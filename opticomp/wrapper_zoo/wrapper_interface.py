@@ -124,4 +124,3 @@ class WrapperInterface(ABC):
         """
         self.__objective = objective
         self.__search_space = search_space
-    

@@ -28,4 +28,3 @@ class HyperoptTPE(WrapperInterface):
         best_score = best_trial['result']['loss']
 
         return best_params, best_score
-    

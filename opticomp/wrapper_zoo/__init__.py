@@ -42,7 +42,3 @@ def bayesian(objective: Callable[[dict[str, float]], float] = None,
         Optionally pass parameters to initialize the wrapper."""
     from .bayes_opt.wrapper_bayesian_optimization import Bayesian
     return Bayesian(objective, search_space)
-
-
-
-    
