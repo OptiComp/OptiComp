@@ -34,7 +34,7 @@ class WrapperResult():
 
 class BenchmarkResults():
     def __init__(self):
-        self._results = []
+        self.results = []
 
     def _add_result(self, wrapper,
                     best_params,
@@ -47,7 +47,7 @@ class BenchmarkResults():
                                 best_score,
                                 elapsed_time,
                                 steps)
-        self._results.append(result)
+        self.results.append(result)
 
     def _normalize_name(self, name):
         norm_name = name.lower().replace(" ", "").replace("_", "").replace("-", "")
@@ -62,7 +62,7 @@ class BenchmarkResults():
         wrapper_name : str
             Provide the wrapper name you want to summarize.
         """
-        for result in self._results:
+        for result in self.results:
             if result.name.lower() == self._normalize_name(wrapper_name):
                 result.summarize()
                 return
@@ -72,7 +72,7 @@ class BenchmarkResults():
         """
         Summarize the results for all wrappers.
         """
-        for result in self._results:
+        for result in self.results:
             result.summarize()
 
     def fetch_wrapper_result(self, wrapper_name: str) -> WrapperResult:
@@ -89,7 +89,7 @@ class BenchmarkResults():
         class WrapperResult
             A class containing the results for a specific wrapper
         """
-        for result in self._results:
+        for result in self.results:
             if result.name.lower() == self._normalize_name(wrapper_name):
                 return result
         print(f"No results found for wrapper: {wrapper_name}")

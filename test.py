@@ -17,4 +17,6 @@ results = benchmark_suite.benchmark(direction="minimize", max_steps=100, target_
 results.summarize_all()
 result = results.fetch_wrapper_result("optuna_random")
 
+bay = wrapper_zoo.bayesian(objective, search_space)
+
 

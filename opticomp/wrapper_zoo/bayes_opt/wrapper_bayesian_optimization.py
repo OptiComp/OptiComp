@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+
 from bayes_opt import BayesianOptimization, UtilityFunction
 
 from ..wrapper_interface import WrapperInterface
@@ -8,8 +10,10 @@ class Bayesian(WrapperInterface):
     def __init__(self, objective, search_space):
         super().__init__("1.4.3", "maximize", objective, search_space)
 
-    config = {'kappa': 2.5,
-              'xi': 30.0}
+    @dataclass
+    class Config:
+        kappa: float = 2.5
+        xi: float = 0.0
 
     def _wrap_normalize_parameters(self, params, search_space):
         # No need to normalize parameters for BayesianOptimization
