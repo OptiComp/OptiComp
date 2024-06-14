@@ -1,7 +1,7 @@
 # WrapperInterface
 
 ## Overview
-The WrapperInterface is the heart of every wrapper in OptiComp. It simplifies the creation of wrappers and provides an easy way to use them. The WrapperInterface provides two public methods.
+The WrapperInterface is the heart of every wrapper in OptiComp. It simplifies the creation of wrappers and provides an easy way to use them. The WrapperInterface provides a few public methods.
 
 <br>
 
@@ -33,4 +33,12 @@ direction: str
 max_steps: int = None
 target_score: int = None
 progress_bar: bool = False
+```
+
+
+#### Returns
+The `optimize()` method returns all the results in a `WrapperResult` class. This class contains all the results and some useful methods to evaluate them.
+
+```python
+WrapperResult
 ```

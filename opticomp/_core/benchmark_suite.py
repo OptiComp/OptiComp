@@ -57,7 +57,7 @@ class BenchmarkSuite:
         """
         self._wrappers.clear()
 
-    def benchmark(self, direction: str = "minimize", max_steps: int = None, target_score: int = None, verbose: bool = True, progress_bar: bool = False) -> BenchmarkResults:
+    def benchmark(self, direction: str, max_steps: int = None, target_score: int = None, verbose: bool = True, progress_bar: bool = False) -> BenchmarkResults:
         """
         Benchmark wrappers on provided objective and search_space.
 
