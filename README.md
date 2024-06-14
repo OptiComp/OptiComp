@@ -116,7 +116,9 @@ class CustomWrapper(WrapperInterface):
 <br>
 
 ## Contributing
-Contributions are welcome! Please feel free to submit a pull request or open an issue to improve OptiComp.
+
+Contributions are welcome! Whether you're reporting a bug, suggesting a feature, or contributing code or wrappers, your help is appreciated. Please feel free to submit a pull request or open an issue to improve OptiComp. For more information, head to the contributions section in the wiki.
+
 <br>
 
 ## Documentation
