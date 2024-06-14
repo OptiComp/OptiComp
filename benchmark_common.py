@@ -13,10 +13,3 @@ benchmark_suite.add_wrapper(wrapper_zoo.fetch_bayesian())
 
 # Compare and optimize using the added wrappers
 results = benchmark_suite.benchmark(direction="minimize", max_steps=100, target_score=200, verbose=True, progress_bar=True)
-test = results.fetch_wrapper_result("bayesian")
-# test.
-
-
-wrapper = wrapper_zoo.fetch_optuna_random(objective, search_space)
-result = wrapper.optimize("minimize", max_steps=10)
-# result.
