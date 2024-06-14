@@ -1,4 +1,3 @@
-import time
 from typing import Callable
 
 from .result_benchmark import BenchmarkResults

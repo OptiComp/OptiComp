@@ -3,6 +3,7 @@ import warnings
 from abc import ABC
 from dataclasses import dataclass
 from typing import Callable
+
 from .result_wrapper import WrapperResult
 
 
@@ -84,8 +85,8 @@ class WrapperInterface(ABC):
 
         Returns
         -------
-        Class
-            A class containing the wrappers results
+        WrapperResult
+            A class containing the wrapper's results
         """
         if not max_steps and not target_score:
             raise ValueError("Either max_steps or target_score must be provided")
