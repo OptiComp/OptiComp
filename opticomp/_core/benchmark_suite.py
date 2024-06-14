@@ -105,4 +105,4 @@ class BenchmarkSuite:
         return results
     
     def get_best():
-        raise NotImplementedError()
+        raise NotImplementedError("This feature will be introduced in future versions of the library.")

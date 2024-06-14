@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="OptiComp",
-    version="0.1.1",
+    version="0.1.0",
     description="Library to easily compare optimizers on a custom or common objective.",
     long_description=open('README.md').read(),
     author="SJWRD",
@@ -16,15 +16,5 @@ setup(
     install_requires=[
         "numpy",
         "tqdm",
-    ],
-    extras_require={
-        "dev": [
-            "pytest",
-            "pytest-cov",
-            "flake8",
-            "black",
-            "sphinx",
-            "sphinx_rtd_theme",
-        ],
-    },
+    ]
 )
