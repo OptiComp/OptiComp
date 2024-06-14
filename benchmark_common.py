@@ -16,4 +16,3 @@ results = benchmark_suite.benchmark(direction="minimize", max_steps=100, target_
 
 wrapper = wrapper_zoo.fetch_optuna_random(objective, search_space)
 result = wrapper.optimize()
-

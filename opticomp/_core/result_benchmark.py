@@ -53,4 +53,4 @@ class BenchmarkResults():
                 return result
         print(f"No results found for wrapper: {wrapper_name}")
         # Create and return an empty WrapperResult
-        return WrapperResult("EmptyResult", None, None, None, None, None)
+        return WrapperResult("EmptyResult", None, None, None, None)
