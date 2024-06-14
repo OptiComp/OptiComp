@@ -81,7 +81,8 @@ results = benchmark_suite.benchmark(direction="maximize", max_steps=100, target_
 <br>
 
 #### **Custom Wrapper:**
-Create a custom wrapper for any optimizer:
+Create a custom wrapper for any optimizer:\
+Head to the wiki for more information on creating [custom wrappers](https://github.com/OptiComp/OptiComp/wiki/Custom-wrappers).
 ```python
 import logging
 
@@ -117,9 +118,9 @@ class CustomWrapper(WrapperInterface):
 
 ## Contributing
 
-Contributions are welcome! Whether you're reporting a bug, suggesting a feature, or contributing code or wrappers, your help is appreciated. Please feel free to submit a pull request or open an issue to improve OptiComp. For more information, head to the contributions section in the wiki.
+Contributions are welcome! Whether you're reporting a bug, suggesting a feature, or contributing code or wrappers, your help is appreciated. Please feel free to submit a pull request or open an issue to improve OptiComp. For more information, head to the [contributions](https://github.com/OptiComp/OptiComp/wiki/Contributing) section in the wiki.
 
 <br>
 
 ## Documentation
-For more detailed documentation and examples, please refer to the Wiki section of the GitHub repository.
+For more detailed documentation and examples, please refer to the [Wiki](https://github.com/OptiComp/OptiComp/wiki) section of the GitHub repository.
