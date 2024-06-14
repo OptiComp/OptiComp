@@ -95,7 +95,7 @@ class BenchmarkSuite:
             results._add_result(wrapper_result)
 
             if verbose:
-                print(f"\nScore: {wrapper_result.best_score}")
+                print(f"\nScore: {wrapper_result.score}")
                 print(f"Time: {wrapper_result.elapsed_time}")
                 print(f"steps: {wrapper_result.steps}")
         
