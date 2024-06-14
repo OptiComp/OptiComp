@@ -1,8 +1,8 @@
 import time
 from typing import Callable
 
-from ..wrapper_zoo.wrapper_interface import WrapperInterface
-from .results import BenchmarkResults
+from .result_benchmark import BenchmarkResults
+from .wrapper_interface import WrapperInterface
 
 
 # Optimizer compare class
@@ -58,7 +58,7 @@ class BenchmarkSuite:
         """
         self._wrappers.clear()
 
-    def benchmark(self, direction: str = "minimize", max_steps: int = None, target_score: int = None, verbose: bool = True, progress_bar: bool = False):
+    def benchmark(self, direction: str = "minimize", max_steps: int = None, target_score: int = None, verbose: bool = True, progress_bar: bool = False) -> BenchmarkResults:
         """
         Benchmark wrappers on provided objective and search_space.
 
@@ -91,16 +91,14 @@ class BenchmarkSuite:
             if verbose or progress_bar:
                 print(f"\n=== Wrapper: {wrapper.__class__.__name__} ===")
 
-            start_time = time.time()
-            params, score, steps = wrapper.optimize(direction, max_steps=max_steps, target_score=target_score, progress_bar=progress_bar)
-            elapsed_time = time.time() - start_time
+            wrapper_result = wrapper.optimize(direction, max_steps=max_steps, target_score=target_score, progress_bar=progress_bar)
 
-            results._add_result(wrapper, params, score, elapsed_time, steps)
+            results._add_result(wrapper_result)
 
             if verbose:
-                print(f"\nScore: {score}")
-                print(f"Time: {elapsed_time}")
-                print(f"steps: {steps}")
+                print(f"\nScore: {wrapper_result.best_score}")
+                print(f"Time: {wrapper_result.elapsed_time}")
+                print(f"steps: {wrapper_result.steps}")
         
         if verbose:
             print()

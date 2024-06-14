@@ -1,7 +1,9 @@
+import time
 import warnings
 from abc import ABC
 from dataclasses import dataclass
 from typing import Callable
+from .result_wrapper import WrapperResult
 
 
 class WrapperInterface(ABC):
@@ -64,7 +66,7 @@ class WrapperInterface(ABC):
         return best_params, best_score, steps
     
     # Run optimizer
-    def optimize(self, direction: str, max_steps: int = None, target_score: int = None, progress_bar: bool = False) -> tuple[dict[str, float], float, int]:
+    def optimize(self, direction: str, max_steps: int = None, target_score: int = None, progress_bar: bool = False) -> WrapperResult:
         """
         Run the optimizer on the provided objective and search space.
 
@@ -82,11 +84,8 @@ class WrapperInterface(ABC):
 
         Returns
         -------
-        tuple
-            A tuple containing the following elements:
-            - dict[str, float]: The optimized parameters.
-            - float: The resulting score.
-            - int: The number of steps taken.
+        Class
+            A class containing the wrappers results
         """
         if not max_steps and not target_score:
             raise ValueError("Either max_steps or target_score must be provided")
@@ -107,12 +106,18 @@ class WrapperInterface(ABC):
             return -score if invert else score
         
         self._wrap_setup(final_objective, self.__search_space)
-
+        
+        start_time = time.time()
         params, score, steps = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction, invert, progress_bar)
+        elapsed_time = time.time() - start_time
         
         # Invert score back to normal, if invert == True (see 'final_objective' above)
         score = -score if invert else score
-        return params, score, steps
+        return WrapperResult(self.__class__.__name__,
+                            params,
+                            score,
+                            elapsed_time,
+                            steps)
     
     def initialize(self, objective: Callable[[dict[str, float]], float], search_space: dict[str, tuple[float, float]]):
         """

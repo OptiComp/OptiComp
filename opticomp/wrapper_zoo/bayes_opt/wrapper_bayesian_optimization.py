@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from bayes_opt import BayesianOptimization, UtilityFunction
 
-from ..wrapper_interface import WrapperInterface
+from ..._core.wrapper_interface import WrapperInterface
 
 
 # Wrapper interface

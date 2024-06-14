@@ -2,7 +2,7 @@ import logging
 
 import optuna
 
-from ..wrapper_interface import WrapperInterface
+from ..._core.wrapper_interface import WrapperInterface
 
 
 class OptunaTPE(WrapperInterface):

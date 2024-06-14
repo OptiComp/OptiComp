@@ -1,53 +1,12 @@
-from ..wrapper_zoo.wrapper_interface import WrapperInterface
-
-
-class WrapperResult():
-    name: str
-    wrapper: WrapperInterface
-    best_params: dict[str, float]
-    best_score: int
-    elapsed_time: int
-    steps: int
-
-    def __init__(self, name,
-                 wrapper,
-                 best_params,
-                 best_score,
-                 elapsed_time,
-                 steps):
-        self.name = name
-        self.wrapper = wrapper
-        self.best_params = best_params
-        self.best_score = best_score
-        self.elapsed_time = elapsed_time
-        self.steps = steps
-    
-    def summarize(self):
-        """
-        Summarize the results for this wrappers.
-        """
-        print(f"Optimiser: {self.name}")
-        print(f"Score: {self.best_score}")
-        print(f"Time: {self.elapsed_time}")
-        print(f"steps: {self.steps}\n")
+from .result_wrapper import WrapperResult
 
 
 class BenchmarkResults():
     def __init__(self):
         self.results = []
 
-    def _add_result(self, wrapper,
-                    best_params,
-                    best_score,
-                    elapsed_time,
-                    steps):
-        result = WrapperResult(wrapper.__class__.__name__,
-                                wrapper,
-                                best_params,
-                                best_score,
-                                elapsed_time,
-                                steps)
-        self.results.append(result)
+    def _add_result(self, wrapper_result):
+        self.results.append(wrapper_result)
 
     def _normalize_name(self, name):
         norm_name = name.lower().replace(" ", "").replace("_", "").replace("-", "")
