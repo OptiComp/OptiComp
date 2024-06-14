@@ -67,7 +67,7 @@ class WrapperInterface(ABC):
         return best_params, best_score, steps
     
     # Run optimizer
-    def optimize(self, direction: str, max_steps: int = None, target_score: int = None, progress_bar: bool = False):
+    def optimize(self, direction: str, max_steps: int = None, target_score: float = None, progress_bar: bool = False):
         """
         Run the optimizer on the provided objective and search space.
 
@@ -77,7 +77,7 @@ class WrapperInterface(ABC):
             The direction of optimization, either "minimize" or "maximize".
         max_steps : int, optional
             The maximum number of optimization steps. If not provided, target_score must be provided.
-        target_score : int, optional
+        target_score : float, optional
             The target score to achieve. If not provided, max_steps must be provided.
         progress_bar : bool, optional
             Show progress bar.

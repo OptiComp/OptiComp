@@ -41,7 +41,7 @@ Set `progress_bar` to `True` if you want to see a progress bar for every wrapper
 ```python
 direction: str
 max_steps: int = None
-target_score: int = None
+target_score: float = None
 verbose: bool = True
 progress_bar: bool = False
 ```

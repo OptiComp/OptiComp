@@ -31,7 +31,7 @@ The following parameters can be used to configure the optimize method. Either `m
 ```python
 direction: str
 max_steps: int = None
-target_score: int = None
+target_score: float = None
 progress_bar: bool = False
 ```
 

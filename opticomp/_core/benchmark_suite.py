@@ -57,7 +57,7 @@ class BenchmarkSuite:
         """
         self._wrappers.clear()
 
-    def benchmark(self, direction: str, max_steps: int = None, target_score: int = None, verbose: bool = True, progress_bar: bool = False) -> BenchmarkResults:
+    def benchmark(self, direction: str, max_steps: int = None, target_score: float = None, verbose: bool = True, progress_bar: bool = False) -> BenchmarkResults:
         """
         Benchmark wrappers on provided objective and search_space.
 
@@ -67,7 +67,7 @@ class BenchmarkSuite:
             The direction of optimization. Default is 'minimize'.
         max_steps : int, optional
             The maximum number of optimization steps. If not provided, target_score must be provided.
-        target_score : int, optional
+        target_score : float, optional
             The target score to achieve. If not provided, max_steps must be provided.
         verbose : bool, optional
             If True, print information during benchmarking. Default is False.
