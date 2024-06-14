@@ -82,6 +82,8 @@ class BenchmarkSuite:
         """
         if not max_steps and not target_score:
             raise ValueError("Either max_steps or target_score must be provided")
+        if direction != 'minimize' and direction != 'maximize':
+            raise ValueError(f"Unknown direction: '{direction}'. Please choose 'minimize' or 'maximize'.")
         
         results = BenchmarkResults()
 

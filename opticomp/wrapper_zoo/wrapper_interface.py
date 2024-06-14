@@ -92,6 +92,9 @@ class WrapperInterface(ABC):
             raise ValueError("Either max_steps or target_score must be provided")
         if self.__objective is None or self.__search_space is None:
             raise ValueError("Wrapper not initialized. Please use 'wrapper.initialize(objective, search_space)'.")
+        if direction != 'minimize' and direction != 'maximize':
+            raise ValueError(f"Unknown direction: '{direction}'. Please choose 'minimize' or 'maximize'.")
+        
         invert = False
         if self.default_direction != direction:
             invert = True
