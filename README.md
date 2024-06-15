@@ -124,3 +124,4 @@ Contributions are welcome! Whether you're reporting a bug, suggesting a feature,
 
 ## Documentation
 For more detailed documentation and examples, please refer to the [Wiki](https://github.com/OptiComp/OptiComp/wiki) section of the GitHub repository.
+
