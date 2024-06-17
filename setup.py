@@ -1,10 +1,13 @@
 from setuptools import find_packages, setup
 
+with open("README.md", "r") as f:
+    description = f.read()
+
 setup(
     name="OptiComp",
     version="0.1.1",
     description="Library to easily compare optimizers on a custom or common objective.",
-    long_description=open('README.md').read(),
+    long_description=description,
     long_description_content_type="text/markdown",
     author="SJWRD",
     url="https://github.com/OptiComp/OptiComp",
