@@ -54,7 +54,7 @@ After running the library, you can expect the following information in the resul
 - **Best Params:** Best parameters during benchmarking.
 
 These results provide insights into the performance and outcomes of each optimizer, enabling easy comparison between them.\
-For more information, please visit the [results](https://github.com/OptiComp/OptiComp/wiki/Results) sectoin in the wiki.
+For more information, please visit the [results](https://github.com/OptiComp/OptiComp/wiki/Results) section in the wiki.
 
 <br>
 
