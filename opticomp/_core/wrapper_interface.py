@@ -49,15 +49,26 @@ class WrapperInterface(ABC):
         else:
             pbar = None
         history = []
+        best_params = {}
+        best_score = None
         steps = 0
         while True:
             steps += 1
-            best_params, best_score = self._wrap_step(final_objective, search_space)
+            params, score = self._wrap_step(final_objective, search_space)
             # Invert best_score back to normal, if invert == True (see 'final_objective' in 'optimize' below)
-            norm_score = -best_score if invert else best_score
+            norm_score = -score if invert else score
             history.append(norm_score)
+
             if pbar:
                 pbar.update(1)
+
+            if score > best_score and direction == "maximize":
+                best_score = score
+                best_params = params
+            elif score < best_score and direction == "minimize":
+                best_score = score
+                best_params = params
+
             if max_steps:
                 if steps >= max_steps:
                     break
@@ -66,6 +77,7 @@ class WrapperInterface(ABC):
                     break
                 elif norm_score <= target_score and direction == "minimize":
                     break
+
         return best_params, best_score, steps, history
     
     # Run optimizer
@@ -111,14 +123,14 @@ class WrapperInterface(ABC):
         self._wrap_setup(final_objective, self.__search_space)
         
         start_time = time.time()
-        params, score, steps, history = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction, invert, progress_bar)
+        best_params, best_score, steps, history = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction, invert, progress_bar)
         elapsed_time = time.time() - start_time
         
         # Invert score back to normal, if invert == True (see 'final_objective' above)
-        score = -score if invert else score
+        best_score = -best_score if invert else best_score
         return WrapperResults(self.__class__.__name__,
-                            params,
-                            score,
+                            best_params,
+                            best_score,
                             history,
                             elapsed_time,
                             steps)
