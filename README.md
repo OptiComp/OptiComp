@@ -4,12 +4,12 @@ OptiComp is a versatile library for comparing optimizers. It supports both built
 <br>
 
 ## Features
-- **Unified API:** Standardize different optimization libraries or custom optimizers with common wrappers.
-- **Standard Wrappers:** Ready-to-use wrappers for popular optimization libraries like Optuna, bayes_opt, and Hyperopt.
-- **Custom Wrappers:** Create your own wrappers for other libraries or your custom optimizers.
-- **Standard Objectives:** Pick a standard objective to evaluate the optimizer on, providing predefined metrics for easier evaluation and comparison across different optimization algorithms.
-- **Custom Objectives:** Create custom objectives to evaluate the optimizer on, allowing for tailored evaluation metrics based on specific tasks or requirements.
-- **Optimizer Comparison:** Compare different wrappers on your objective to find the most effective optimizer.
+- **Unified API:** Standardized optimizer API using common wrappers.
+- **Standard Wrappers:** Ready-to-use wrappers.
+- **Custom Wrappers:** Create your own wrappers any optimizer.
+- **Standard Objectives:** Ready-to-use objective to evaluate an optimizer on.
+- **Custom Objectives:** Create custom objectives to evaluate the optimizer on, allowing you to test optimizers on your project.
+- **Optimizer Comparison:** Compare different wrappers to find the most effective optimizer.
 - **Best Optimizer Selection:** Select the best wrapper for your objective with less computational overhead.
 - **Direct Optimization:** Run optimizations directly using the provided wrappers.
 <br>
