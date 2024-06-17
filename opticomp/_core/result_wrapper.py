@@ -10,28 +10,40 @@ class WrapperResults():
     history: list
     elapsed_time: float
     steps: int
+    cpu_usage: list[float]
+    ram_usage: list[float]
 
     def __init__(self, name,
                  best_params,
                  best_score,
                  history,
                  elapsed_time,
-                 steps):
+                 steps,
+                 cpu_usage,
+                 ram_usage):
         self.name = name
         self.best_params = best_params
         self.best_score = best_score
         self.history = history
         self.elapsed_time = elapsed_time
         self.steps = steps
+        self.cpu_usage = cpu_usage
+        self.ram_usage = ram_usage
     
     def summarize(self):
         """
         Summarize the results for this wrappers.
         """
+        avr_cpu = sum(self.cpu_usage) / len(self.cpu_usage) if self.cpu_usage else 0.0
+        avr_ram = sum(self.ram_usage) / len(self.ram_usage) if self.ram_usage else 0.0
+
         print(f"Optimiser: {self.name}")
         print(f"Score: {self.best_score}")
         print(f"Time: {self.elapsed_time}")
-        print(f"steps: {self.steps}\n")
+        print(f"steps: {self.steps}")
+        print(f"avr CPU usage: {avr_cpu:.1f}%")
+        print(f"avr RAM usage: {avr_ram:.1f}\n")
+        print(self.cpu_usage)
 
     def plot(self, show: bool = False, save_dir: str = None):
         """
