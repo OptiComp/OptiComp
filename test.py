@@ -1,7 +1,7 @@
 from opticomp import BenchmarkSuite, objective_zoo, wrapper_zoo
 
 # Get common objective from objective_zoo
-objective, search_space = objective_zoo.fetch_sphere_function()
+objective, search_space = objective_zoo.fetch_rosenbrock_function()
 
 # Create an instance of the benchmark suite
 benchmark_suite = BenchmarkSuite(objective, search_space)
@@ -12,7 +12,7 @@ benchmark_suite.add_wrapper(wrapper_zoo.fetch_optuna_tpe())
 benchmark_suite.add_wrapper(wrapper_zoo.fetch_bayesian())
 
 # Compare and optimize using the added wrappers
-results = benchmark_suite.benchmark(direction="minimize", max_steps=100, target_score=200, verbose=True, progress_bar=True)
+results = benchmark_suite.benchmark(direction="maximize", max_steps=30, target_score=None, verbose=True, progress_bar=True)
 
-result = results.fetch_wrapper_result("bayesian")
-result.plot(save_dir="opticomp")
+names = ["optuna_random", "bayesian"]
+results.plot(show=True, save_dir="docs")

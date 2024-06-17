@@ -1,3 +1,7 @@
+import os
+
+import matplotlib.pyplot as plt
+
 from .result_wrapper import WrapperResults
 
 
@@ -33,6 +37,45 @@ class BenchmarkResults():
         """
         for result in self.results:
             result.summarize()
+
+    def plot(self, wrapper_names: list[str] = None, show: bool = False, save_dir: str = None):
+        """
+        Plot one graph to visualize all the wrapper histories.
+        
+        Parameters
+        ----------
+        wrapper_names: list[str] = None, optional
+            Give a list of which wrappers you want to plot. The other wrappers will be excluded.
+        show : bool = False, optional
+            Set to true to show the graph.
+        save_dir: str = None. optional
+            Give a dir to save the graph to.
+        """
+        if wrapper_names:
+            norm_wrapper_names = [self._normalize_name(name) for name in wrapper_names]
+
+        plt.figure()
+
+        for result in self.results:
+            if wrapper_names and result.name.lower() not in norm_wrapper_names:
+                continue
+            x = []
+            y = result.history
+            for step in range(len(result.history)):
+                x.append(step + 1)
+            plt.plot(x, y, label=result.name)
+
+        plt.title("Summary")
+        plt.xlabel('Steps')
+        plt.ylabel('Score')
+        plt.legend()
+
+        if show:
+            plt.show()
+        if save_dir:
+            os.makedirs(save_dir, exist_ok=True)
+            file_path = os.path.join(save_dir, "plot_summary.png")
+            plt.savefig(file_path)
 
     def fetch_wrapper_result(self, wrapper_name: str) -> WrapperResults:
         """
