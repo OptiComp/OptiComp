@@ -21,5 +21,7 @@ class OptunaRandom(WrapperInterface):
         self._study = optuna.create_study(direction="minimize", sampler=optuna.samplers.RandomSampler())
     
     def _wrap_step(self, objective, search_space):
-        self._study.optimize(objective, n_trials=1)
-        return self._study.best_params, self._study.best_value
+        trial = self._study.ask()
+        result = objective(trial)
+        self._study.tell(trial, result)
+        return trial.params, result

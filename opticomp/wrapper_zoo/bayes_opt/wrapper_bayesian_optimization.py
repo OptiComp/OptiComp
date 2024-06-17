@@ -43,8 +43,5 @@ class Bayesian(WrapperInterface):
         next_point = self._optimizer.suggest(self._utility)
         target = objective(next_point)
         self._optimizer.register(params=next_point, target=target)
-            
-        best_params = self._optimizer.max['params']
-        best_score = self._optimizer.max['target']
-
-        return best_params, best_score
+        
+        return next_point, target
