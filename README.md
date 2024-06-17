@@ -42,7 +42,7 @@ benchmark_suite.add_wrapper(wrapper_zoo.fetch_bayesian())
 # Compare and optimize using the added wrappers
 results = benchmark_suite.benchmark(direction="minimize", max_steps=100, target_score=200, verbose=True, progress_bar=True)
 ```
-For more specific examples, such as creating custom objectives or wrappers, please visit the [Wiki]([https://github.com/OptiComp/OptiComp/wiki](https://github.com/OptiComp/OptiComp/wiki/Getting-started)
+For more specific examples, such as creating custom objectives or wrappers, please visit the [Wiki](https://github.com/OptiComp/OptiComp/wiki/Getting-started)
 
 <br>
 
