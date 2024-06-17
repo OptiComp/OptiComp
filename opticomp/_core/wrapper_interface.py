@@ -4,7 +4,7 @@ from abc import ABC
 from dataclasses import dataclass
 from typing import Callable
 
-from .result_wrapper import WrapperResult
+from .result_wrapper import WrapperResults
 
 
 class WrapperInterface(ABC):
@@ -85,7 +85,7 @@ class WrapperInterface(ABC):
 
         Returns
         -------
-        WrapperResult
+        WrapperResults
             A class containing the wrapper's results
         """
         if not max_steps and not target_score:
@@ -114,7 +114,7 @@ class WrapperInterface(ABC):
         
         # Invert score back to normal, if invert == True (see 'final_objective' above)
         score = -score if invert else score
-        return WrapperResult(self.__class__.__name__,
+        return WrapperResults(self.__class__.__name__,
                             params,
                             score,
                             elapsed_time,

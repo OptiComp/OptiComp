@@ -1,5 +1,5 @@
 
-class WrapperResult():
+class WrapperResults():
     name: str
     params: dict[str, float]
     score: float

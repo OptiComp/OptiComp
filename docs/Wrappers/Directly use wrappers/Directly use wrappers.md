@@ -33,4 +33,4 @@ wrapper.initialize(objective, search_space)
 # Start optimizing
 result = wrapper.optimize('minimize', max_steps=100, target_score=200, progress_bar=True)
 ```
-The `wrapper.optimize()` returns an instance of the `WrapperResult` class containing all the results from the optimization. 
+The `wrapper.optimize()` returns an instance of the `WrapperResults` class containing all the results from the optimization. 

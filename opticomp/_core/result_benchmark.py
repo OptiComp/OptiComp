@@ -1,4 +1,4 @@
-from .result_wrapper import WrapperResult
+from .result_wrapper import WrapperResults
 
 
 class BenchmarkResults():
@@ -34,7 +34,7 @@ class BenchmarkResults():
         for result in self.results:
             result.summarize()
 
-    def fetch_wrapper_result(self, wrapper_name: str) -> WrapperResult:
+    def fetch_wrapper_result(self, wrapper_name: str) -> WrapperResults:
         """
         Fetch and return the result class of a specific wrapper
         
@@ -45,12 +45,12 @@ class BenchmarkResults():
 
         Returns
         -------
-        class WrapperResult
+        class WrapperResults
             A class containing the results for a specific wrapper
         """
         for result in self.results:
             if result.name.lower() == self._normalize_name(wrapper_name):
                 return result
         print(f"No results found for wrapper: {wrapper_name}")
-        # Create and return an empty WrapperResult
-        return WrapperResult("EmptyResult", None, None, None, None)
+        # Create and return an empty WrapperResults so the autocomplete always works
+        return WrapperResults("EmptyResult", None, None, None, None)

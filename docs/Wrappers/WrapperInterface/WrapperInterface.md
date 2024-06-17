@@ -37,8 +37,8 @@ progress_bar: bool = False
 
 
 #### Returns
-The `optimize()` method returns all the results in a `WrapperResult` class. This class contains all the results and some useful methods to evaluate them.
+The `optimize()` method returns all the results in a `WrapperResults` class. This class contains all the results and some useful methods to evaluate them.
 
 ```python
-WrapperResult
+WrapperResults
 ```
