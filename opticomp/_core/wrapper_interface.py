@@ -49,8 +49,8 @@ class WrapperInterface(ABC):
         else:
             pbar = None
         history = []
-        best_params = {}
         best_score = None
+        best_params = None
         steps = 0
         while True:
             steps += 1
@@ -62,7 +62,10 @@ class WrapperInterface(ABC):
             if pbar:
                 pbar.update(1)
 
-            if score > best_score and direction == "maximize":
+            if not best_score:
+                best_score = score
+                best_params = params
+            elif score > best_score and direction == "maximize":
                 best_score = score
                 best_params = params
             elif score < best_score and direction == "minimize":
