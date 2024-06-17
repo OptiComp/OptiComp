@@ -24,7 +24,7 @@ pip install opticomp
 
 ## Usage
 #### **Benchmark Common Wrappers And Objectives:**
-Use the OptiComp common wrappers and objectives:
+Use the OptiComp build-in wrappers and objectives:
 ```python
 from opticomp import BenchmarkSuite, objective_zoo, wrapper_zoo
 
@@ -42,78 +42,19 @@ benchmark_suite.add_wrapper(wrapper_zoo.fetch_bayesian())
 # Compare and optimize using the added wrappers
 results = benchmark_suite.benchmark(direction="minimize", max_steps=100, target_score=200, verbose=True, progress_bar=True)
 ```
+For more specific examples, such as creating custom objectives or wrappers, please visit the [Wiki]([https://github.com/OptiComp/OptiComp/wiki](https://github.com/OptiComp/OptiComp/wiki/Getting-started)
+
 <br>
 
-#### **Custom Objective:**
-Create a custom objective and search_space:
+## Results
+After running the library, you can expect the following information in the results:
+- **Steps Taken:** Number of iterations or steps taken during the benchmarking.
+- **Elapsed Time:** Total time taken for the algorithm to complete its task.
+- **Final Score:** The score, or evaluation result after completing the benchmark.
+- **Best Params:** Best parameters during benchmarking.
 
-```python
-from opticomp import BenchmarkSuite, wrapper_zoo
+These results provide insights into the performance and outcomes of each optimizer, enabling easy comparison between them.
 
-
-# Custom objective
-def objective(params):
-    # Split params
-    param1 = params['param1']
-    param2 = params['param1']
-    
-    # Evaluate and calculate score
-    score = param1 + param2
-
-    # Return score
-    return score
-
-# Custom search_space
-search_space = {'param1': (-100, 100),
-                'param2': (-100, 100)}
-
-# Create an instance of the benchmark suite
-benchmark_suite = BenchmarkSuite(objective, search_space)
-
-# Add wrappers directly from wrapper_zoo to the benchmark_suite
-benchmark_suite.add_wrapper(wrapper_zoo.fetch_optuna_random())
-benchmark_suite.add_wrapper(wrapper_zoo.fetch_optuna_tpe())
-benchmark_suite.add_wrapper(wrapper_zoo.fetch_bayesian())
-
-# Compare and optimize using the added wrappers
-results = benchmark_suite.benchmark(direction="maximize", max_steps=100, target_score=190, verbose=True, progress_bar=True)
-```
-<br>
-
-#### **Custom Wrapper:**
-Create a custom wrapper for any optimizer:\
-Head to the wiki for more information on creating [custom wrappers](https://github.com/OptiComp/OptiComp/wiki/Custom-wrappers).
-```python
-import logging
-
-import optuna
-
-from opticomp import BenchmarkSuite, WrapperInterface, objective_zoo, wrapper_zoo
-
-
-# Create a custom wrapper
-class CustomWrapper(WrapperInterface):
-    def __init__(self, objective, search_space):
-        # Give library version and default optimizer direction
-        super().__init__("3.6.1", "minimize", objective, search_space)
-
-    # Normalize the output parameters of the optimizer to work with the BenchmarkSuite
-    def _wrap_normalize_parameters(self, trial, search_space):
-        params = [trial.suggest_float(name, low, high) for name, (low, high) in search_space.items()]
-        normalized_params = {name: param_value for name, param_value in zip(search_space.keys(), params)}
-        return normalized_params
-
-    # Setup optimizer
-    def _wrap_setup(self, objective, search_space):
-        optuna.logging.disable_default_handler()
-        optuna.logging.get_logger("optuna").addHandler(logging.NullHandler())
-        self._study = optuna.create_study(direction="minimize", sampler=optuna.samplers.RandomSampler())
-    
-    # Take ONE optimizer step. never more than one
-    def _wrap_step(self, objective, search_space):
-        self._study.optimize(objective, n_trials=1)
-        return self._study.best_params, self._study.best_value
-```
 <br>
 
 ## Contributing
