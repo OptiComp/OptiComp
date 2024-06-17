@@ -44,13 +44,10 @@ class WrapperResults():
         save_dir: str = None. optional
             Give a dir to save the graph to.
         """
-        step = 0
         x = []
-        y = []
-        for score in self.history:
-            step += 1
-            x.append(step)
-            y.append(score)
+        y = self.history
+        for step in range(len(self.history)):
+            x.append(step + 1)
 
         plt.figure()
         plt.plot(x, y)
@@ -62,5 +59,5 @@ class WrapperResults():
             plt.show()
         if save_dir:
             os.makedirs(save_dir, exist_ok=True)
-            file_path = os.path.join(save_dir, f"plot_{self.name}")
+            file_path = os.path.join(save_dir, f"plot_{self.name}.png")
             plt.savefig(file_path)
