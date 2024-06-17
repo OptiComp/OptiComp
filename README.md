@@ -50,8 +50,13 @@ For more specific examples, such as creating custom objectives or wrappers, plea
 After running the library, you can expect the following information in the results:
 - **Steps Taken:** Number of iterations or steps taken during the benchmarking.
 - **Elapsed Time:** Total time taken for the algorithm to complete its task.
-- **Final Score:** The score, or evaluation result after completing the benchmark.
+- **Best Score:** The score, or evaluation result after completing the benchmark.
 - **Best Params:** Best parameters during benchmarking.
+- **History:** A list with the score for every step taken. This can be visualised as shown below.
+
+#### Methods to visualise results
+![alt text](https://github.com/OptiComp/OptiComp/blob/main/docs/Img/example_summary.png)
+
 
 These results provide insights into the performance and outcomes of each optimizer, enabling easy comparison between them.\
 For more information, please visit the [results](https://github.com/OptiComp/OptiComp/wiki/Results) section in the wiki.
