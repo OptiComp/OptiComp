@@ -70,12 +70,12 @@ class BenchmarkResults():
         plt.ylabel('Score')
         plt.legend()
 
-        if show:
-            plt.show()
         if save_dir:
             os.makedirs(save_dir, exist_ok=True)
             file_path = os.path.join(save_dir, "plot_summary.png")
             plt.savefig(file_path)
+        if show:
+            plt.show()
 
     def fetch_wrapper_result(self, wrapper_name: str) -> WrapperResults:
         """

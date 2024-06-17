@@ -5,21 +5,21 @@ import matplotlib.pyplot as plt
 
 class WrapperResults():
     name: str
-    params: dict[str, float]
-    score: float
+    best_params: dict[str, float]
+    best_score: float
     history: list
     elapsed_time: float
     steps: int
 
     def __init__(self, name,
-                 params,
-                 score,
+                 best_params,
+                 best_score,
                  history,
                  elapsed_time,
                  steps):
         self.name = name
-        self.params = params
-        self.score = score
+        self.best_params = best_params
+        self.best_score = best_score
         self.history = history
         self.elapsed_time = elapsed_time
         self.steps = steps
@@ -29,7 +29,7 @@ class WrapperResults():
         Summarize the results for this wrappers.
         """
         print(f"Optimiser: {self.name}")
-        print(f"Score: {self.score}")
+        print(f"Score: {self.best_score}")
         print(f"Time: {self.elapsed_time}")
         print(f"steps: {self.steps}\n")
 
@@ -55,9 +55,9 @@ class WrapperResults():
         plt.xlabel('Steps')
         plt.ylabel('Score')
 
-        if show:
-            plt.show()
         if save_dir:
             os.makedirs(save_dir, exist_ok=True)
             file_path = os.path.join(save_dir, f"plot_{self.name}.png")
             plt.savefig(file_path)
+        if show:
+            plt.show()
