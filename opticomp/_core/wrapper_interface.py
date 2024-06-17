@@ -48,23 +48,25 @@ class WrapperInterface(ABC):
                               "Continuing without progress bar")
         else:
             pbar = None
+        history = []
         steps = 0
         while True:
             steps += 1
             best_params, best_score = self._wrap_step(final_objective, search_space)
+            # Invert best_score back to normal, if invert == True (see 'final_objective' in 'optimize' below)
+            norm_score = -best_score if invert else best_score
+            history.append(norm_score)
             if pbar:
                 pbar.update(1)
             if max_steps:
                 if steps >= max_steps:
                     break
             if target_score:
-                # Invert best_score back to normal, if invert == True (see 'final_objective' in 'optimize' below)
-                norm_score = -best_score if invert else best_score
                 if norm_score >= target_score and direction == "maximize":
                     break
                 elif norm_score <= target_score and direction == "minimize":
                     break
-        return best_params, best_score, steps
+        return best_params, best_score, steps, history
     
     # Run optimizer
     def optimize(self, direction: str, max_steps: int = None, target_score: float = None, progress_bar: bool = False):
@@ -109,7 +111,7 @@ class WrapperInterface(ABC):
         self._wrap_setup(final_objective, self.__search_space)
         
         start_time = time.time()
-        params, score, steps = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction, invert, progress_bar)
+        params, score, steps, history = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction, invert, progress_bar)
         elapsed_time = time.time() - start_time
         
         # Invert score back to normal, if invert == True (see 'final_objective' above)
@@ -117,6 +119,7 @@ class WrapperInterface(ABC):
         return WrapperResults(self.__class__.__name__,
                             params,
                             score,
+                            history,
                             elapsed_time,
                             steps)
     
