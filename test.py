@@ -15,4 +15,4 @@ benchmark_suite.add_wrapper(wrapper_zoo.fetch_bayesian())
 results = benchmark_suite.benchmark(direction="minimize", max_steps=100, target_score=200, verbose=True, progress_bar=True)
 
 result = results.fetch_wrapper_result("bayesian")
-result.plot()
+result.plot(save_dir="opticomp")

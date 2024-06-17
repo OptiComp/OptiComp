@@ -1,3 +1,5 @@
+import os
+
 import matplotlib.pyplot as plt
 
 
@@ -31,8 +33,17 @@ class WrapperResults():
         print(f"Time: {self.elapsed_time}")
         print(f"steps: {self.steps}\n")
 
-    def plot(self):
-
+    def plot(self, show: bool = False, save_dir: str = None):
+        """
+        Plot a graph to visualize the wrapper history.
+        
+        Parameters
+        ----------
+        show : bool = False, optional
+            Set to true to show the graph.
+        save_dir: str = None. optional
+            Give a dir to save the graph to.
+        """
         step = 0
         x = []
         y = []
@@ -47,5 +58,9 @@ class WrapperResults():
         plt.xlabel('Steps')
         plt.ylabel('Score')
 
-        # Show the plot
-        plt.show()
+        if show:
+            plt.show()
+        if save_dir:
+            os.makedirs(save_dir, exist_ok=True)
+            file_path = os.path.join(save_dir, f"plot_{self.name}")
+            plt.savefig(file_path)
