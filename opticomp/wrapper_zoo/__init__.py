@@ -25,3 +25,12 @@ def fetch_bayesian(objective: Callable[[dict[str, float]], float] = None,
         Optionally pass parameters to initialize the wrapper."""
     from .bayes_opt.wrapper_bayesian_optimization import Bayesian
     return Bayesian(objective, search_space)
+
+
+# ================================================================================ Sklearn
+def fetch_sklearn_gridsearch(objective: Callable[[dict[str, float]], float] = None,
+            search_space: dict[str, tuple[float, float]] = None):
+    """ Fetch optimizer wrapper from wrapper zoo.\n
+        Optionally pass parameters to initialize the wrapper."""
+    from .sklearn.wrapper_sklearn_gridsearch import SklearnGridSearch
+    return SklearnGridSearch(objective, search_space)
