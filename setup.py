@@ -5,8 +5,8 @@ with open("README.md", "r") as f:
 
 setup(
     name="OptiComp",
-    version="0.1.1",
-    description="Library to easily compare optimizers on a custom or common objective.",
+    version="0.2.0",
+    description="Easily compare/benchmark optimizers on a custom or common objective.",
     long_description=description,
     long_description_content_type="text/markdown",
     author="SJWRD",
