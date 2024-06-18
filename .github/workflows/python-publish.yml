@@ -22,10 +22,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Clean up old distribution files
+    - name: Clear caches
       run: |
-        rm -rf dist
-        mkdir dist
+        python -m pip cache purge
+        rm -rf $HOME/.cache/pip
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
