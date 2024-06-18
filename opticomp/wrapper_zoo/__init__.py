@@ -18,23 +18,6 @@ def fetch_optuna_random(objective: Callable[[dict[str, float]], float] = None,
     return OptunaRandom(objective, search_space)
 
 
-def fetch_optuna_grid_search(objective: Callable[[dict[str, float]], float] = None,
-            search_space: dict[str, tuple[float, float]] = None):
-    """ Fetch optimizer wrapper from wrapper zoo.\n
-        Optionally pass parameters to initialize the wrapper."""
-    from .optuna.wrapper_optuna_grid_search import OptunaGridSearch
-    return OptunaGridSearch(objective, search_space)
-
-
-# ================================================================================ Hyperopt
-def fetch_hyperopt_tpe(objective: Callable[[dict[str, float]], float] = None,
-            search_space: dict[str, tuple[float, float]] = None):
-    """ Fetch optimizer wrapper from wrapper zoo.\n
-        Optionally pass parameters to initialize the wrapper."""
-    from .hyperopt.wrapper_hyperopt_tpe import HyperoptTPE
-    return HyperoptTPE(objective, search_space)
-
-
 # ================================================================================ BayesianOpt
 def fetch_bayesian(objective: Callable[[dict[str, float]], float] = None,
             search_space: dict[str, tuple[float, float]] = None):
