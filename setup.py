@@ -21,5 +21,6 @@ setup(
         "numpy",
         "tqdm",
         "matplotlib",
+        "psutil",
     ]
 )
