@@ -22,6 +22,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Clear caches
+      run: |
+        python -m pip cache purge
+        rm -rf $HOME/.cache/pip
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
@@ -31,7 +35,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install build
     - name: Build package
-      run: python -m build
+   #   run: python -m build
+      run: python setup.py sdist bdist_wheel
     - name: Publish package
       uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
       with:
