@@ -53,7 +53,7 @@ After running the library, you can expect the following information in the resul
 - **Best Score:** The score, or evaluation result after completing the benchmark.
 - **Best Params:** Best parameters during benchmarking.
 - **Score history:** A list with the score for every step taken. This can be visualised as shown below.
-- **CPU and RAM history:** A list with the CPU and RAM usage during earch step. This can be used to get the average or peaks.
+- **CPU and RAM history:** A list with the CPU and RAM usage during each step. This can be used to get the average or peaks.
 
 #### Methods to visualise results
 ![alt text](https://github.com/OptiComp/OptiComp/blob/main/docs/Img/example_summary.png)
