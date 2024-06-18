@@ -1,49 +1,54 @@
 import os
 
 import matplotlib.pyplot as plt
+import psutil
 
 
 class WrapperResults():
     name: str
     best_params: dict[str, float]
     best_score: float
-    history: list
+    score_history: list[float]
     elapsed_time: float
     steps: int
-    cpu_usage: list[float]
-    ram_usage: list[float]
+    cpu_history: list[float]
+    ram_history: list[float]
 
     def __init__(self, name,
                  best_params,
                  best_score,
-                 history,
+                 score_history,
                  elapsed_time,
                  steps,
-                 cpu_usage,
-                 ram_usage):
+                 cpu_history,
+                 ram_history):
         self.name = name
         self.best_params = best_params
         self.best_score = best_score
-        self.history = history
+        self.score_history = score_history
         self.elapsed_time = elapsed_time
         self.steps = steps
-        self.cpu_usage = cpu_usage
-        self.ram_usage = ram_usage
+        self.cpu_history = cpu_history
+        self.ram_history = ram_history
     
     def summarize(self):
         """
         Summarize the results for this wrappers.
         """
-        avr_cpu = sum(self.cpu_usage) / len(self.cpu_usage) if self.cpu_usage else 0.0
-        avr_ram = sum(self.ram_usage) / len(self.ram_usage) if self.ram_usage else 0.0
-
-        print(f"Optimiser: {self.name}")
+        avr_cpu = sum(self.cpu_history) / len(self.cpu_history) if self.cpu_history else 0.0
+        avr_ram = sum(self.ram_history) / len(self.ram_history) if self.ram_history else 0.0
+        peak_cpu_usage = max(self.cpu_history) if self.cpu_history else 0.0
+        peak_ram_usage = max(self.ram_history) if self.ram_history else 0.0
+        
+        print(f"\n=== Wrapper: {self.name} ===")
         print(f"Score: {self.best_score}")
-        print(f"Time: {self.elapsed_time}")
+        print(f"Time: {self.elapsed_time:.4f} sec")
         print(f"steps: {self.steps}")
-        print(f"avr CPU usage: {avr_cpu:.1f}%")
-        print(f"avr RAM usage: {avr_ram:.1f}\n")
-        print(self.cpu_usage)
+        print("=== System")
+        print(f"avr CPU usage: {avr_cpu:.1f}% over {psutil.cpu_count()} cores")
+        print(f"peak CPU usage: {peak_cpu_usage:.1f}% over {psutil.cpu_count()} cores")
+        print(f"avr RAM usage: {avr_ram:.1f} mb")
+        print(f"peak RAM usage: {peak_ram_usage:.1f} mb\n")
 
     def plot(self, show: bool = False, save_dir: str = None):
         """
@@ -57,8 +62,8 @@ class WrapperResults():
             Give a dir to save the graph to.
         """
         x = []
-        y = self.history
-        for step in range(len(self.history)):
+        y = self.score_history
+        for step in range(len(self.score_history)):
             x.append(step + 1)
 
         plt.figure()

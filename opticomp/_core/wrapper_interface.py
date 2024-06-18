@@ -3,6 +3,7 @@ import warnings
 from abc import ABC
 from dataclasses import dataclass
 from typing import Callable
+
 import psutil
 
 from .result_wrapper import WrapperResults
@@ -49,26 +50,25 @@ class WrapperInterface(ABC):
                               "Continuing without progress bar")
         else:
             pbar = None
-        history = []
+        score_history = []
         best_score = None
         best_params = None
         steps = 0
 
-        cpu_usage = []
-        ram_usage = []
+        cpu_history = []
+        ram_history = []
         process = psutil.Process()
 
         while True:
             steps += 1
 
             params, score = self._wrap_step(final_objective, search_space)
-            
-            cpu_usage.append(process.cpu_percent(interval=None))
-            ram_usage.append(process.memory_info().rss / 1024 ** 2)  # Convert to MB
+            cpu_history.append(process.cpu_percent(interval=None) / psutil.cpu_count()) # Normalize by dividing by the number of cores)
+            ram_history.append(process.memory_info().rss / 1024 ** 2)  # Convert to MB
 
             # Invert best_score back to normal, if invert == True (see 'final_objective' in 'optimize' below)
             norm_score = -score if invert else score
-            history.append(norm_score)
+            score_history.append(norm_score)
 
             if pbar:
                 pbar.update(1)
@@ -92,7 +92,7 @@ class WrapperInterface(ABC):
                 elif norm_score <= target_score and direction == "minimize":
                     break
 
-        return best_params, best_score, steps, history, cpu_usage, ram_usage
+        return best_params, best_score, steps, score_history, cpu_history, ram_history
     
     # Run optimizer
     def optimize(self, direction: str, max_steps: int = None, target_score: float = None, progress_bar: bool = False):
@@ -137,7 +137,7 @@ class WrapperInterface(ABC):
         self._wrap_setup(final_objective, self.__search_space)
         
         start_time = time.time()
-        best_params, best_score, steps, history, cpu_usage, ram_usage = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction, invert, progress_bar)
+        best_params, best_score, steps, score_history, cpu_history, ram_history = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction, invert, progress_bar)
         elapsed_time = time.time() - start_time
         
         # Invert score back to normal, if invert == True (see 'final_objective' above)
@@ -145,11 +145,11 @@ class WrapperInterface(ABC):
         return WrapperResults(self.__class__.__name__,
                             best_params,
                             best_score,
-                            history,
+                            score_history,
                             elapsed_time,
                             steps,
-                            cpu_usage,
-                            ram_usage)
+                            cpu_history,
+                            ram_history)
     
     def initialize(self, objective: Callable[[dict[str, float]], float], search_space: dict[str, tuple[float, float]]):
         """
