@@ -60,8 +60,8 @@ class BenchmarkResults():
             if wrapper_names and result.name.lower() not in norm_wrapper_names:
                 continue
             x = []
-            y = result.history
-            for step in range(len(result.history)):
+            y = result.score_history
+            for step in range(len(result.score_history)):
                 x.append(step + 1)
             plt.plot(x, y, label=result.name)
 
