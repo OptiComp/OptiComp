@@ -34,3 +34,12 @@ def fetch_sklearn_gridsearch(objective: Callable[[dict[str, float]], float] = No
         Optionally pass parameters to initialize the wrapper."""
     from .sklearn.wrapper_sklearn_gridsearch import SklearnGridSearch
     return SklearnGridSearch(objective, search_space)
+
+
+# ================================================================================ Deap
+def fetch_deap_ea(objective: Callable[[dict[str, float]], float] = None,
+            search_space: dict[str, tuple[float, float]] = None):
+    """ Fetch optimizer wrapper from wrapper zoo.\n
+        Optionally pass parameters to initialize the wrapper."""
+    from .deap.wrapper_deap_ea import DeapEA
+    return DeapEA(objective, search_space)
