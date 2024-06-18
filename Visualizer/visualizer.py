@@ -5,7 +5,6 @@ from opticomp import objective_zoo
 
 objective, search_space = objective_zoo.fetch_ackley_function()
 
-
 # Generate grid data
 x_range = np.linspace(search_space['param1'][0], search_space['param1'][1], 50)
 y_range = np.linspace(search_space['param2'][0], search_space['param2'][1], 50)
