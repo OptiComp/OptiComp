@@ -119,7 +119,7 @@ class WrapperInterface(ABC):
         if not max_steps and not target_score:
             raise ValueError("Either max_steps or target_score must be provided")
         if self.__objective is None or self.__search_space is None:
-            raise ValueError("Wrapper not initialized. Please use 'wrapper.initialize(objective, search_space)'.")
+            raise ValueError("Wrapper not initialized. Please use 'wrapper.reinitialize(objective, search_space)'.")
         if direction not in {'minimize', 'maximize'}:
             raise ValueError(f"Unknown direction: '{direction}'. Please choose 'minimize' or 'maximize'.")
         
@@ -151,9 +151,9 @@ class WrapperInterface(ABC):
                             cpu_history,
                             ram_history)
     
-    def initialize(self, objective: Callable[[dict[str, float]], float], search_space: dict[str, tuple[float, float]]):
+    def reinitialize(self, objective: Callable[[dict[str, float]], float], search_space: dict[str, tuple[float, float]]):
         """
-        Initialize the wrapper with an objective function and search space.
+        Reinitialize the wrapper with an objective function and search space.
 
         Parameters
         ----------
