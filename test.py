@@ -1,7 +1,7 @@
 from opticomp import BenchmarkSuite, objective_zoo, wrapper_zoo
 
 # Get common objective from objective_zoo
-objective, search_space = objective_zoo.fetch_sphere_function()
+objective, search_space = objective_zoo.fetch_ackley_function()
 
 # Create an instance of the benchmark suite
 benchmark_suite = BenchmarkSuite(objective, search_space)
