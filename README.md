@@ -1,6 +1,6 @@
 # OptiComp
 ## Overview
-OptiComp is a versatile library for comparing optimizers. It supports both built-in benchmark objectives and custom objectives. Users can compare various optimizers using provided wrappers or create their own. OptiComp streamlines finding the best optimizer for any task.
+OptiComp is a versatile library for comparing optimizers. It supports both built-in benchmark objectives and custom objectives. Users can compare various optimizers using provided wrappers or create their own. OptiComp streamlines finding the best optimizer for any task or an easy way to compare you optimizer against others.
 <br>
 
 ## Features
