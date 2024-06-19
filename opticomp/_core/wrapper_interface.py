@@ -52,8 +52,6 @@ class WrapperInterface(ABC):
             pbar = None
         score_history = []
         params_history = []
-        best_score = None
-        best_params = None
         steps = 0
 
         cpu_history = []
@@ -75,16 +73,6 @@ class WrapperInterface(ABC):
             if pbar:
                 pbar.update(1)
 
-            if not best_score:
-                best_score = score
-                best_params = params
-            elif score > best_score and direction == "maximize":
-                best_score = score
-                best_params = params
-            elif score < best_score and direction == "minimize":
-                best_score = score
-                best_params = params
-
             if max_steps:
                 if steps >= max_steps:
                     break
@@ -94,7 +82,7 @@ class WrapperInterface(ABC):
                 elif norm_score <= target_score and direction == "minimize":
                     break
 
-        return best_params, best_score, steps, score_history, params_history, cpu_history, ram_history
+        return steps, score_history, params_history, cpu_history, ram_history
     
     # Run optimizer
     def optimize(self, direction: str, max_steps: int = None, target_score: float = None, progress_bar: bool = False):
@@ -139,8 +127,15 @@ class WrapperInterface(ABC):
         self._wrap_setup(final_objective, self.__search_space)
         
         start_time = time.time()
-        best_params, best_score, steps, score_history, params_history, cpu_history, ram_history = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction, invert, progress_bar)
+        steps, score_history, params_history, cpu_history, ram_history = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction, invert, progress_bar)
         elapsed_time = time.time() - start_time
+
+        if direction == "minimize":
+            best_index = score_history.index(min(score_history))
+        else:
+            best_index = score_history.index(max(score_history))
+        best_score = score_history[best_index]
+        best_params = params_history[best_index]
         
         # Invert score back to normal, if invert == True (see 'final_objective' above)
         best_score = -best_score if invert else best_score
