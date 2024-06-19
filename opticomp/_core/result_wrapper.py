@@ -99,12 +99,8 @@ class WrapperResults():
 
         Parameters
         ----------
-        param_ranges : dict
-            The ranges for the parameters to plot. Example: {'param1': (0, 1), 'param2': (0, 1)}
-        view : {'3d', 'topdown'}, optional
-            The view to plot. '3d' for a 3D surface plot, 'topdown' for a contour plot (default is '3d').
-        fixed_params : dict, optional
-            The fixed values for the remaining parameters not being plotted.
+        params : list
+            The names of the params you want to map.
         resolution : int, optional
             The number of points to sample in each dimension (default is 50).
         show : bool, optional
