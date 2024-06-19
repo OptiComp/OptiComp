@@ -51,6 +51,7 @@ class WrapperInterface(ABC):
         else:
             pbar = None
         score_history = []
+        params_history = []
         best_score = None
         best_params = None
         steps = 0
@@ -69,6 +70,7 @@ class WrapperInterface(ABC):
             # Invert best_score back to normal, if invert == True (see 'final_objective' in 'optimize' below)
             norm_score = -score if invert else score
             score_history.append(norm_score)
+            params_history.append(params)
 
             if pbar:
                 pbar.update(1)
@@ -92,7 +94,7 @@ class WrapperInterface(ABC):
                 elif norm_score <= target_score and direction == "minimize":
                     break
 
-        return best_params, best_score, steps, score_history, cpu_history, ram_history
+        return best_params, best_score, steps, score_history, params_history, cpu_history, ram_history
     
     # Run optimizer
     def optimize(self, direction: str, max_steps: int = None, target_score: float = None, progress_bar: bool = False):
@@ -137,15 +139,18 @@ class WrapperInterface(ABC):
         self._wrap_setup(final_objective, self.__search_space)
         
         start_time = time.time()
-        best_params, best_score, steps, score_history, cpu_history, ram_history = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction, invert, progress_bar)
+        best_params, best_score, steps, score_history, params_history, cpu_history, ram_history = self.__optimization_loop(final_objective, self.__search_space, max_steps, target_score, direction, invert, progress_bar)
         elapsed_time = time.time() - start_time
         
         # Invert score back to normal, if invert == True (see 'final_objective' above)
         best_score = -best_score if invert else best_score
         return WrapperResults(self.__class__.__name__,
+                            self.__objective,
+                            self.__search_space,
                             best_params,
                             best_score,
                             score_history,
+                            params_history,
                             elapsed_time,
                             steps,
                             cpu_history,
