@@ -101,12 +101,12 @@ class WrapperResults():
         ----------
         params : list
             The names of the params you want to map.
-        resolution : int, optional
+        resolution : int = 50, optional
             The number of points to sample in each dimension (default is 50).
-        show : bool, optional
-            Set to True to show the plot.
-        save_dir : str, optional
-            Directory to save the plot.
+        show : bool = False, optional
+            Set to true to show the graph.
+        save_dir: str = None. optional
+            Give a dir to save the graph to.
         """
         if len(params) != 2:
             raise ValueError("Currently, only 2D plots are supported. Please provide exactly two parameters to vary.")
@@ -144,13 +144,13 @@ class WrapperResults():
 
         best_param1 = self.best_params[param1]
         best_param2 = self.best_params[param2]
-        plt.scatter(best_param1, best_param2, color='r', label='Best Score', zorder=2)
+        plt.scatter(best_param1, best_param2, color='r', label='Best Result', zorder=2)
 
         plt.legend()
 
         if save_dir:
             os.makedirs(save_dir, exist_ok=True)
-            file_path = os.path.join(save_dir, f"landscape_{self.name}.png")
+            file_path = os.path.join(save_dir, f"Landscape_{self.name}.png")
             plt.savefig(file_path)
         if show:
             plt.show()

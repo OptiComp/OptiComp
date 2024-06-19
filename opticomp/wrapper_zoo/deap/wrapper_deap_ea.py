@@ -18,10 +18,9 @@ class DeapEA(WrapperInterface):
     @dataclass
     class Config:
         # Delete this if the optimizer does not need any configuration variables
-        population_size: type = 50
-        generations: type = 30
-        cxpb = 0.5
-        mutpb = 0.2
+        population_size: int = 50
+        cxpb : float = 0.5
+        mutpb : float = 0.2
 
     def _wrap_normalize_parameters(self, individual, search_space):
         normalized_params = {param_name: val for param_name, val in zip(search_space.keys(), individual)}
@@ -51,8 +50,8 @@ class DeapEA(WrapperInterface):
         # Use CPU operators by default
         self.toolbox.register("mate", tools.cxBlend, alpha=0.5)
         self.toolbox.register("mutate", tools.mutPolynomialBounded,
-                                low=[low for low, high in search_space.values()],
-                                up=[high for low, high in search_space.values()],
+                                low=[low for low, _ in search_space.values()],
+                                up=[high for _, high in search_space.values()],
                                 eta=1.0, indpb=0.2)
 
         self.toolbox.register("select", tools.selTournament, tournsize=3)
