@@ -7,13 +7,13 @@ OptiComp is a versatile library for comparing optimizers. It supports both built
 <br>
 
 ## Features
+- **Optimizer Comparison:** Compare different optimizer wrappers to find the most effective optimizer.
+- **Visualization tools:** Utilize visualization tools to analyze the results from the optimizers.
 - **Unified API:** Standardized optimizer API using common wrappers.
 - **Standard Wrappers:** Ready-to-use wrappers.
 - **Custom Wrappers:** Create your own wrappers any optimizer.
 - **Standard Objectives:** Ready-to-use objective to evaluate an optimizer on.
 - **Custom Objectives:** Create custom objectives to evaluate the optimizer on, allowing you to test optimizers on your project.
-- **Optimizer Comparison:** Compare different wrappers to find the most effective optimizer.
-- **Best Optimizer Selection:** Select the best wrapper for your objective with less computational overhead.
 - **Direct Optimization:** Run optimizations directly using the provided wrappers.
 <br>
 
