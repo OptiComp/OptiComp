@@ -137,8 +137,6 @@ class WrapperInterface(ABC):
         best_score = score_history[best_index]
         best_params = params_history[best_index]
         
-        # Invert score back to normal, if invert == True (see 'final_objective' above)
-        best_score = -best_score if invert else best_score
         return WrapperResults(self.__class__.__name__,
                             self.__objective,
                             self.__search_space,

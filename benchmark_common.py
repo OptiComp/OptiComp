@@ -16,7 +16,7 @@ benchmark_suite.add_wrapper(wrapper_zoo.fetch_optuna_tpe())
 benchmark_suite.add_wrapper(wrapper_zoo.fetch_deap_ea())
 
 # Compare and optimize using the added wrappers
-results = benchmark_suite.benchmark(direction="maximize", max_steps=100, target_score=None, verbose=True, progress_bar=True)
+results = benchmark_suite.benchmark(direction="minimize", max_steps=100, target_score=None, verbose=True, progress_bar=True)
 
 # results.plot_score(show=True)
 
