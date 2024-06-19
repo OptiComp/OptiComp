@@ -38,7 +38,7 @@ class BenchmarkResults():
         for result in self.results:
             result.summarize()
 
-    def plot(self, wrapper_names: list[str] = None, show: bool = False, save_dir: str = None):
+    def plot_score(self, wrapper_names: list[str] = None, show: bool = False, save_dir: str = None):
         """
         Plot one graph to visualize all the wrapper histories.
         
@@ -96,4 +96,4 @@ class BenchmarkResults():
                 return result
         print(f"No results found for wrapper: {wrapper_name}")
         # Create and return an empty WrapperResults so the autocomplete always works
-        return WrapperResults("EmptyResult", None, None, None, None)
+        return WrapperResults("EmptyResult")
