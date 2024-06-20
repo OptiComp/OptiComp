@@ -164,6 +164,38 @@ class BenchmarkResults():
             plt.savefig(file_path)
         if show:
             plt.show()
+    
+    def plot_boxplot(self, wrapper_names=None, show=False, save_dir=None):
+        if wrapper_names:
+            norm_wrapper_names = [self._normalize_name(name) for name in wrapper_names]
+
+        plt.figure()
+
+        data_to_plot = []
+
+        for results_name in self.results_all:
+            results_opt = self.results_all[results_name]
+            scores = [result.best_score for result in results_opt]
+            if wrapper_names and results_name.lower() not in norm_wrapper_names:
+                continue
+            data_to_plot.append(scores)
+
+        boxplot = plt.boxplot(data_to_plot, labels=list(self.results_all.keys()))
+
+        plt.legend([boxplot['medians'][0], boxplot['boxes'][0], boxplot['whiskers'][0], plt.Line2D([], [], color='black', marker='o', markerfacecolor='white', markeredgewidth=1, linestyle='None')],
+                   ['Median', 'Interquartile', 'Outer bounds', 'Outliers'],
+                   loc='best')
+
+        plt.title("Box Plot of Scores")
+        plt.xlabel('Optimizers')
+        plt.ylabel('Scores')
+
+        if save_dir:
+            os.makedirs(save_dir, exist_ok=True)
+            file_path = os.path.join(save_dir, "boxplot.png")
+            plt.savefig(file_path)
+        if show:
+            plt.show()
 
     def fetch_wrapper_result(self, wrapper_name: str) -> WrapperResults:
         """
