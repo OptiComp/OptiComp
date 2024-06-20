@@ -57,7 +57,7 @@ class BenchmarkSuite:
         """
         self._wrappers.clear()
 
-    def benchmark(self, direction: str, max_steps: int = None, target_score: float = None, verbose: bool = False, progress_bar: bool = False) -> BenchmarkResults:
+    def benchmark(self, direction: str, n_runs: int = 5, max_steps: int = None, target_score: float = None, verbose: bool = False, progress_bar: bool = False) -> BenchmarkResults:
         """
         Benchmark wrappers on provided objective and search_space.
 
@@ -65,6 +65,8 @@ class BenchmarkSuite:
         ----------
         direction : str, optional
             The direction of optimization. Default is 'minimize'.
+        n_runs : int, optional
+            Set the amount of times each optimizer is run. More runs provides a more reliable outcome, but takes longer.
         max_steps : int, optional
             The maximum number of optimization steps. If not provided, target_score must be provided.
         target_score : float, optional
@@ -90,9 +92,12 @@ class BenchmarkSuite:
             if verbose or progress_bar:
                 print(f"\n=== Wrapper: {wrapper.__class__.__name__} ===")
 
-            wrapper_result = wrapper.optimize(direction, max_steps=max_steps, target_score=target_score, progress_bar=progress_bar)
+            results_run = []
+            for _ in range(n_runs):
+                wrapper_result = wrapper.optimize(direction, max_steps=max_steps, target_score=target_score, progress_bar=progress_bar)
+                results_run.append(wrapper_result)
 
-            results._add_result(wrapper_result)
+            results._add_result(results_run)
 
             if verbose:
                 print(f"\nScore: {wrapper_result.best_score}")
