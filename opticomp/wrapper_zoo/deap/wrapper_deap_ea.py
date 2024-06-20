@@ -51,9 +51,6 @@ class DeapEA(WrapperInterface):
         # Register the evaluation, crossover, mutation, and selection functions
         self.toolbox.register("evaluate", objective_wrapper)
 
-        for low, high in search_space.values():
-            print(high)
-
         self.toolbox.register("mate", tools.cxBlend, alpha=0.5)
         self.toolbox.register("mutate", tools.mutPolynomialBounded,
                                 low=[low for low, _ in search_space.values()],
