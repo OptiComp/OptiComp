@@ -43,3 +43,12 @@ def fetch_deap_ea(objective: Callable[[dict[str, float]], float] = None,
         Optionally pass parameters to initialize the wrapper."""
     from .deap.wrapper_deap_ea import DeapEA
     return DeapEA(objective, search_space)
+
+
+# ================================================================================ HyperOpt
+def fetch_hyperopt_tpe(objective: Callable[[dict[str, float]], float] = None,
+            search_space: dict[str, tuple[float, float]] = None):
+    """ Fetch optimizer wrapper from wrapper zoo.\n
+        Optionally pass parameters to initialize the wrapper."""
+    from .hyperopt.wrapper_hyperopt_tpe import HyperoptTPE
+    return HyperoptTPE(objective, search_space)
