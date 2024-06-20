@@ -90,7 +90,7 @@ class BenchmarkSuite:
 
         for wrapper in self._wrappers:
             if verbose or progress_bar:
-                print(f"\n=== Wrapper: {wrapper.__class__.__name__} ===")
+                print(f"\n=== Wrapper: {wrapper.__class__.__name__} === {n_runs} runs of max {max_steps} steps.")
 
             results_run = []
             for _ in range(n_runs):
