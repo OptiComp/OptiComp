@@ -15,13 +15,9 @@ benchmark_suite.add_wrapper(wrapper_zoo.fetch_optuna_tpe())
 # benchmark_suite.add_wrapper(wrapper_zoo.fetch_deap_ea())
 
 # Compare and optimize using the added wrappers
-results = benchmark_suite.benchmark(direction="minimize", n_runs=5, max_steps=20, target_score=None, verbose=True, progress_bar=True)
+results = benchmark_suite.benchmark(direction="minimize", n_runs=15, max_steps=60, target_score=None, verbose=True, progress_bar=True)
 
 # results.plot_boxplot(show=True)
-
-results.plot_runs(wrapper_name="optuna_tpe", show=True, save_dir="docs/Img")
-
-# results.plot_runs("deap_ea", show=True)
 
 # result = results.fetch_wrapper_result("deap_ea")
 # result.plot_objective_landscape(["param1", "param2"], resolution=100, show=True)

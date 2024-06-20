@@ -186,9 +186,9 @@ class BenchmarkResults():
                    ['Median', 'Interquartile', 'Outer bounds', 'Outliers'],
                    loc='best')
 
-        plt.title("Box Plot of Scores")
+        plt.title("Boxplot of Scores")
         plt.xlabel('Optimizers')
-        plt.ylabel('Scores')
+        plt.ylabel('Score')
 
         if save_dir:
             os.makedirs(save_dir, exist_ok=True)
