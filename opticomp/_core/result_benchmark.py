@@ -153,14 +153,14 @@ class BenchmarkResults():
                         x.append(step + 1)
                     plt.plot(x, y, label=f"run: {run + 1}")
 
-        plt.title("Summary")
+        plt.title(f"Runs {results_name}")
         plt.xlabel('Steps')
         plt.ylabel('Score')
         plt.legend()
 
         if save_dir:
             os.makedirs(save_dir, exist_ok=True)
-            file_path = os.path.join(save_dir, f"plot all runs {wrapper_name}.png")
+            file_path = os.path.join(save_dir, f"plot_runs_{results_name}.png")
             plt.savefig(file_path)
         if show:
             plt.show()
