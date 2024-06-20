@@ -92,7 +92,7 @@ class WrapperResults():
 
     def plot_objective_landscape(self, params, show_path=False, fixed_params=None, resolution=50, show: bool = False, save_dir: str = None):
         """
-        Plot the landscape of the objective function.
+        Plot the landscape of the objective function. This can visualize the relationship between two params.
 
         !!!WARNING!!!
         If your objective function is slow, this will take a long time.
