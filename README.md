@@ -62,7 +62,7 @@ After running the library, you can expect the following information in the resul
 
 Score graph             |  Landscape graph
 :-------------------------:|:-------------------------:
-<img src="https://github.com/OptiComp/OptiComp/blob/main/docs/Img/example_summary.png" width="461" height="346">  |  <img src="https://github.com/OptiComp/OptiComp/blob/main/docs/Img/landscape_DeapEA.png" width="461" height="346">
+<img src="https://github.com/OptiComp/OptiComp/blob/main/docs/Img/example_summary.png" width="384" height="288">  |  <img src="https://github.com/OptiComp/OptiComp/blob/main/docs/Img/landscape_DeapEA.png" width="384" height="288">
 
 
 These results provide insights into the performance and outcomes of each optimizer, enabling easy comparison between them.\
