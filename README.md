@@ -51,7 +51,7 @@ For more specific examples, such as creating custom objectives or wrappers, plea
 
 ## Results
 After running the library, you can expect the following information in the results:
-- **Multiple Runs:** Keep multiple runs for every optimizer to test consistency.
+- **Multiple Runs:** Keep multiple runs from every optimizer to ensure consistency.
 - **Steps Taken:** Number of iterations or steps taken during the benchmarking.
 - **Elapsed Time:** Total time taken for the algorithm to complete its task.
 - **Best Score:** The score, or evaluation result after completing the benchmark.
