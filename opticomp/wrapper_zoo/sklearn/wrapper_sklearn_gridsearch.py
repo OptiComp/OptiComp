@@ -14,37 +14,37 @@ class SklearnGridSearch(WrapperInterface):
         self.grid_search = None
         self.x_train = []
         self.y_train = []
-    
+
     @dataclass
     class Config:
         num_samples: int = 30
         model = RandomForestClassifier()
-    
+
     def _wrap_normalize_parameters(self, trial, search_space):
-        # For sklearn's GridSearchCV, parameters are directly passed as a dictionary
-        return trial.params
+        # Extract params with their actual names from search space
+        if trial is None:
+            params = {name: np.random.uniform(min_val, max_val) for name, (min_val, max_val) in search_space.items()}
+        else:
+            try:
+                params = {name: trial.suggest(name) for name in search_space.keys()}
+            except NotImplementedError:
+                # Handle the case where WrapperInterface doesn't have a suggest method
+                print("WrapperInterface doesn't have a suggest method. Using random values.")
+                params = {name: np.random.uniform(min_val, max_val) for name, (min_val, max_val) in search_space.items()}
+        return params
 
     def _wrap_setup(self, objective, search_space):
-        # param_grid = {param_name: list(np.linspace(min_val, max_val, 10))
-        #               for param_name, (min_val, max_val) in search_space.items()}
-        param_grid = {
-            'param1': np.linspace(-100, 100, 10),  # Example range for param1
-            'param2': np.linspace(-100, 100, 10),  # Example range for param2
-            'param3': np.linspace(-100, 100, 10)   # Example range for param3
-        }
+        param_grid = {param_name: list(np.linspace(min_val, max_val, 10))
+                      for param_name, (min_val, max_val) in search_space.items()}
 
         print(param_grid)
         self.grid_search = GridSearchCV(self.Config.model, param_grid, scoring=objective, cv=5, verbose=1, n_jobs=-1)
-        
+
         # Generate x_train
         self.x_train = []
         self.y_train = []
         for _ in range(self.Config.num_samples):
-            params = {}
-            for param_name, (min_val, max_val) in search_space.items():
-                # Generate random values within the specified range for each parameter
-                param_value = np.random.uniform(min_val, max_val)
-                params[param_name] = param_value
+            params = self._wrap_normalize_parameters(trial=self, search_space=search_space)
             self.x_train.append(params)
 
         # Convert x_train to a list of dictionaries
@@ -56,4 +56,4 @@ class SklearnGridSearch(WrapperInterface):
 
     def _wrap_step(self, objective, search_space):
         self.grid_search.fit(self.x_train, self.y_train)  # Replace with your own X_train, y_train data
-        return self.grid_search.cv_results_['params'], self.grid_search.cv_results_['mean_test_score']   # Return current results after each step
+        return self.grid_search.cv_results_['params'], self.grid_search.cv_results_['mean_test_score']  # Return current results after each step
