@@ -11,18 +11,18 @@ benchmark_suite = BenchmarkSuite(objective, search_space)
 
 # Add wrappers directly from wrapper_zoo to the benchmark_suite
 benchmark_suite.add_wrapper(wrapper_zoo.fetch_optuna_random())
-benchmark_suite.add_wrapper(wrapper_zoo.fetch_optuna_tpe())
-# benchmark_suite.add_wrapper(wrapper_zoo.fetch_deap_ea())
+# benchmark_suite.add_wrapper(wrapper_zoo.fetch_optuna_tpe())
+benchmark_suite.add_wrapper(wrapper_zoo.fetch_deap_ea())
 
 # Compare and optimize using the added wrappers
-results = benchmark_suite.benchmark(direction="minimize", n_runs=15, max_steps=60, target_score=None, verbose=True, progress_bar=True)
+results = benchmark_suite.benchmark(direction="minimize", n_runs=3, max_steps=60, target_score=None, verbose=True, progress_bar=True)
 
 # results.plot_boxplot(show=True)
 
-# result = results.fetch_wrapper_result("deap_ea")
-# result.plot_objective_landscape(["param1", "param2"], resolution=100, show=True)
+result = results.fetch_wrapper_result("deap_ea")
+result.plot_objective_landscape(["param1", "param2"], resolution=100, show=True)
 # result.plot_objective_landscape(["param1", "param2"], show_path=True, resolution=100, show=True)
-# print(result.best_params)
+print(result.best_params)
 
 # result = results.fetch_wrapper_result("optuna_tpe")
 # result.plot_objective_landscape(["param1", "param2"], resolution=100, show=True)

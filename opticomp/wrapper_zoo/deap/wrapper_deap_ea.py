@@ -24,7 +24,9 @@ class DeapEA(WrapperInterface):
         mutpb : float = 0.2
 
     def _wrap_normalize_parameters(self, individual, search_space):
+        # print(individual)
         normalized_params = {param_name: val for param_name, val in zip(search_space.keys(), individual)}
+        # print(normalized_params)
         return normalized_params
     
     def _wrap_setup(self, objective, search_space):
@@ -49,7 +51,9 @@ class DeapEA(WrapperInterface):
         # Register the evaluation, crossover, mutation, and selection functions
         self.toolbox.register("evaluate", objective_wrapper)
 
-        # Use CPU operators by default
+        for low, high in search_space.values():
+            print(high)
+
         self.toolbox.register("mate", tools.cxBlend, alpha=0.5)
         self.toolbox.register("mutate", tools.mutPolynomialBounded,
                                 low=[low for low, _ in search_space.values()],
