@@ -23,15 +23,40 @@ class BenchmarkResults():
     
     # ============================================================== Measure results
 
+    def set_measure(self, measure: str = "median"):
+        """
+        Set the current measure for summarizing results.
+
+        Parameters
+        ----------
+        measure : str
+            The measure to use ("median", "max", "min"). Default is "median".
+        """
+        self.measure = measure.lower()
+
     def _median(self, results):
         # Get the median result, based on score.
         sorted_results = sorted(results, key=attrgetter('best_score'))
         median_index = len(sorted_results) // 2
         return results[median_index]
+    
+    def _max(self, results):
+        # Get the result with the highest score.
+        return max(results, key=attrgetter('best_score'))
+    
+    def _min(self, results):
+        # Get the result with the lowest score.
+        return max(results, key=attrgetter('best_score'))
 
     def _apply_measure_results(self, results):
         if self._measure_method == "median":
             measure_result = self._median(results)
+        elif self._measure_method == "max":
+            measure_result = self._max(results)
+        elif self._measure_method == "min":
+            measure_result = self._min(results)
+        else:
+            raise ValueError(f"Measure '{self._measure_method}' not recognized.")
         return measure_result
 
     # ============================================================== Public methods
