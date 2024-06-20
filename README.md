@@ -60,11 +60,17 @@ After running the library, you can expect the following information in the resul
 - **Params history:** A list with the output params for every step taken.
 - **CPU and RAM history:** A list with the CPU and RAM usage during each step. This can be used to get the average or peaks.
 
-#### Methods to visualise results
+#### Visually compare different optimizers
 
-Score graph             |  Landscape graph
+Score graph             |  Box Plot
 :-------------------------:|:-------------------------:
-<img src="https://github.com/OptiComp/OptiComp/blob/main/docs/Img/example_summary.png" width="384" height="288">  |  <img src="https://github.com/OptiComp/OptiComp/blob/main/docs/Img/landscape_DeapEA.png" width="384" height="288">
+<img src="https://github.com/OptiComp/OptiComp/blob/main/docs/Img/example_summary.png" width="384" height="288">  |  <img src="https://github.com/OptiComp/OptiComp/blob/main/docs/Img/boxplot.png" width="384" height="288">
+
+#### Visually analyze one optimizer
+
+Runs graph             |  Landscape graph
+:-------------------------:|:-------------------------:
+<img src="https://github.com/OptiComp/OptiComp/blob/main/docs/Img/plot_runs_OptunaTPE.png" width="384" height="288">  |  <img src="https://github.com/OptiComp/OptiComp/blob/main/docs/Img/landscape_DeapEA.png" width="384" height="288">
 
 
 These results provide insights into the performance and outcomes of each optimizer, enabling easy comparison between them.\
