@@ -56,13 +56,14 @@ After running the library, you can expect the following information in the resul
 - **Best Score:** The score, or evaluation result after completing the benchmark.
 - **Best Params:** Best parameters during benchmarking.
 - **Score history:** A list with the score for every step taken. This can be visualised as shown below.
+- **Params history:** A list with the output params for every step taken.
 - **CPU and RAM history:** A list with the CPU and RAM usage during each step. This can be used to get the average or peaks.
 
 #### Methods to visualise results
 
 Score graph             |  Landscape graph
 :-------------------------:|:-------------------------:
-<img src="https://github.com/OptiComp/OptiComp/blob/main/docs/Img/example_summary.png" width="461" height="346">  |  <img src="https://github.com/OptiComp/OptiComp/blob/main/docs/Img/landscape_DeapEA.png" width="461" height="346">
+<img src="https://github.com/OptiComp/OptiComp/blob/main/docs/Img/example_summary.png" width="384" height="288">  |  <img src="https://github.com/OptiComp/OptiComp/blob/main/docs/Img/landscape_DeapEA.png" width="384" height="288">
 
 
 These results provide insights into the performance and outcomes of each optimizer, enabling easy comparison between them.\
