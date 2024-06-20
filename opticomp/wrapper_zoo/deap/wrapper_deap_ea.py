@@ -14,6 +14,7 @@ class DeapEA(WrapperInterface):
         self.toolbox = base.Toolbox()
         self.population = None
         self.stats = None
+        self.created = False # This is to prevent unnecessary overwrites
 
     @dataclass
     class Config:
@@ -28,9 +29,10 @@ class DeapEA(WrapperInterface):
     
     def _wrap_setup(self, objective, search_space):
         
-        # Define the individual and the population
-        creator.create("FitnessMax", base.Fitness, weights=(1.0,))
-        creator.create("Individual", list, fitness=creator.FitnessMax)
+        if not self.created:
+            # Define the individual and the population
+            creator.create("FitnessMax", base.Fitness, weights=(1.0,))
+            creator.create("Individual", list, fitness=creator.FitnessMax)
 
         # Register the individual attribute generators
         for param_name, (low, high) in search_space.items():
@@ -65,6 +67,8 @@ class DeapEA(WrapperInterface):
         self.stats.register("std", np.std)
         self.stats.register("min", np.min)
         self.stats.register("max", np.max)
+
+        self.created = True
             
     def _wrap_step(self, objective, search_space):
         # Run the genetic algorithm
