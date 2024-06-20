@@ -20,7 +20,7 @@ results = benchmark_suite.benchmark(direction="minimize", n_runs=3, max_steps=60
 # results.plot_boxplot(show=True)
 
 result = results.fetch_wrapper_result("deap_ea")
-result.plot_objective_landscape(["param1", "param2"], resolution=100, show=True)
+result.plot_objective_landscape(["param1", "param2"], resolution=100, show=True, save_dir="docs/Img")
 # result.plot_objective_landscape(["param1", "param2"], show_path=True, resolution=100, show=True)
 print(result.best_params)
 
