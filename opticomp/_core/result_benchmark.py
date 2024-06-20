@@ -130,7 +130,7 @@ class BenchmarkResults():
 
     def plot_runs(self, wrapper_name:str, show: bool = False, save_dir: str = None):
         """
-        Plot one graph to visualize all run scores for one wrapper.
+        Plot all run scores for one wrapper.
         
         Parameters
         ----------
@@ -141,7 +141,6 @@ class BenchmarkResults():
         save_dir: str = None. optional
             Give a dir to save the graph to.
         """
-
         plt.figure()
 
         for results_name in self.results_all:
@@ -152,7 +151,7 @@ class BenchmarkResults():
                     y = result.score_history
                     for step in range(len(result.score_history)):
                         x.append(step + 1)
-                    plt.plot(x, y, label=f"run: {run}")
+                    plt.plot(x, y, label=f"run: {run + 1}")
 
         plt.title("Summary")
         plt.xlabel('Steps')
