@@ -16,9 +16,9 @@ benchmark_suite.add_wrapper(wrapper_zoo.fetch_optuna_tpe())
 benchmark_suite.add_wrapper(wrapper_zoo.fetch_deap_ea())
 
 # Compare and optimize using the added wrappers
-results = benchmark_suite.benchmark(direction="maximize", max_steps=200, target_score=None, verbose=True, progress_bar=True)
+results = benchmark_suite.benchmark(direction="minimize", max_steps=30, target_score=None, verbose=True, progress_bar=True)
 
-# results.plot_score(show=True)
+results.plot_runs_score("optuna_tpe", show=True)
 
 result = results.fetch_wrapper_result("deap_ea")
 result.plot_objective_landscape(["param1", "param2"], resolution=100, show=True)

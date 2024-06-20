@@ -96,6 +96,7 @@ class BenchmarkSuite:
             for _ in range(n_runs):
                 wrapper_result = wrapper.optimize(direction, max_steps=max_steps, target_score=target_score, progress_bar=progress_bar)
                 results_run.append(wrapper_result)
+                print(f"\nScore: {wrapper_result.best_score}")
 
             results._add_result(results_run)
 

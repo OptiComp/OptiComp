@@ -128,6 +128,44 @@ class BenchmarkResults():
         if show:
             plt.show()
 
+    def plot_runs(self, wrapper_name:str, show: bool = False, save_dir: str = None):
+        """
+        Plot one graph to visualize all run scores for one wrapper.
+        
+        Parameters
+        ----------
+        wrapper_name: str = None
+            Give the name of the wrapper you want to plot all runs of.
+        show : bool = False, optional
+            Set to true to show the graph.
+        save_dir: str = None. optional
+            Give a dir to save the graph to.
+        """
+
+        plt.figure()
+
+        for results_name in self.results_all:
+            if results_name.lower() == self._normalize_name(wrapper_name):
+                results_opt = self.results_all[results_name]
+                for run, result in enumerate(results_opt):
+                    x = []
+                    y = result.score_history
+                    for step in range(len(result.score_history)):
+                        x.append(step + 1)
+                    plt.plot(x, y, label=f"run: {run}")
+
+        plt.title("Summary")
+        plt.xlabel('Steps')
+        plt.ylabel('Score')
+        plt.legend()
+
+        if save_dir:
+            os.makedirs(save_dir, exist_ok=True)
+            file_path = os.path.join(save_dir, f"plot all runs {wrapper_name}.png")
+            plt.savefig(file_path)
+        if show:
+            plt.show()
+
     def fetch_wrapper_result(self, wrapper_name: str) -> WrapperResults:
         """
         Fetch and return the result class of a specific wrapper
@@ -143,10 +181,7 @@ class BenchmarkResults():
             A class containing the results for a specific wrapper
         """
         for results_name in self.results_all:
-            print(results_name)
             results_opt = self.results_all[results_name]
-            print(self.results_all)
-            print(results_opt)
             result = self._apply_measure_results(results_opt)
             if result.name.lower() == self._normalize_name(wrapper_name):
                 return result
