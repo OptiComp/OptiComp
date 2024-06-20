@@ -25,7 +25,7 @@ class BenchmarkResults():
 
     def set_measure(self, measure: str = "median"):
         """
-        Set the current measure for summarizing results.
+        Set the measure to select what run to analyze.
 
         Parameters
         ----------
@@ -35,19 +35,17 @@ class BenchmarkResults():
         self.measure = measure.lower()
 
     def _median(self, results):
-        # Get the median result, based on score.
         sorted_results = sorted(results, key=attrgetter('best_score'))
         median_index = len(sorted_results) // 2
         return results[median_index]
     
     def _max(self, results):
-        # Get the result with the highest score.
         return max(results, key=attrgetter('best_score'))
     
     def _min(self, results):
-        # Get the result with the lowest score.
         return max(results, key=attrgetter('best_score'))
 
+    # This method selects and returns specific optimizer run
     def _apply_measure_results(self, results):
         if self._measure_method == "median":
             measure_result = self._median(results)
@@ -64,6 +62,7 @@ class BenchmarkResults():
     def summarize(self, wrapper_name: str):
         """
         Summarize the results for a specific wrapper.
+        Use 'set_measure()' to change which optimizer run to summarize.
         
         Parameters
         ----------
@@ -81,6 +80,7 @@ class BenchmarkResults():
     def summarize_all(self):
         """
         Summarize the results for all wrappers.
+        Use 'set_measure()' to change which optimizer run to summarize.
         """
         for results_name in self.results_all:
             results_opt = self.results_all[results_name]
@@ -89,7 +89,8 @@ class BenchmarkResults():
 
     def plot_score(self, wrapper_names: list[str] = None, show: bool = False, save_dir: str = None):
         """
-        Plot one graph to visualize all the wrapper histories.
+        Plot one graph to visualize all the optimizer score histories.
+        Use 'set_measure()' to change which optimizer run to plot.
         
         Parameters
         ----------
@@ -130,12 +131,12 @@ class BenchmarkResults():
 
     def plot_runs(self, wrapper_name:str, show: bool = False, save_dir: str = None):
         """
-        Plot all run scores for one wrapper.
+        Plot the best_score for every run of one wrapper/optimizer.
         
         Parameters
         ----------
         wrapper_name: str = None
-            Give the name of the wrapper you want to plot all runs of.
+            Provide  the name of the wrapper you want to plot all runs of.
         show : bool = False, optional
             Set to true to show the graph.
         save_dir: str = None. optional
@@ -199,7 +200,8 @@ class BenchmarkResults():
 
     def fetch_wrapper_result(self, wrapper_name: str) -> WrapperResults:
         """
-        Fetch and return the result class of a specific wrapper
+        Fetch and return the result class of a specific wrapper.
+        Use 'set_measure()' to change which optimizer run to fetch.
         
         Parameters
         ----------

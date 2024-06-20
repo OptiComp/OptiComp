@@ -90,7 +90,7 @@ class WrapperResults():
         if show:
             plt.show()
 
-    def plot_objective_landscape(self, params, show_path=False, fixed_params=None, resolution=50, show: bool = False, save_dir: str = None):
+    def plot_objective_landscape(self, params: list[str, str], show_path: bool = False, resolution: int = 50, show: bool = False, save_dir: str = None):
         """
         Plot the landscape of the objective function. This can visualize the relationship between two params.
 
@@ -101,6 +101,8 @@ class WrapperResults():
         ----------
         params : list
             The names of the params you want to map.
+        show_path : bool = False, optional
+            Show the path of the optimizer through the landscape.
         resolution : int = 50, optional
             The number of points to sample in each dimension (default is 50).
         show : bool = False, optional
